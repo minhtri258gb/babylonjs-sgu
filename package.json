@@ -1,0 +1,14 @@
+{
+	"name": "testjs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./src/Client.js",
+	"scripts": {
+		"start": "node ./src/Server.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}
