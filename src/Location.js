@@ -47,6 +47,7 @@ export default class Location
 		box.position = new BABYLON.Vector3(_position[0], _position[1], _position[2]);
 		box.isVisible = false;
 
+
 		let rectPre = new BABYLON.GUI.Rectangle();
         rectPre.width = "300px";
         rectPre.height = "200px";
@@ -58,7 +59,6 @@ export default class Location
         rectPre.linkWithMesh(box);
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
-
 		// try
 		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
         rectPre.addControl(imgPreview);
@@ -93,16 +93,13 @@ export default class Location
 		rect.color = "Black";
 		rect.thickness = 3;
 		rect.background = "transparent"; // "white";//
-        rect.hoverCursor = "pointer";
-        rect.isPointerBlocker = true;
+    rect.hoverCursor = "pointer";
+    rect.isPointerBlocker = true;
 		rect.drawOutline = true;
 		// rect.outlineColor = "Black";
 		// rect.outlineWidth = 5;
-
 		engine.advancedTexture.addControl(rect);
-
 		rect.linkWithMesh(box);
-
 		rect.onPointerDownObservable.add(() => {
 			engine.loc.dispose();
 			engine.loc = DataSource.getLocationInfo(_name);
