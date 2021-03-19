@@ -48,64 +48,72 @@ export default class Location
 		box.position = new BABYLON.Vector3(_position[0], _position[1], _position[2]);
 		box.isVisible = false;
 
-		let rectpre = new BABYLON.GUI.Rectangle();
-        rectpre.width = "300px";
-        rectpre.height = "200px";
-        rectpre.cornerRadius = 40;
-        rectpre.color = "Orange";
-        rectpre.thickness = 2;
-        rectpre.background = "green";
-        engine.advancedTexture.addControl(rectpre);
-        rectpre.linkWithMesh(box);
-        rectpre.linkOffsetY = -150;
-        rectpre.isVisible = false;
-
-		// TODO un comment
-		// let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
-		// rectpre.addControl(imgPreview);
+		let rectPre = new BABYLON.GUI.Rectangle();
+        rectPre.width = "300px";
+        rectPre.height = "200px";
+        rectPre.cornerRadius = 40;
+        rectPre.color = "Black";
+        rectPre.thickness = 3;
+        rectPre.background = "green";
+        engine.advancedTexture.addControl(rectPre);
+        rectPre.linkWithMesh(box);
+        rectPre.linkOffsetY = -150;
+        rectPre.isVisible = false;
+		// try
+		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
+        rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
         line.lineWidth = 3;
-        line.color = "Orange";
+        line.color = "Black";
         line.y2 = 98;
         // line.dash = [5, 10];
         line.linkOffsetY = -15;
         engine.advancedTexture.addControl(line);
         line.linkWithMesh(box);
-        line.connectedControl = rectpre;
+        line.connectedControl = rectPre;
         line.isVisible = false;
+
+        let textPre = new BABYLON.GUI.TextBlock("textPre","Sân "+_name);
+        //textPre.linkWithMesh(box);
+        textPre.color = "white";
+        textPre.fontFamily = "Time News Roman"
+        textPre.drawOutline = true;
+        textPre.outlineColor = "Black";
+        textPre.outlineWidth = 3;
+        textPre.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+        textPre.height = 0.15
+        rectPre.addControl(textPre);
 
 		// Icon walk
 		let rect = new BABYLON.GUI.Ellipse();
 		rect.width = "30px";
 		rect.height = "30px";
 		// rect.cornerRadius = 20;
-		rect.color = "Orange";
-		rect.thickness = 2;
+		rect.color = "Black";
+		rect.thickness = 3;
 		rect.background = "transparent"; // "white";//
+
 		rect.zIndex = 1;
-        rect.hoverCursor = "pointer";
-        rect.isPointerBlocker = true;
+    rect.hoverCursor = "pointer";
+    rect.isPointerBlocker = true;
 		// rect.drawOutline = true;
 		// rect.outlineColor = "Black";
 		// rect.outlineWidth = 5;
-
 		engine.advancedTexture.addControl(rect);
-
 		rect.linkWithMesh(box);
-
 		rect.onPointerDownObservable.add(() => {
 			engine.loc.dispose();
 			engine.loc = DataSource.getLocationInfo(_name);
 		});
 
 		rect.onPointerMoveObservable.add(() => {
-            rectpre.isVisible = true;
+            rectPre.isVisible = true;
             line.isVisible = true;
         });
 
         rect.onPointerOutObservable.add(() => {
-            rectpre.isVisible = false;
+            rectPre.isVisible = false;
             line.isVisible = false;
         });
 
@@ -119,7 +127,8 @@ export default class Location
 			mesh: box,
 			button: rect,
 			pointer: line,
-			preview: rectpre
+			preview: rectPre,
+			//textblock: textPre
 		});
 	}
 
