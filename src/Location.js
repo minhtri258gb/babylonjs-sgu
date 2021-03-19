@@ -9,6 +9,7 @@ export default class Location
 	{
 		// Set default
 		this.name = _name;
+		this.position = {x: 0, y: 0};
 		this.link = [];
 		
 		this.dome = new BABYLON.PhotoDome(
@@ -59,9 +60,9 @@ export default class Location
         rectpre.linkOffsetY = -150;
         rectpre.isVisible = false;
 
-		// try
-		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
-        rectpre.addControl(imgPreview);
+		// TODO un comment
+		// let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
+		// rectpre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
         line.lineWidth = 3;
@@ -82,9 +83,10 @@ export default class Location
 		rect.color = "Orange";
 		rect.thickness = 2;
 		rect.background = "transparent"; // "white";//
+		rect.zIndex = 1;
         rect.hoverCursor = "pointer";
         rect.isPointerBlocker = true;
-		rect.drawOutline = true;
+		// rect.drawOutline = true;
 		// rect.outlineColor = "Black";
 		// rect.outlineWidth = 5;
 
@@ -119,5 +121,12 @@ export default class Location
 			pointer: line,
 			preview: rectpre
 		});
+	}
+
+	mapset()
+	{
+		// let mapImg = engine.map.image;
+		// mapImg.transformCenterX = this.position.x;
+		// mapImg.transformCenterY = this.position.y;
 	}
 }
