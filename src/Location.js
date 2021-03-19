@@ -9,6 +9,7 @@ export default class Location
 	{
 		// Set default
 		this.name = _name;
+		this.position = {x: 0, y: 0};
 		this.link = [];
 		
 		this.dome = new BABYLON.PhotoDome(
@@ -46,7 +47,6 @@ export default class Location
 		let box = BABYLON.MeshBuilder.CreateBox(_name + "_box", {});
 		box.position = new BABYLON.Vector3(_position[0], _position[1], _position[2]);
 		box.isVisible = false;
-
 
 		let rectPre = new BABYLON.GUI.Rectangle();
         rectPre.width = "300px";
@@ -93,9 +93,11 @@ export default class Location
 		rect.color = "Black";
 		rect.thickness = 3;
 		rect.background = "transparent"; // "white";//
+
+		rect.zIndex = 1;
     rect.hoverCursor = "pointer";
     rect.isPointerBlocker = true;
-		rect.drawOutline = true;
+		// rect.drawOutline = true;
 		// rect.outlineColor = "Black";
 		// rect.outlineWidth = 5;
 		engine.advancedTexture.addControl(rect);
@@ -128,5 +130,12 @@ export default class Location
 			preview: rectPre,
 			//textblock: textPre
 		});
+	}
+
+	mapset()
+	{
+		// let mapImg = engine.map.image;
+		// mapImg.transformCenterX = this.position.x;
+		// mapImg.transformCenterY = this.position.y;
 	}
 }

@@ -1,7 +1,9 @@
+/// <reference path="../lib/babylon.js" />
+/// <reference path="../lib/babylon.gui.js" />
 
 import DataSource from "./DataSource.js";
 import Manager from "./Manager.js";
-import Location from "./Location.js";
+import Map from "./Map.js";
 
 const engine =
 {
@@ -35,6 +37,7 @@ const engine =
 
 		// Component
 		this.manager = new Manager();
+		this.map = new Map();
 
 		// Camera setup
 		let camera = new BABYLON.FreeCamera('maincam', BABYLON.Vector3.Zero(), this.scene);
@@ -324,53 +327,10 @@ const engine =
 	    //quay nguoc chieu stackpanel
    	    panel.children.reverse();
 
-     
 	},
-
- 
+  
 	loadmap: function()
 	{
-
-		// ex1
-		// var onpickAction = new BABYLON.ExecuteCodeAction(
-		// BABYLON.ActionManager.OnPickTrigger,
-		// function(evt) {
-		// 	console.log("(",evt.pointerX,",",evt.pointerY,")");  
-		// });
-
-
-		// ex2
-		this.scene.onPointerDown = function (event, pickResult)
-		{
-			//left mouse click
-			// if(event.button == 0)
-			// {
-			// 	let vector = pickResult.pickedPoint;
-			// 	console.log('left mouse click: ' + vector.x + ',' + vector.y + ',' + vector.z );
-			// }
-			//right mouse click
-			if(event.button == 2)
-			{
-				let vector = pickResult.pickedPoint;
-				console.log('right mouse click: ' + vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed() );
-			}
-	// 		//Wheel button or middle button on mouse click
-	// 		if(event.button == 1){
-	// 				vector['x'] = pickResult.pickedPoint['x'];
-	// 				vector['y'] = pickResult.pickedPoint['y'];
-	// 				vector['z'] = pickResult.pickedPoint['z'];
-	// 				console.log('middle mouse click: ' + vector.x + ',' + vector.y + ',' + vector.z );
-	// 		}
-		}
-
-
-
-
-
-
-
-
-
 		this.loc = DataSource.getLocationInfo("SGU_A_01"); // cong truong
 	},
 
