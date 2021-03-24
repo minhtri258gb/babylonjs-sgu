@@ -107,14 +107,20 @@ export default class Location
 			engine.loc = DataSource.getLocationInfo(_name);
 		});
 
-		rect.onPointerMoveObservable.add(() => {
-            rectPre.isVisible = true;
+		rect.onPointerMoveObservable.add(() => {            
+			rectPre.isVisible = true;
             line.isVisible = true;
+			//engine.animation.fadeAnimIn(rectPre);
+			//engine.animation.fadeAnimIn(line);
         });
 
         rect.onPointerOutObservable.add(() => {
-            rectPre.isVisible = false;
-            line.isVisible = false;
+			//engine.animation.fadeAnimOut(rectPre);
+			//engine.animation.fadeAnimOut(line);           
+			//setTimeout(() => {
+				rectPre.isVisible = false;
+            	line.isVisible = false;
+			//},400);
         });
 
 		// Walk icon

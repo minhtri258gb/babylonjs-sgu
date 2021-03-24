@@ -104,27 +104,114 @@ export default class Map
 		this.totalMap.addControl(this.image); // inster image
         this.totalMap.isVisible = false;
 		engine.advancedTexture.addControl(this.totalMap);
+
+		//Total map close button
+		this.btnCloseTotalMap = new BABYLON.GUI.Ellipse();
+		this.btnCloseTotalMap.background = "white";
+		this.btnCloseTotalMap.color = "black";
+		this.btnCloseTotalMap.thickness = 2;
+		this.btnCloseTotalMap.width = "35px";
+		this.btnCloseTotalMap.height = "35px";
+		this.btnCloseTotalMap.hoverCursor = "pointer";
+		this.btnCloseTotalMap.verticalAlignment = 0;
+		this.btnCloseTotalMap.horizontalAlignment = 1;
+		this.btnCloseTotalMap.top = "10px";
+		this.btnCloseTotalMap.left = "-10px";		
+		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close1.png");
+        this.btnCloseTotalMap.onPointerClickObservable.add(() => {
+
+				//btn list
+				engine.interfaces.btnUI.btn.isVisible = true;
+        		engine.interfaces.btnFullScreen.btn.isVisible = true;
+        		engine.interfaces.btnSetting.btn.isVisible = true;
+        		engine.interfaces.btnMap.btn.isVisible = true;
+        		engine.interfaces.btnSound.btn.isVisible = true;
+        		engine.interfaces.btnRotation.btn.isVisible = true;				
+				engine.animation.fadeAnimIn(engine.interfaces.btnUI.btn);
+				engine.animation.fadeAnimIn(engine.interfaces.btnFullScreen.btn);
+				engine.animation.fadeAnimIn(engine.interfaces.btnSetting.btn);
+				engine.animation.fadeAnimIn(engine.interfaces.btnSound.btn);
+				engine.animation.fadeAnimIn(engine.interfaces.btnMap.btn);
+				engine.animation.fadeAnimIn(engine.interfaces.btnRotation.btn);
+				
+        		//----
+				engine.animation.fadeAnimOut(this.totalMap);
+				setTimeout(() => {	
+					this.totalMap.isVisible = false;
+				},400);
+
+                this.miniMap.isVisible = true;
+				engine.animation.fadeAnimIn(this.miniMap);
+
+                for (let i=0; i< engine.loc.link.length; i++)
+				{
+                    engine.loc.link[i].button.isVisible = true;
+					engine.animation.fadeAnimIn(engine.loc.link[i].button);
+				}
+
+		});
+
+		this.btnCloseTotalMap.addControl(this.imgTotalMapCloseBtn);
+		this.totalMap.addControl(this.btnCloseTotalMap);
 		
 		
 		// let crossImg = new BABYLON.GUI.Image("mapImg","./asset/smallno.png");
 		// crossImg.rotate = 0.2;//45 * Math.Pi / 180.0;
 		// totalMapUI.addControl(mapImg);
 
-
+		
 		// Mini map
-		let miniMap = new BABYLON.GUI.Ellipse();
-		miniMap.width = "150px";
-		miniMap.height = "150px";
-		miniMap.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-		miniMap.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-		miniMap.thickness = 0;
-		miniMap.background = "green";
-		miniMap.zIndex = 2;
-		miniMap.shadowColor = "black";
-		miniMap.shadowBlur = 10;
-		miniMap.addControl(this.image);
+		this.miniMap = new BABYLON.GUI.Ellipse();
+		this.miniMap.width = "200px";
+		this.miniMap.height = "200px";
+		this.miniMap.hoverCursor = "pointer";
+		this.miniMap.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+		this.miniMap.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+		this.miniMap.left = "15px";
+		this.miniMap.top = "15px";
+		this.miniMap.thickness = 0;
+		this.miniMap.background = "green";
+		this.miniMap.zIndex = 2;
+		this.miniMap.shadowColor = "black";
+		this.miniMap.shadowBlur = 10;
+		this.miniMap.addControl(this.image);
+		this.miniMap.isPointerBlocker = true;
+		this.miniMap.onPointerClickObservable.add(() => {
+			//btn list
+			engine.animation.fadeAnimOut(engine.interfaces.btnUI.btn);
+			engine.animation.fadeAnimOut(engine.interfaces.btnFullScreen.btn);
+			engine.animation.fadeAnimOut(engine.interfaces.btnSetting.btn);
+			engine.animation.fadeAnimOut(engine.interfaces.btnSound.btn);
+			engine.animation.fadeAnimOut(engine.interfaces.btnMap.btn);
+			engine.animation.fadeAnimOut(engine.interfaces.btnRotation.btn);
+			setTimeout(() => {
+			engine.interfaces.btnUI.btn.isVisible = false;
+			engine.interfaces.btnFullScreen.btn.isVisible = false;
+			engine.interfaces.btnSetting.btn.isVisible = false;
+			engine.interfaces.btnMap.btn.isVisible = false;
+			engine.interfaces.btnSound.btn.isVisible = false;
+			engine.interfaces.btnRotation.btn.isVisible = false;
+			},400);
+
+			//----
+			this.totalMap.isVisible = true;
+			engine.animation.fadeAnimIn(this.totalMap);
+
+			engine.animation.fadeAnimOut(this.miniMap);
+			setTimeout(() => {
+			this.miniMap.isVisible = false;
+			},400);
+
+			for (let i=0; i< engine.loc.link.length; i++)
+			{
+				engine.animation.fadeAnimOut(engine.loc.link[i].button);
+				setTimeout(() => {
+				engine.loc.link[i].button.isVisible = false;
+				}, 400);
+			}
+		});
 		// miniMap.addControl(crossImg);
-		engine.advancedTexture.addControl(miniMap);
+		engine.advancedTexture.addControl(this.miniMap);
 
 
 		// Player position
