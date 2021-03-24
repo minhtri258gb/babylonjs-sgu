@@ -295,6 +295,7 @@ export default class Map
 		});
 		// miniMap.addControl(crossImg);
 		engine.advancedTexture.addControl(this.miniMap);
+	}
 
 	addLink(_name, _position)
 	{
