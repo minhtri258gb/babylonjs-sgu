@@ -69,6 +69,7 @@ export default class Map
 		this.totalMap.background = "green";
 		this.totalMap.zIndex = 3;
         this.totalMap.isPointerBlocker = true;
+        this.totalMap.isVisible = false;
 		this.totalMap.onPointerDownObservable.add((evt) => { // Mouse click pre
 			if (evt.buttonIndex == 0)
 			{
@@ -334,8 +335,8 @@ export default class Map
 	{
 		// hook mini map
 		let pos = DataSource.loc[engine.loc.name].position;
-		this.miniImg.leftInPixels = -(pos.x - 0.5) * (150 * 4);
-		this.miniImg.topInPixels = -(pos.y - 0.5) * (150 * 4);
+		this.miniImg.leftInPixels = -(pos.x - 0.5) * (200 * 4);
+		this.miniImg.topInPixels = -(pos.y - 0.5) * (200 * 4);
 		
 		// TODO
 

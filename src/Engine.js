@@ -36,12 +36,6 @@ const engine =
 
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-		// Component
-		this.manager = new Manager();
-		this.map = new Map();
-        this.interfaces = new Interfaces();
-		this.animation = new Animation();
-
 		// Camera setup
         this.camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 1,new BABYLON.Vector3(0,-1,-1), this.scene);
 		//this.camera = new BABYLON.ArcRotateCamera('maincam', BABYLON.Vector3.Zero(), this.scene);
@@ -71,7 +65,9 @@ const engine =
 		DataSource.init();
 		Location.registerMousePicking();
 		this.manager = new Manager();
+        this.interfaces = new Interfaces();
 		this.map = new Map();
+		this.animation = new Animation();
 		
 		this.changeLocation('SGU_A_01');
 	},
