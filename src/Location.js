@@ -158,7 +158,7 @@ export default class Location
 			if(event.button == 2)
 			{
 				let vector = pickResult.pickedPoint;
-				console.log('3D point: ' + vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed() );
+				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
 			}
 		}
 	}

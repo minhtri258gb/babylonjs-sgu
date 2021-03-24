@@ -18,9 +18,10 @@ const engine =
 		this.run();
 		
 		// setInterval(() => { // loop function
-		// 	let a = this.manager.getMesh("wooden_watch_tower");
-		// 	a.position = new BABYLON.Vector3(0, 70, 0);
-		// }, 3000);
+			
+		// 	// console.log(engine.camera.position);
+
+		// }, 1000);
 	},
 
 	initEngine: function()
@@ -37,29 +38,11 @@ const engine =
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
 		// Camera setup
-        this.camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 1,new BABYLON.Vector3(0,-1,-1), this.scene);
-		//this.camera = new BABYLON.ArcRotateCamera('maincam', BABYLON.Vector3.Zero(), this.scene);
-		this.camera.setTarget(new BABYLON.Vector3(0, 0, -1));
+        this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
 		this.camera.attachControl(this.canvas, true);
-		// camera.keysUp.push(87);
-		// camera.keysDown.push(83);
-		// camera.keysLeft.push(65);
-		// camera.keysRight.push(68);
-		// camera.upperBetaLimit = Math.PI / 2.2;
 		this.camera.fov = 60 * Math.PI / 180.0; // Tam nhin
-		// camera.inertia = 0.0; // Quan tinh
 		this.camera.angularSensibility = 1000; // toc do chuot
         this.camera.useAutoRotationBehavior = true; //tu dong xoay camera
-		// camera.moveSensibility = 100; // toc do di chuyen ???
-		// camera.speed = 5.0; // Toc do di chuyen
-		// camera.applyGravity = true; // Physic - gravity
-		// camera.checkCollisions = true;
-		// arc camera
-		// var camera = new BABYLON.ArcRotateCamera("arcCamera",
-		// 		BABYLON.Tools.ToRadians(45),
-		// 		BABYLON.Tools.ToRadians(45),
-		// 		10.0, box.position, scene);
-		// camera.attachControl(canvas,true);
 
 		// Component
 		DataSource.init();

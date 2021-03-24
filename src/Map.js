@@ -354,8 +354,8 @@ export default class Map
 	{
 		engine.camera.onViewMatrixChangedObservable.add(() =>
 		{
-			let target = engine.camera.target;
-			let tmptarget = new BABYLON.Vector2(target.x, target.z).normalize();
+			let target = engine.camera.position;
+			let tmptarget = new BABYLON.Vector2(-target.x, -target.z).normalize();
 			var angle = Math.acos(BABYLON.Vector2.Dot(tmptarget, new BABYLON.Vector3(0,-1)));
 
 			if (tmptarget.x > 0) // fix 360 rotate
