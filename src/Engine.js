@@ -6,17 +6,18 @@ import Manager from "./Manager.js";
 import Map from "./Map.js";
 import Interfaces from "./Interfaces.js";
 import Animation from "./Animation.js";
+import Location from './Location.js'
 
 const engine =
 {
+	// Forwards
 	main: function()
 	{
 		// INIT
 		this.initEngine();
-		this.loadmap();
 		this.run();
 		
-		// setInterval(() => {
+		// setInterval(() => { // loop function
 		// 	let a = this.manager.getMesh("wooden_watch_tower");
 		// 	a.position = new BABYLON.Vector3(0, 70, 0);
 		// }, 3000);
@@ -33,7 +34,6 @@ const engine =
 		this.scene = new BABYLON.Scene(this.engine);
 		this.scene.clearColor = new BABYLON.Color3.Black();
 
-		// HUD
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
 		// Component
@@ -66,15 +66,16 @@ const engine =
 		// 		BABYLON.Tools.ToRadians(45),
 		// 		10.0, box.position, scene);
 		// camera.attachControl(canvas,true);
-	},
 
-	
+		// Component
+		DataSource.init();
+		Location.registerMousePicking();
+		this.manager = new Manager();
+		this.map = new Map();
+		
+		this.changeLocation('SGU_A_01');
+	},
   
-	loadmap: function()
-	{
-		this.loc = DataSource.getLocationInfo("SGU_A_01"); // cong truong
-	},
-
 	run: function()
 	{
 		// Update
@@ -95,6 +96,19 @@ const engine =
 			engine.resize();
 		});
 
+	},
+
+	// Natives
+	changeLocation: function(_name)
+	{
+		if (this.loc !== undefined) // first case when init
+		{
+			if (this.loc.name.localeCompare(_name) == 0) // skip same location
+				return;
+			this.loc.dispose();
+		}
+		this.loc = new Location(_name);
+		this.map.updateLocation();
 	}
 }
 

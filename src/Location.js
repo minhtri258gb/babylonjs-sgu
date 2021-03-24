@@ -8,10 +8,12 @@ export default class Location
 	constructor(_name)
 	{
 		// Set default
+		let info = DataSource.loc[_name];
+
 		this.name = _name;
-		this.position = {x: 0, y: 0};
-		this.link = [];
+		this.position = info.position;
 		
+		// Create PhotoDome
 		this.dome = new BABYLON.PhotoDome(
 			"skyDome",
 			"./asset/skysphere/"+this.name+".jpg",
@@ -22,6 +24,18 @@ export default class Location
 			},
 			engine.scene
 		);
+		this.dome.rotation.y = info.rotation;
+
+		// Set link
+		this.link = [];
+		for (let i=0; i<info.link.length; i++)
+		{
+			let l = info.link[i];
+			this.addLink(l.name, l.pos)
+		}
+
+		// hook map
+		// engine.map.hookMini(this.position);
 	}
 
 	// Natives
@@ -52,20 +66,20 @@ export default class Location
         rectPre.width = "300px";
         rectPre.height = "200px";
         rectPre.cornerRadius = 40;
-        rectPre.color = "Black";
+        rectPre.color = "white";
         rectPre.thickness = 3;
         rectPre.background = "green";
         engine.advancedTexture.addControl(rectPre);
         rectPre.linkWithMesh(box);
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
-		// try
+		
 		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
         rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
         line.lineWidth = 3;
-        line.color = "Black";
+        line.color = "white";
         line.y2 = 98;
         // line.dash = [5, 10];
         line.linkOffsetY = -15;
@@ -90,21 +104,20 @@ export default class Location
 		rect.width = "30px";
 		rect.height = "30px";
 		// rect.cornerRadius = 20;
-		rect.color = "Black";
+		rect.color = "white";
 		rect.thickness = 3;
 		rect.background = "transparent"; // "white";//
 
 		rect.zIndex = 1;
-    rect.hoverCursor = "pointer";
-    rect.isPointerBlocker = true;
+		rect.hoverCursor = "pointer";
+		rect.isPointerBlocker = true;
 		// rect.drawOutline = true;
 		// rect.outlineColor = "Black";
 		// rect.outlineWidth = 5;
 		engine.advancedTexture.addControl(rect);
 		rect.linkWithMesh(box);
 		rect.onPointerDownObservable.add(() => {
-			engine.loc.dispose();
-			engine.loc = DataSource.getLocationInfo(_name);
+			engine.changeLocation(_name);
 		});
 
 		rect.onPointerMoveObservable.add(() => {            
@@ -138,10 +151,15 @@ export default class Location
 		});
 	}
 
-	mapset()
+	static registerMousePicking()
 	{
-		// let mapImg = engine.map.image;
-		// mapImg.transformCenterX = this.position.x;
-		// mapImg.transformCenterY = this.position.y;
+		engine.scene.onPointerDown = function (event, pickResult)
+		{
+			if(event.button == 2)
+			{
+				let vector = pickResult.pickedPoint;
+				console.log('3D point: ' + vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed() );
+			}
+		}
 	}
 }

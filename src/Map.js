@@ -1,4 +1,5 @@
 
+import DataSource from './DataSource.js';
 import engine from './Engine.js'
 
 export default class Map
@@ -16,37 +17,49 @@ export default class Map
 			x: 0,
 			y: 0,
 			scale: 1.0,
-			xMax: 0,
-			xMin: 0,
-			yMax: 0,
-			yMin: 0,
+			xbound: 0,
+			ybound: 0,
+			imgSize: 1,
 			scaleMax: 1.0,
 			scaleMin: 1.0
 		}
+
+		this.link = [];
 		
 		// Caculator
-		// let widthMap = engine.canvas.width * 90 / 100;
-		// let heightMap = engine.canvas.height * 90 / 100;
+		this.mat.xbound = engine.canvas.width * 90 / 100;
+		this.mat.ybound = engine.canvas.height * 90 / 100;
 
-		// if (widthMap > heightMap)
-		// {
-		// 	this.mat.scaleMin = widthMap / heightMap;
-		// 	// mapImg.scaleX = scaleFactor;
-		// 	// mapImg.scaleY = scaleFactor;
-		// }
-		// else
-		// {
-		// }
+		if (this.mat.xbound > this.mat.ybound)
+		{
+			this.mat.imgSize = this.mat.ybound;
+			this.mat.scaleMin = this.mat.xbound / this.mat.ybound + 0.1;
+		}
+		else
+		{
+			this.mat.imgSize = this.mat.xbound;
+			this.mat.scaleMin = this.mat.ybound / this.mat.xbound + 0.1;
+		}
+		
+		this.mat.scaleMax = 3.0; // ?
+		this.mat.scale = 2.0; // custom from min to max
 
-		// Map Image
-		this.image = new BABYLON.GUI.Image("mapImg","./asset/map.png");
-		this.image.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
+		// Init map
+		this.initTotalMap();
+		this.initMiniMap();
 
-		// debug
-		this.image.scaleX = this.mat.scaleMin;
-		this.image.scaleY = this.mat.scaleMin;
+		// Register callback
+		this.registerUpdateCamera();
+	}
 
+	initTotalMap()
+	{
 		// Total map
+		this.totalImg = new BABYLON.GUI.Image("mapImg","./asset/map.png");
+		this.totalImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
+		this.totalImg.scaleX = 2.0;
+		this.totalImg.scaleY = 2.0;
+
 		this.totalMap = new BABYLON.GUI.Rectangle();
 		this.totalMap.width = 0.9;
 		this.totalMap.height = 0.9;
@@ -68,7 +81,12 @@ export default class Map
 			}
 			else if (evt.buttonIndex == 2)
 			{
-				console.log(evt);
+				// // Find point in image
+				// let x = ((evt.x - engine.canvas.width / 2) - (this.mat.x * this.mat.scale)) / (this.mat.imgSize * this.mat.scale) + 0.5;
+				// let y = ((evt.y - engine.canvas.height / 2) - (this.mat.y * this.mat.scale)) / (this.mat.imgSize * this.mat.scale) + 0.5;
+
+				// // this.addLink(posLink);
+				// console.log(x+' '+y);
 			}
 		});
 		this.totalMap.onPointerUpObservable.add((evt) => { // Mouse click post
@@ -78,31 +96,81 @@ export default class Map
 				this.mouse.drag = false;
 	
 				// save before transform
-				this.mat.x = this.image.leftInPixels / this.mat.scale;
-				this.mat.y = this.image.topInPixels / this.mat.scale;
+				this.mat.x = this.totalImg.leftInPixels / this.mat.scale;
+				this.mat.y = this.totalImg.topInPixels / this.mat.scale;
 			}
 		});
 		this.totalMap.onPointerMoveObservable.add((evt) => { // mouse drag
 			if (this.mouse.drag)
 			{
 				// transform when drag, position = old-transform * scale + delta mouse pos
-				this.image.leftInPixels = this.mat.x * this.mat.scale + (evt.x - this.mouse.x);
-				this.image.topInPixels = this.mat.y * this.mat.scale + (evt.y - this.mouse.y);
+				let newX = this.mat.x * this.mat.scale + (evt.x - this.mouse.x);
+				let newY = this.mat.y * this.mat.scale + (evt.y - this.mouse.y);
+
+				// Check bounding
+				let bounding = {
+					x: (this.mat.imgSize * this.mat.scale - this.mat.xbound) / 2 - 5,
+					y: (this.mat.imgSize * this.mat.scale - this.mat.ybound) / 2 - 5
+				}
+				if (newX < -bounding.x) newX = -bounding.x;
+				else if (newX > bounding.x) newX = bounding.x;
+				if (newY < -bounding.y) newY = -bounding.y;
+				else if (newY > bounding.y) newY = bounding.y;
+		
+				// set pos
+				this.totalImg.leftInPixels = newX;
+				this.totalImg.topInPixels = newY;
+
+				for (let i=0; i<this.link.length; i++)
+				{
+					let l = this.link[i];
+					l.rect.leftInPixels = (l.position.x - 0.5) * (this.mat.imgSize * this.mat.scale) + newX;
+					l.rect.topInPixels = (l.position.y - 0.5) * (this.mat.imgSize * this.mat.scale) + newY;
+				}
 			}
 		});
 		this.totalMap.onWheelObservable.add((evt) => { // mouse wheel
-			// zoom
-			let scale = Math.max(this.mat.scale + (evt.y / -500), 1.0);
-			this.image.scaleX = scale;
-			this.image.scaleY = scale;
-			this.mat.scale = scale;
 
-			// fix to zoom
-			this.image.leftInPixels = this.mat.x * scale;
-			this.image.topInPixels = this.mat.y * scale;
+			// Check bounding
+			let scale = Math.max(this.mat.scale + (evt.y / -500), this.mat.scaleMin);
+			if (scale > this.mat.scaleMin && scale < this.mat.scaleMax)
+			{
+				// zoom
+				this.totalImg.scaleX = scale;
+				this.totalImg.scaleY = scale;
+				this.mat.scale = scale;
+	
+				// move center on zoom
+				let newX = this.mat.x * scale;
+				let newY = this.mat.y * scale;
+
+				// move with bounding
+				let bounding = {
+					x: (this.mat.imgSize * this.mat.scale - this.mat.xbound) / 2 - 5,
+					y: (this.mat.imgSize * this.mat.scale - this.mat.ybound) / 2 - 5
+				}
+
+				if (newX < -bounding.x) newX = -bounding.x;
+				else if (newX > bounding.x) newX = bounding.x;
+				if (newY < -bounding.y) newY = -bounding.y;
+				else if (newY > bounding.y) newY = bounding.y;
+
+				// Move
+				this.mat.x = newX / this.mat.scale;
+				this.mat.y = newY / this.mat.scale;
+
+				this.totalImg.leftInPixels = newX;
+				this.totalImg.topInPixels = newY;
+
+				for (let i=0; i<this.link.length; i++)
+				{
+					let l = this.link[i];
+					l.rect.leftInPixels = (l.position.x - 0.5) * (this.mat.imgSize * scale) + newX;
+					l.rect.topInPixels = (l.position.y - 0.5) * (this.mat.imgSize * scale) + newY;
+				}
+			}
 		});
-		this.totalMap.addControl(this.image); // inster image
-        this.totalMap.isVisible = false;
+		this.totalMap.addControl(this.totalImg); // inster image
 		engine.advancedTexture.addControl(this.totalMap);
 
 		//Total map close button
@@ -154,11 +222,25 @@ export default class Map
 		this.btnCloseTotalMap.addControl(this.imgTotalMapCloseBtn);
 		this.totalMap.addControl(this.btnCloseTotalMap);
 		
-		
-		// let crossImg = new BABYLON.GUI.Image("mapImg","./asset/smallno.png");
-		// crossImg.rotate = 0.2;//45 * Math.Pi / 180.0;
-		// totalMapUI.addControl(mapImg);
+		// Add link to totalmap
+		Object.keys(DataSource.loc).forEach((key) => {
+			// if(storage[key].barcode === barcode) { console.log("do something")}
+			let pos = DataSource.loc[key].position;
+			this.addLink(key, pos);
+			// console.log();
+		});
+	}
 
+	initMiniMap()
+	{
+		this.miniImg = new BABYLON.GUI.Image("mapImg","./asset/map.png");
+		this.miniImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
+		this.miniImg.scaleX = 4.0;
+		this.miniImg.scaleY = 4.0;
+		this.miniImg.zIndex = 1;
+		
+		this.crossImg = new BABYLON.GUI.Image("mapImg","./asset/eye.png");
+		this.crossImg.zIndex = 2;
 		
 		// Mini map
 		this.miniMap = new BABYLON.GUI.Ellipse();
@@ -171,10 +253,11 @@ export default class Map
 		this.miniMap.top = "15px";
 		this.miniMap.thickness = 0;
 		this.miniMap.background = "green";
-		this.miniMap.zIndex = 2;
+		this.miniMap.zIndex = 3;
 		this.miniMap.shadowColor = "black";
 		this.miniMap.shadowBlur = 10;
-		this.miniMap.addControl(this.image);
+		this.miniMap.addControl(this.miniImg);
+		this.miniMap.addControl(this.crossImg);
 		this.miniMap.isPointerBlocker = true;
 		this.miniMap.onPointerClickObservable.add(() => {
 			//btn list
@@ -213,10 +296,71 @@ export default class Map
 		// miniMap.addControl(crossImg);
 		engine.advancedTexture.addControl(this.miniMap);
 
+	addLink(_name, _position)
+	{
+		let rect = new BABYLON.GUI.Ellipse();
+		rect.width = "12px";
+		rect.height = "12px";
+		rect.color = "Black";
+		rect.thickness = 1;
+		rect.background = "white";
+		rect.zIndex = 3;
+		rect.hoverCursor = "pointer";
+		rect.isPointerBlocker = true;
+		rect.leftInPixels = (_position.x - 0.5) * (this.mat.imgSize * this.mat.scale) + this.totalImg.leftInPixels;
+		rect.topInPixels = (_position.y - 0.5) * (this.mat.imgSize * this.mat.scale) + this.totalImg.topInPixels;
+		rect.onPointerClickObservable.add((evt) => { // Mouse click
+			engine.changeLocation(_name);
+		});
+		
+		this.totalMap.addControl(rect);
 
-		// Player position
+		this.link.push({
+			name: _name,
+			position: _position,
+			rect: rect
+		});
+	}
 
-		// Link point
+	toogleMap()
+	{
+		let toogle = this.miniMap.isVisible;
+		this.totalMap.isVisible = toogle;
+		this.miniMap.isVisible = !toogle;
+	}
 
+	updateLocation()
+	{
+		// hook mini map
+		let pos = DataSource.loc[engine.loc.name].position;
+		this.miniImg.leftInPixels = -(pos.x - 0.5) * (150 * 4);
+		this.miniImg.topInPixels = -(pos.y - 0.5) * (150 * 4);
+		
+		// TODO
+
+		// link total map
+		for (let i=0; i<this.link.length; i++)
+		{
+			if (this.link[i].name.localeCompare(engine.loc.name) == 0)
+				this.link[i].rect.background = "Orange";
+			else if (this.link[i].rect.background.localeCompare("White") != 0)
+				this.link[i].rect.background = "White";
+		}
+	}
+
+	registerUpdateCamera()
+	{
+		engine.camera.onViewMatrixChangedObservable.add(() =>
+		{
+			let target = engine.camera.target;
+			let tmptarget = new BABYLON.Vector2(target.x, target.z).normalize();
+			var angle = Math.acos(BABYLON.Vector2.Dot(tmptarget, new BABYLON.Vector3(0,-1)));
+
+			if (tmptarget.x > 0) // fix 360 rotate
+				angle = Math.PI * 2 - angle;
+				
+			let offsetAngle = BABYLON.Tools.ToRadians(27); // offset to North
+			this.crossImg.rotation = angle - offsetAngle;
+		});
 	}
 }
