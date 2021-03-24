@@ -4,18 +4,19 @@
 import DataSource from "./DataSource.js";
 import Manager from "./Manager.js";
 import Map from "./Map.js";
+import Location from './Location.js'
 
 const engine =
 {
+	// Forwards
 	main: function()
 	{
 		// INIT
 		this.initEngine();
 		this.initUI();
-		this.loadmap();
 		this.run();
 		
-		// setInterval(() => {
+		// setInterval(() => { // loop function
 		// 	let a = this.manager.getMesh("wooden_watch_tower");
 		// 	a.position = new BABYLON.Vector3(0, 70, 0);
 		// }, 3000);
@@ -32,25 +33,20 @@ const engine =
 		this.scene = new BABYLON.Scene(this.engine);
 		this.scene.clearColor = new BABYLON.Color3.Black();
 
-		// HUD
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-		// Component
-		this.manager = new Manager();
-		this.map = new Map();
-
 		// Camera setup
-		let camera = new BABYLON.FreeCamera('maincam', BABYLON.Vector3.Zero(), this.scene);
-		camera.setTarget(new BABYLON.Vector3(0, 0, -1));
-		camera.attachControl(this.canvas, true);
+		this.camera = new BABYLON.FreeCamera('maincam', BABYLON.Vector3.Zero(), this.scene);
+		this.camera.setTarget(new BABYLON.Vector3(0, 0, -1));
+		this.camera.attachControl(this.canvas, true);
 		// camera.keysUp.push(87);
 		// camera.keysDown.push(83);
 		// camera.keysLeft.push(65);
 		// camera.keysRight.push(68);
 		// camera.upperBetaLimit = Math.PI / 2.2;
-		camera.fov = 60 * Math.PI / 180.0; // Tam nhin
+		this.camera.fov = 60 * Math.PI / 180.0; // Tam nhin
 		// camera.inertia = 0.0; // Quan tinh
-		camera.angularSensibility = 1000; // toc do chuot
+		this.camera.angularSensibility = 1000; // toc do chuot
 		// camera.moveSensibility = 100; // toc do di chuyen ???
 		// camera.speed = 5.0; // Toc do di chuyen
 		// camera.applyGravity = true; // Physic - gravity
@@ -61,6 +57,15 @@ const engine =
 		// 		BABYLON.Tools.ToRadians(45),
 		// 		10.0, box.position, scene);
 		// camera.attachControl(canvas,true);
+
+		// Component
+		DataSource.init();
+		Location.registerMousePicking();
+		this.manager = new Manager();
+		this.map = new Map();
+		
+
+		this.changeLocation('SGU_A_01');
 	},
 
 	initUI: function()
@@ -255,6 +260,10 @@ const engine =
         btnMap.background = "transparent";
         btnMap.hoverCursor = "pointer";
         btnMap.zIndex = 2;
+		btnMap.isPointerBlock = true;
+		btnMap.onPointerClickObservable.add(() => {
+			this.map.toogleMap();
+        });
         panel.addControl(btnMap);
         let imgMap = new BABYLON.GUI.Image("imgMap","./asset/icon/map1.png");
         btnMap.addControl(imgMap);
@@ -329,11 +338,6 @@ const engine =
 
 	},
   
-	loadmap: function()
-	{
-		this.loc = DataSource.getLocationInfo("SGU_A_01"); // cong truong
-	},
-
 	run: function()
 	{
 		// Update
@@ -354,6 +358,19 @@ const engine =
 			engine.resize();
 		});
 
+	},
+
+	// Natives
+	changeLocation: function(_name)
+	{
+		if (this.loc !== undefined) // first case when init
+		{
+			if (this.loc.name.localeCompare(_name) == 0) // skip same location
+				return;
+			this.loc.dispose();
+		}
+		this.loc = new Location(_name);
+		this.map.updateLocation();
 	}
 }
 

@@ -1,35 +1,32 @@
 
 import engine from './Engine.js'
-import Location from './Location.js'
 
 export default class DataSource
 {
-	// Static
-	static getLocationInfo(name)
+	static init()
 	{
-		let loc = new Location(name);
+		let loc = {};
 
-		switch (name)
-		{
-		case 'SGU_A_01':
-			loc.position = {x: 0.626, y: 0.584};
-			loc.addLink('SGU_A_02', [-372,4,-333]);
-			loc.addLink('SGU_B_01', [114,-9,486]);
-			break;
-		case 'SGU_A_02':
-			loc.position = {x: 0.635, y: 0.629};
-			loc.addLink('SGU_A_01', [-457,10,201]);
-			loc.addLink('SGU_B_01', [-491,24,91]);
-			break;
-		case 'SGU_B_01':
-			loc.position = {x: 0.593 , y: 0.533};
-			loc.addLink('SGU_A_01', [498,-2,-31]);
-			break;
-		}
+		loc['SGU_A_01'] = {};
+		loc['SGU_A_01'].link = [];
+		loc['SGU_A_01'].link[0] = {name: 'SGU_A_02', pos: [221,6,448]};
+		loc['SGU_A_01'].link[1] = {name: 'SGU_B_01', pos: [76,-12,-493]};
+		loc['SGU_A_01'].position = {x: 0.6082251082251082, y: 0.5681757037689241};
+		loc['SGU_A_01'].rotation = BABYLON.Tools.ToRadians(158);
 
-		loc.mapset();
+		loc['SGU_A_02'] = {};
+		loc['SGU_A_02'].link = [];
+		loc['SGU_A_02'].link[0] = {name: 'SGU_A_01', pos: [-142,9,-479]};
+		loc['SGU_A_02'].position = {x: 0.6167852862768117, y: 0.613422359185071};
+		loc['SGU_A_02'].rotation = BABYLON.Tools.ToRadians(265);
 
-		return loc;
+		loc['SGU_B_01'] = {};
+		loc['SGU_B_01'].link = [];
+		loc['SGU_B_01'].link[0] = {name: 'SGU_A_01', pos: [6,-3,500]};
+		loc['SGU_B_01'].position = {x: 0.5715386308606647, y: 0.5253748135104067};
+		loc['SGU_B_01'].rotation = BABYLON.Tools.ToRadians(265);
+
+		DataSource.loc = loc;
 	}
 
 }
