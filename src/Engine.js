@@ -46,7 +46,7 @@ const engine =
 		// Camera setup
         this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
 		this.camera.attachControl(this.canvas, true);
-		this.camera.fov = 60 * Math.PI / 180.0; // Tam nhin
+		this.camera.fov = BABYLON.Tools.ToRadians(60); // Tam nhin
 		this.camera.angularSensibility = 1000; // toc do chuot
         this.camera.useAutoRotationBehavior = true; //tu dong xoay camera
 
@@ -95,6 +95,12 @@ const engine =
 		}
 		this.loc = new Location(_name);
 		this.map.updateLocation();
+	},
+
+	setCameraFOV(value)
+	{
+		this.camera.fov = BABYLON.Tools.ToRadians(value);
+	
 	}
 }
 
