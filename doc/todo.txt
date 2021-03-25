@@ -1,0 +1,2 @@
+fix F11 fullscreen
+fix sound bar //tam thoi fix duoc
