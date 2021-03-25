@@ -1,2 +1,9 @@
+
+len flare
+particle
+icon color
+icon svg file
+move animation
+
 fix F11 fullscreen
 fix sound bar //tam thoi fix duoc

@@ -137,7 +137,7 @@ export default class Location
         });
 
 		// Walk icon
-		let imgwalk = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/walk.png");
+		let imgwalk = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/walk.svg");
         rect.addControl(imgwalk);
 
 		
