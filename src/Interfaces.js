@@ -6,6 +6,10 @@ export default class Interfaces
 	// Forwards
 	constructor()
 	{
+        // this.text = new BABYLON.GUI.TextBlock();
+        // this.text.text = engine.getFps() + " fps";
+        // engine.advancedTexture.addControl(this.text);
+
 		this.panel = new BABYLON.GUI.StackPanel();
 		this.panel.isVertical = false;
 		//this.panel.width = "240px";
@@ -45,12 +49,14 @@ export default class Interfaces
                 engine.animation.fadeAnimOut(this.btnMap.btn);
                 engine.animation.fadeAnimOut(this.btnSound.btn);
                 engine.animation.fadeAnimOut(this.btnRotation.btn);
+                engine.animation.fadeAnimOut(this.FOV.container);
                 setTimeout(() => {
         		this.btnFullScreen.btn.isVisible = false;
         		this.btnSetting.btn.isVisible = false;
         		this.btnMap.btn.isVisible = false;
         		this.btnSound.btn.isVisible = false;
         		this.btnRotation.btn.isVisible = false;
+                this.FOV.container.isVisible = false;
                 }, 400);
         		//----add link
 
@@ -77,11 +83,13 @@ export default class Interfaces
         		this.btnMap.btn.isVisible = true;
         		this.btnSound.btn.isVisible = true;
         		this.btnRotation.btn.isVisible = true;
+                this.FOV.container.isVisible = true;
                 engine.animation.fadeAnimIn(this.btnFullScreen.btn);
                 engine.animation.fadeAnimIn(this.btnSetting.btn);
                 engine.animation.fadeAnimIn(this.btnMap.btn);
                 engine.animation.fadeAnimIn(this.btnSound.btn);
                 engine.animation.fadeAnimIn(this.btnRotation.btn);
+                engine.animation.fadeAnimIn(this.FOV.container);
 
         		//----add link
                 engine.map.miniMap.isVisible = true;
@@ -153,10 +161,6 @@ export default class Interfaces
         	//TODO
         });
         this.panel.addControl(this.btnSetting.btn);
-
-
-        
-
 
 		//Thanh sound
 		this.btnSound = {};
@@ -286,24 +290,89 @@ export default class Interfaces
             engine.map.totalMap.isVisible = true;
             engine.animation.fadeAnimIn(engine.map.totalMap);
 
+            engine.animation.fadeAnimOut(this.FOV.container);
+            engine.animation.fadeAnimOut(this.btnUI.btn);
+            engine.animation.fadeAnimOut(this.btnFullScreen.btn);
+            engine.animation.fadeAnimOut(this.btnSetting.btn);
+            engine.animation.fadeAnimOut(this.btnMap.btn);
+            engine.animation.fadeAnimOut(this.btnSound.btn);
+            engine.animation.fadeAnimOut(this.btnRotation.btn);
+            engine.animation.fadeAnimOut(engine.map.miniMap);
+            setTimeout(() => {
+            this.FOV.container.isVisible = false;
             this.btnUI.btn.isVisible = false;
             this.btnFullScreen.btn.isVisible = false;
             this.btnSetting.btn.isVisible = false;
             this.btnMap.btn.isVisible = false;
             this.btnSound.btn.isVisible = false;
             this.btnRotation.btn.isVisible = false;
-            //----add link
             engine.map.miniMap.isVisible = false; 
+            },400);
+            //----add link
+            
             for (let i=0; i<engine.loc.link.length; i++)
                 engine.loc.link[i].button.isVisible = false;  
                   
         });
 		this.panel.addControl(this.btnMap.btn);
-
-
 		this.panel.children.reverse();  //Reverse panel ĐỂ CUỐI PANEL!!!
 
-	}
-	
+        //---FOV
+        this.FOV = {};
+        this.FOV.container = new BABYLON.GUI.Rectangle();
+        this.FOV.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+	    this.FOV.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+        this.FOV.container.color = "transparent";
+        this.FOV.container.width = "70px";
+        this.FOV.container.height = "220px";
+        engine.advancedTexture.addControl(this.FOV.container);
+       
+        this.FOV.slider = new BABYLON.GUI.Slider();
+	    this.FOV.slider.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+	    this.FOV.slider.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+	    this.FOV.slider.minimum = 0;
+	    this.FOV.slider.maximum = 1;
+	    this.FOV.slider.value = 0.5;
+	    this.FOV.slider.color = "black";
+	    this.FOV.slider.isThumbClamped = true;
+	    this.FOV.slider.isThumbCircle = true;        
+        this.FOV.slider.hoverCursor = "grab";
+        this.FOV.slider.color = "white";
+        this.FOV.slider.thumbColor = "black";
+        this.FOV.slider.background = "white";	    
+        this.FOV.slider.height = "30px";
+        this.FOV.slider.width = "150px";
+        //this.FOV.slider.thumbWidth = "20px"
+        this.FOV.slider.rotation = -Math.PI/2;
+        this.FOV.slider.onValueChangedObservable.add((value) => {
+            engine.setCameraFOV((1 - value) * 80 + 20);
+        });
+        this.FOV.container.addControl(this.FOV.slider);
 
+
+        this.FOV.btnPlus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/icon/fov_plus.png");
+        this.FOV.btnPlus.width = "30px";
+        this.FOV.btnPlus.height = "30px";
+        this.FOV.btnPlus.color = "transparent";
+        this.FOV.btnPlus.hoverCursor = "pointer";
+        this.FOV.btnPlus.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;        
+        this.FOV.btnPlus.onPointerClickObservable.add(() => {
+            this.FOV.slider.value += 0.05;
+        });
+        this.FOV.container.addControl(this.FOV.btnPlus);
+        
+        this.FOV.btnMinus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnMinus", "./asset/icon/fov_minus.png");
+        this.FOV.btnMinus.width = "30px";
+        this.FOV.btnMinus.height = "30px";
+        this.FOV.btnMinus.color = "transparent";
+        this.FOV.btnMinus.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+        this.FOV.btnMinus.onPointerClickObservable.add(() => {
+            this.FOV.slider.value -= 0.05;
+        });	
+        this.FOV.container.addControl(this.FOV.btnMinus);
+    }   
+    hideInterfaces()
+    {
+        //TODO
+    } 
 }
