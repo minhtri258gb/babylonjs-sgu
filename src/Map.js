@@ -220,7 +220,6 @@ export default class Map
                     engine.loc.link[i].button.isVisible = true;
 					engine.animation.fadeAnimIn(engine.loc.link[i].button);
 				}
-
 		});
 
 		this.btnCloseTotalMap.addControl(this.imgTotalMapCloseBtn);
@@ -239,8 +238,8 @@ export default class Map
 	{
 		this.miniImg = new BABYLON.GUI.Image("mapImg","./asset/map.png");
 		this.miniImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
-		this.miniImg.scaleX = 4.0;
-		this.miniImg.scaleY = 4.0;
+		this.miniImg.scaleX = 5.0;
+		this.miniImg.scaleY = 5.0;
 		this.miniImg.zIndex = 1;
 		
 		this.crossImg = new BABYLON.GUI.Image("mapImg","./asset/eye.png");
@@ -273,14 +272,13 @@ export default class Map
 			engine.animation.fadeAnimOut(engine.interfaces.btnRotation.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.FOV.container);
 			setTimeout(() => {
-			engine.interfaces.btnUI.btn.isVisible = false;
-			engine.interfaces.btnFullScreen.btn.isVisible = false;
-			engine.interfaces.btnSetting.btn.isVisible = false;
-			engine.interfaces.btnMap.btn.isVisible = false;
-			engine.interfaces.btnSound.btn.isVisible = false;
-			engine.interfaces.btnRotation.btn.isVisible = false;
-			engine.interfaces.FOV.container.isVisible = false;
-
+				engine.interfaces.btnUI.btn.isVisible = false;
+				engine.interfaces.btnFullScreen.btn.isVisible = false;
+				engine.interfaces.btnSetting.btn.isVisible = false;
+				engine.interfaces.btnMap.btn.isVisible = false;
+				engine.interfaces.btnSound.btn.isVisible = false;
+				engine.interfaces.btnRotation.btn.isVisible = false;
+			  engine.interfaces.FOV.container.isVisible = false;
 			},400);
 
 			//----
@@ -296,11 +294,10 @@ export default class Map
 			{
 				engine.animation.fadeAnimOut(engine.loc.link[i].button);
 				setTimeout(() => {
-				engine.loc.link[i].button.isVisible = false;
+					engine.loc.link[i].button.isVisible = false;
 				}, 400);
 			}
 		});
-		// miniMap.addControl(crossImg);
 		engine.advancedTexture.addControl(this.miniMap);
 	}
 
@@ -330,19 +327,12 @@ export default class Map
 		});
 	}
 
-	toogleMap()
-	{
-		let toogle = this.miniMap.isVisible;
-		this.totalMap.isVisible = toogle;
-		this.miniMap.isVisible = !toogle;
-	}
-
 	updateLocation()
 	{
 		// hook mini map
 		let pos = DataSource.loc[engine.loc.name].position;
-		this.miniImg.leftInPixels = -(pos.x - 0.5) * (200 * 4);
-		this.miniImg.topInPixels = -(pos.y - 0.5) * (200 * 4);
+		this.miniImg.leftInPixels = -(pos.x - 0.5) * (200 * 5);
+		this.miniImg.topInPixels = -(pos.y - 0.5) * (200 * 5);
 		
 		// TODO
 
@@ -370,5 +360,37 @@ export default class Map
 			let offsetAngle = BABYLON.Tools.ToRadians(27); // offset to North
 			this.crossImg.rotation = angle - offsetAngle;
 		});
+	}
+
+	resize()
+	{
+		this.mat.xbound = engine.canvas.width * 90 / 100;
+		this.mat.ybound = engine.canvas.height * 90 / 100;
+
+		if (this.mat.xbound > this.mat.ybound)
+		{
+			this.mat.imgSize = this.mat.ybound;
+			this.mat.scaleMin = this.mat.xbound / this.mat.ybound + 0.1;
+		}
+		else
+		{
+			this.mat.imgSize = this.mat.xbound;
+			this.mat.scaleMin = this.mat.ybound / this.mat.xbound + 0.1;
+		}
+		this.mat.x = 0;
+		this.mat.y = 0;
+		this.totalImg.leftInPixels = 0;
+		this.totalImg.topInPixels = 0;
+
+		this.mat.scale = this.mat.scaleMin;
+		this.totalImg.scaleX = this.mat.scaleMin;
+		this.totalImg.scaleY = this.mat.scaleMin;
+
+		for (let i=0; i<this.link.length; i++)
+		{
+			let l = this.link[i];
+			l.rect.leftInPixels = (l.position.x - 0.5) * (this.mat.imgSize * this.mat.scale);
+			l.rect.topInPixels = (l.position.y - 0.5) * (this.mat.imgSize * this.mat.scale);
+		}
 	}
 }
