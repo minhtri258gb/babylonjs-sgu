@@ -7,6 +7,7 @@ import Map from "./Map.js";
 import Interfaces from "./Interfaces.js";
 import Animation from "./Animation.js";
 import Location from './Location.js'
+import Effect from "./Effect.js";
 
 const engine =
 {
@@ -37,6 +38,11 @@ const engine =
 
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
+		this.light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0,100,0), this.scene);
+        // this.light.groundColor = new BABYLON.Color3(0.2, 0.2, 0.2);
+        // this.light.intensity = 0.5;
+
+
 		// Camera setup
         this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
 		this.camera.attachControl(this.canvas, true);
@@ -51,6 +57,8 @@ const engine =
         this.interfaces = new Interfaces();
 		this.map = new Map();
 		this.animation = new Animation();
+
+		Effect.lenFlare();
 		
 		this.changeLocation('SGU_A_01');
 	},
@@ -64,15 +72,14 @@ const engine =
 		// });
 
 		// Render
-		let scene = this.scene;
-		this.engine.runRenderLoop(function () {
-			scene.render();
+		this.engine.runRenderLoop(() => {
+			this.scene.render();
 		});
 
 		// Resize window event
-		var engine = this.engine;
-		window.addEventListener("resize", function () {
-			engine.resize();
+		window.addEventListener("resize", () => {
+			this.map.resize();
+			this.engine.resize();
 		});
 
 	},
