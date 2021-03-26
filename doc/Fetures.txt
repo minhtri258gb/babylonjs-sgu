@@ -1,23 +1,40 @@
 
+
+// Main
 PhotoDome (sky shere)
-
-Mouse picker
-
 PhotoDome link
 
+// Camera
+change cursor style to move on drag
+invert X:Y mouse drag
+turn off inertia
+
+// Data
+Mouse picker
+
+// Map
 Total map
-
 Map link
-
 mini map
 
-GUI
+// Effect
+Len Flare
+Particle system
 
+// Music
+random load music
+change volume by GUI
+
+
+// GUI
+Popup menu
+Animation GUI
+Help panel
+
+// Some function
 Auto rotate
 
-Popup menu
 
-Animation GUI
 
 
 

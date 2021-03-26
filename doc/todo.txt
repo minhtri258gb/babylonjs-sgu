@@ -7,3 +7,13 @@ move animation
 
 fix F11 fullscreen
 fix sound bar //tam thoi fix duoc
+
+Friction for move type
+
+multi language
+
+upload image 360 by client
+
+help panel
+
+download some music no copy right sound
