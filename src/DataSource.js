@@ -3,9 +3,14 @@ import engine from './Engine.js'
 
 export default class DataSource
 {
-	static init()
+	constructor()
 	{
-		// Locations
+		this.initLocation();
+		this.initMusic();
+	}
+
+	initLocation()
+	{
 		let loc = {};
 
 		loc['SGU_A_01'] = {};
@@ -29,13 +34,21 @@ export default class DataSource
 		loc['SGU_B_01'].rotation = BABYLON.Tools.ToRadians(265);
 
 		DataSource.loc = loc;
+	}
 
-		// Music
+	initMusic()
+	{
 		this.music = [
 			"Alan Walker - Fade",
 			"Disfigure - Blank",
 			"Janji - Heroes Tonight"
 		];
+	}
+
+	// get random name in list music
+	getMusic()
+	{
+		return this.music[Math.floor(Math.random() * this.music.length)];
 	}
 
 }

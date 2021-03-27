@@ -51,8 +51,8 @@ const engine =
 		this.camera.inputs.remove(this.camera.inputs.attached.keyboard);
 
 		// Component
-		DataSource.init();
 		Location.registerMousePicking();
+		this.data = new DataSource();
 		this.language = new Language();
 		this.animation = new Animation();
         this.interfaces = new Interfaces();
