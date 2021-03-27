@@ -5,6 +5,7 @@ export default class DataSource
 {
 	static init()
 	{
+		// Locations
 		let loc = {};
 
 		loc['SGU_A_01'] = {};
@@ -28,6 +29,13 @@ export default class DataSource
 		loc['SGU_B_01'].rotation = BABYLON.Tools.ToRadians(265);
 
 		DataSource.loc = loc;
+
+		// Music
+		this.music = [
+			"Alan Walker - Fade",
+			"Disfigure - Blank",
+			"Janji - Heroes Tonight"
+		];
 	}
 
 }

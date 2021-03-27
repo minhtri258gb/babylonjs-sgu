@@ -19,7 +19,6 @@ export default class Interfaces
 		// this.panel.isPointerBlocker = true;		
 		engine.advancedTexture.addControl(this.panel);
 
-
 		//Nut an/hien UI
 		this.btnUI = {};
 		this.btnUI.btn = new BABYLON.GUI.Button();
@@ -103,7 +102,6 @@ export default class Interfaces
 			}
 		});
 		this.panel.addControl(this.btnUI.btn);
-
 		
 		//Nut fullscreen
 		this.btnFullScreen = {};
