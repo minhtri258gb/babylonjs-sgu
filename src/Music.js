@@ -34,7 +34,7 @@ export default class Music
 
 	changeMusic()
 	{
-		this.music = new BABYLON.Sound("music1", "asset/music/"+DataSource.music[Math.floor(Math.random() * list.length)]+".mp3", engine.scene,
+		this.music = new BABYLON.Sound("music1", "asset/music/"+engine.data.getMusic()+".mp3", engine.scene,
 			null, {loop: true, autoplay: true});
 	}
 }
