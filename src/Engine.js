@@ -8,6 +8,7 @@ import Animation from "./Animation.js";
 import Location from './Location.js'
 import Effect from "./Effect.js";
 import Music from "./Music.js";
+import Language from "./Language.js";
 
 const engine =
 {
@@ -52,9 +53,10 @@ const engine =
 		// Component
 		DataSource.init();
 		Location.registerMousePicking();
+		this.language = new Language();
+		this.animation = new Animation();
         this.interfaces = new Interfaces();
 		this.map = new Map();
-		this.animation = new Animation();
 		this.effect = new Effect();
 		this.music = new Music();
 		

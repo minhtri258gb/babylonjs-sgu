@@ -1,5 +1,6 @@
 
 import engine from './Engine.js'
+import DataSource from './DataSource.js'
 
 export default class Music
 {
@@ -33,12 +34,7 @@ export default class Music
 
 	changeMusic()
 	{
-		let list = [
-			"Alan Walker - Fade",
-			"Disfigure - Blank",
-			"Janji - Heroes Tonight"
-		];
-		this.music = new BABYLON.Sound("music1", "asset/music/"+list[Math.floor(Math.random() * list.length)]+".mp3", engine.scene,
+		this.music = new BABYLON.Sound("music1", "asset/music/"+DataSource.music[Math.floor(Math.random() * list.length)]+".mp3", engine.scene,
 			null, {loop: true, autoplay: true});
 	}
 }

@@ -1,5 +1,4 @@
 
-
 // Main
 PhotoDome (sky shere)
 PhotoDome link
@@ -31,12 +30,9 @@ Popup menu
 Animation GUI
 Help panel
 
+// Menu setting
+
 // Some function
 Auto rotate
-
-
-
-
-
 
 

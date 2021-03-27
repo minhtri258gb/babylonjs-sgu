@@ -153,8 +153,7 @@ export default class Location
 
 	static registerMousePicking()
 	{
-		engine.scene.onPointerDown = (event, pickResult) =>
-		{
+		engine.scene.onPointerDown = (event, pickResult) => { // event mouse click pre
 			if(event.button == 0)
 			{
 				// move type
@@ -167,15 +166,13 @@ export default class Location
 				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
 			}
 		}
-		engine.scene.onPointerMove = () =>
-		{
+		engine.scene.onPointerMove = () => { // event mouse move
 			if (this.isDrag)
 				engine.canvas.style.cursor = "move";
 			else
 				engine.canvas.style.cursor = "default";
 		}
-		engine.scene.onPointerUp = (event) =>
-		{
+		engine.scene.onPointerUp = (event) => { // event mouse click post
 			if(event.button == 0)
 			{
 				// move type
@@ -184,7 +181,7 @@ export default class Location
 			}
 		}
 		const POINTERWHEEL = 0x08;
-		engine.scene.onPointerObservable.add((evt) => {
+		engine.scene.onPointerObservable.add((evt) => { // event mouse wheel
 			engine.interfaces.FOV.slider.value += (evt.event.deltaY / -1000);
 		}, POINTERWHEEL);
 
