@@ -106,6 +106,8 @@ export default class Interfaces
 				engine.animation.fadeAnimOut(this.btnSound.btn);
 				engine.animation.fadeAnimOut(this.btnRotation.btn);
 				engine.animation.fadeAnimOut(this.FOV.container);
+				engine.animation.fadeAnimOut(this.logoNav.container);
+				
 				setTimeout(() => {
 				this.btnFullScreen.btn.isVisible = false;
 				this.btnSetting.btn.isVisible = false;
@@ -113,6 +115,7 @@ export default class Interfaces
 				this.btnSound.btn.isVisible = false;
 				this.btnRotation.btn.isVisible = false;
 				this.FOV.container.isVisible = false;
+				this.logoNav.container.isVisible = false;
 				}, 400);
 				//----add link
 
@@ -140,12 +143,15 @@ export default class Interfaces
 				this.btnSound.btn.isVisible = true;
 				this.btnRotation.btn.isVisible = true;
 				this.FOV.container.isVisible = true;
+				this.logoNav.container.isVisible = true;
 				engine.animation.fadeAnimIn(this.btnFullScreen.btn);
 				engine.animation.fadeAnimIn(this.btnSetting.btn);
 				engine.animation.fadeAnimIn(this.btnMap.btn);
 				engine.animation.fadeAnimIn(this.btnSound.btn);
 				engine.animation.fadeAnimIn(this.btnRotation.btn);
 				engine.animation.fadeAnimIn(this.FOV.container);
+				engine.animation.fadeAnimIn(this.logoNav.container);
+				
 
 				//----add link
 				engine.map.miniMap.isVisible = true;
@@ -470,8 +476,7 @@ export default class Interfaces
 			//TODO
 			engine.map.totalMap.isVisible = true;
 			engine.animation.fadeAnimIn(engine.map.totalMap);
-
-			engine.animation.fadeAnimOut(this.FOV.container);
+			
 			engine.animation.fadeAnimOut(this.btnUI.btn);
 			engine.animation.fadeAnimOut(this.btnFullScreen.btn);
 			engine.animation.fadeAnimOut(this.btnSetting.btn);
@@ -479,15 +484,19 @@ export default class Interfaces
 			engine.animation.fadeAnimOut(this.btnSound.btn);
 			engine.animation.fadeAnimOut(this.btnRotation.btn);
 			engine.animation.fadeAnimOut(engine.map.miniMap);
-			setTimeout(() => {
-			this.FOV.container.isVisible = false;
+			engine.animation.fadeAnimOut(this.FOV.container);
+			engine.animation.fadeAnimOut(this.logoNav.container);
+			
+			setTimeout(() => {			
 			this.btnUI.btn.isVisible = false;
 			this.btnFullScreen.btn.isVisible = false;
 			this.btnSetting.btn.isVisible = false;
 			this.btnMap.btn.isVisible = false;
 			this.btnSound.btn.isVisible = false;
 			this.btnRotation.btn.isVisible = false;
-			engine.map.miniMap.isVisible = false; 
+			engine.map.miniMap.isVisible = false;
+			this.FOV.container.isVisible = false; 
+			this.logoNav.container.isVisible = false; 
 			},400);
 			//----add link
 			

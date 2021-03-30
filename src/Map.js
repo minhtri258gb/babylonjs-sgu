@@ -197,6 +197,8 @@ export default class Map
         		engine.interfaces.btnSound.btn.isVisible = true;
         		engine.interfaces.btnRotation.btn.isVisible = true;	
         		engine.interfaces.FOV.container.isVisible = true;	
+        		engine.interfaces.logoNav.container.isVisible = true;	
+
 
 				engine.animation.fadeAnimIn(engine.interfaces.btnUI.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.btnFullScreen.btn);
@@ -205,6 +207,7 @@ export default class Map
 				engine.animation.fadeAnimIn(engine.interfaces.btnMap.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.btnRotation.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.FOV.container);
+				engine.animation.fadeAnimIn(engine.interfaces.logoNav	.container);
 				
         		//----
 				engine.animation.fadeAnimOut(this.totalMap);
@@ -271,6 +274,7 @@ export default class Map
 			engine.animation.fadeAnimOut(engine.interfaces.btnMap.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.btnRotation.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.FOV.container);
+			engine.animation.fadeAnimOut(engine.interfaces.logoNav.container);
 			setTimeout(() => {
 				engine.interfaces.btnUI.btn.isVisible = false;
 				engine.interfaces.btnFullScreen.btn.isVisible = false;
@@ -278,7 +282,8 @@ export default class Map
 				engine.interfaces.btnMap.btn.isVisible = false;
 				engine.interfaces.btnSound.btn.isVisible = false;
 				engine.interfaces.btnRotation.btn.isVisible = false;
-			  engine.interfaces.FOV.container.isVisible = false;
+			  	engine.interfaces.FOV.container.isVisible = false;
+			  	engine.interfaces.logoNav.container.isVisible = false;				
 			},400);
 
 			//----
