@@ -39,18 +39,18 @@ export default class Interfaces
 
 
 		//Nut ngon ngu VietNam
-		this.logoNav.btnLangVn = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/vn-flag.png");
-		this.logoNav.btnLangVn.width = "30px";
-		this.logoNav.btnLangVn.height = "20px";
-		this.logoNav.btnLangVn.color = "transparent";
-		this.logoNav.btnLangVn.hoverCursor = "pointer";
-		this.logoNav.btnLangVn.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;   
-		this.logoNav.btnLangVn.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
-		this.logoNav.btnLangVn.left = "15px";        
-		this.logoNav.btnLangVn.onPointerClickObservable.add(() => {
+		this.logoNav.btnLangVi = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/vi-flag.png");
+		this.logoNav.btnLangVi.width = "30px";
+		this.logoNav.btnLangVi.height = "20px";
+		this.logoNav.btnLangVi.color = "transparent";
+		this.logoNav.btnLangVi.hoverCursor = "pointer";
+		this.logoNav.btnLangVi.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;   
+		this.logoNav.btnLangVi.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+		this.logoNav.btnLangVi.left = "15px";        
+		this.logoNav.btnLangVi.onPointerClickObservable.add(() => {
 			//TODO
 		});
-		this.logoNav.container.addControl(this.logoNav.btnLangVn);
+		this.logoNav.container.addControl(this.logoNav.btnLangVi);
 
 		//Nut ngon ngu English
 		this.logoNav.btnLangEn = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/uk-flag.png");
