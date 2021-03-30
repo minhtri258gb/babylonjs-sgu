@@ -76,8 +76,8 @@ export default class Effect
 
 		// ===================================================
 		// MOTION BLUR
-		// var mb = new BABYLON.MotionBlurPostProcess('mb', engine.scene, 1.0, engine.camera);
-		// mb.motionStrength = 0.2;
+		//  var mb = new BABYLON.MotionBlurPostProcess('mb', engine.scene, 1.0, engine.camera);
+		//  mb.motionStrength = 0.2;
 		
 		// ===================================================
 		// POST PROCESS

@@ -33,7 +33,7 @@ export default class Language
 		{
 			case 'title': return 'SGU Sightseeing';
 		}
-		return '[en] unavaiable';
+		return '[en] unavailable';
 	}
 
 	vi(tag)
