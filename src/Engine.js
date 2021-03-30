@@ -49,7 +49,7 @@ const engine =
 		this.camera.fov = BABYLON.Tools.ToRadians(60); // Tam nhin
 		this.camera.angularSensibility = 1000; // toc do chuot
         this.camera.useAutoRotationBehavior = true; //tu dong xoay camera
-
+		//this.camera.inertialRadiusOffset = 100;
 		// Component
 		DataSource.init();
 		Location.registerMousePicking();

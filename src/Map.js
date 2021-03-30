@@ -250,9 +250,9 @@ export default class Map
 		this.miniMap.width = "200px";
 		this.miniMap.height = "200px";
 		this.miniMap.hoverCursor = "pointer";
-		this.miniMap.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+		this.miniMap.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 		this.miniMap.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-		this.miniMap.left = "15px";
+		this.miniMap.left = "-15px";
 		this.miniMap.top = "15px";
 		this.miniMap.thickness = 0;
 		this.miniMap.background = "green";

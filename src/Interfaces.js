@@ -1,4 +1,5 @@
 
+import CheckboxDef from './Component/CheckboxDef.js';
 import engine from './Engine.js'
 
 export default class Interfaces
@@ -16,7 +17,7 @@ export default class Interfaces
 		this.panel.height = "160px";
 		this.panel.horizontalAlignment = 1;
 		this.panel.verticalAlignment = 1;
-        this.panel.isPointerBlocker = true;			
+        //this.panel.isPointerBlocker = true;			
 		engine.advancedTexture.addControl(this.panel);
 
 
@@ -144,6 +145,162 @@ export default class Interfaces
 
 
         //Nut cai dat
+        this.settings = {};
+        this.settings.isShow = false;
+        this.settings.container = new BABYLON.GUI.ScrollViewer();
+        this.settings.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+	    this.settings.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.settings.container.width = "300px";
+        this.settings.container.height = "400px";
+        this.settings.container.leftInPixels = 400;
+        this.settings.container.background = "#c0c0c0";
+        this.settings.container.thickness = 2;
+        this.settings.container.zIndex = 3;
+        this.settings.container.cornerRadius = 10;
+        engine.advancedTexture.addControl(this.settings.container);
+        
+        // //Khung cai dat Grid (dieu chinh so dong Setting)
+        this.settings.selPanel = new BABYLON.GUI.SelectionPanel("settings");
+        //this.settings.selPanel.background = "white";
+        this.settings.selPanel.height = "399px";
+        this.settings.container.addControl(this.settings.selPanel);
+
+        this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup("Hiệu Ứng");
+        this.settings.effectsGroup.addCheckbox("Lóa Sáng Mặt Trời", (isChecked) => {
+            if (isChecked) {
+                //TODO
+                console.log()
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+        this.settings.effectsGroup.addCheckbox("Hạt Bụi Bay", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.effectsGroup.addCheckbox("Sáng Viền", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.effectsGroup.addCheckbox("Chuyển Động Mờ", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.effectsGroup.addCheckbox("Khử Răng Cưa", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup("Góc Nhìn");
+        this.settings.projectionsGroup.addRadio("Bình Thường", (chosen) => {   
+            //TODO
+        }, true);
+        this.settings.projectionsGroup.addRadio("Trực Giao", (chosen) => {   
+            //TODO
+        });
+        this.settings.projectionsGroup.addRadio("Cách Tâm", (chosen) => {   
+            //TODO
+        });
+        this.settings.projectionsGroup.addRadio("Hành Tinh Tí Hon", (chosen) => {   
+            //TODO
+        });
+        this.settings.projectionsGroup.addRadio("Dạng Ống", (chosen) => {   
+            //TODO
+        });
+
+        this.settings.selPanel.addGroup(this.settings.projectionsGroup);
+        this.settings.selPanel.addGroup(this.settings.effectsGroup);
+        
+        
+        // //Tieu de setting Hieu ung
+        // this.setting.effectsText = new BABYLON.GUI.TextBlock();
+        // this.setting.effectsText.text = "Hiệu ứng";
+        // this.setting.effectsText.fontSize = "30";
+        // this.setting.effectsText.fontStyle = "bold";
+        // this.setting.grid.addControl(this.setting.effectsText, 0, 0);
+
+        // //Option bat/tat lenFlare
+        // this.setting.lenFlare = new CheckboxDef("Hiệu ứng Lens Flare", false, this.setting.grid, 1, 0);
+        // this.setting.lenFlare.callbackChangedValue((toggle) => {
+        //     if (toggle)
+        //     {
+                
+        //         //todo
+        //     }
+        //     else
+        //     {
+        //         //todo
+        //     }
+        // });
+
+        // //Option bat/tat lenFlare
+        // this.setting.lenFlare = new CheckboxDef("Hiệu ứng Hạt", false, this.setting.grid, 2, 0);
+        // this.setting.lenFlare.callbackChangedValue((toggle) => {
+        //     if (toggle)
+        //     {
+                
+        //         //todo
+        //     }
+        //     else
+        //     {
+        //         //todo
+        //     }
+        // });
+
+        // this.setting.lenFlare = new CheckboxDef("Hiệu ứng ...", false, this.setting.grid, 3, 0);
+        // this.setting.lenFlare.callbackChangedValue((toggle) => {
+        //     if (toggle)
+        //     {
+                
+        //         //todo
+        //     }
+        //     else
+        //     {
+        //         //todo
+        //     }
+        // });
+        // this.setting.effectsText = new BABYLON.GUI.TextBlock();
+        // this.setting.effectsText.text = "Góc nhìn";
+        // this.setting.effectsText.fontSize = "30";
+        // this.setting.effectsText.fontStyle = "bold";
+        // this.setting.grid.addControl(this.setting.effectsText, 4, 0);
+        
+        
+        // this.btnSetting.lenFlareCheckbox = new BABYLON.GUI.Checkbox();
+        // this.btnSetting.lenFlareCheckbox.width = "20px";
+        // this.btnSetting.lenFlareCheckbox.height = "20px";
+        // this.btnSetting.lenFlareCheckbox.isChecked = true;
+        // this.btnSetting.lenFlareCheckbox.color = "green";
+        // this.btnSetting.lenFlareCheckbox.onIsCheckedChangedObservable.add((value) => {
+        //     //TODO
+        // });
+        // this.btnSetting.grid.addControl(this.btnSetting.lenFlareCheckbox, 0 ,0);
+
         this.btnSetting = {};
         this.btnSetting.btn = new BABYLON.GUI.Button();
         this.btnSetting.btn.width = "55px";
@@ -158,10 +315,19 @@ export default class Interfaces
         this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/setting.png");
         this.btnSetting.btn.addControl(this.btnSetting.imgSetting);
         this.btnSetting.btn.onPointerClickObservable.add(() => {
-        	//TODO
+            if (this.settings.isShow === false)
+            {
+        	    engine.animation.drawerAnimX(this.settings.container, 400, -1);
+                this.settings.isShow = true;
+            }
+            else
+            {
+                engine.animation.drawerAnimX(this.settings.container, -1, 400);
+                this.settings.isShow = false;
+            }
         });
         this.panel.addControl(this.btnSetting.btn);
-
+       
 		//Thanh sound
 		this.btnSound = {};
         this.btnSound.slider = new BABYLON.GUI.Slider();
@@ -188,7 +354,6 @@ export default class Interfaces
         	this.btnSound.slider.isVisible = false;
         });
 	    engine.advancedTexture.addControl(this.btnSound.slider);
-
 
 	    //Nut sound       
         this.btnSound.btn = new BABYLON.GUI.Button();
@@ -365,6 +530,7 @@ export default class Interfaces
         this.FOV.btnMinus.width = "30px";
         this.FOV.btnMinus.height = "30px";
         this.FOV.btnMinus.color = "transparent";
+        this.FOV.btnMinus.hoverCursor = "pointer";
         this.FOV.btnMinus.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         this.FOV.btnMinus.onPointerClickObservable.add(() => {
             this.FOV.slider.value -= 0.05;
