@@ -1,4 +1,5 @@
 
+import CheckboxDef from './Component/CheckboxDef.js';
 import engine from './Engine.js'
 
 export default class Interfaces
@@ -16,7 +17,7 @@ export default class Interfaces
 		this.panel.height = "160px";
 		this.panel.horizontalAlignment = 1;
 		this.panel.verticalAlignment = 1;
-		// this.panel.isPointerBlocker = true;		
+    //this.panel.isPointerBlocker = true;			
 		engine.advancedTexture.addControl(this.panel);
 
 		//Nut an/hien UI
@@ -141,25 +142,127 @@ export default class Interfaces
 		this.panel.addControl(this.btnFullScreen.btn);
 
 
-		//Nut cai dat
-		this.btnSetting = {};
-		this.btnSetting.btn = new BABYLON.GUI.Button();
-		this.btnSetting.btn.width = "55px";
-		this.btnSetting.btn.height = "35px";
-		this.btnSetting.btn.paddingRight = "10px";
-		this.btnSetting.btn.paddingLeft = "10px";
-		this.btnSetting.btn.top = "30%";
-		this.btnSetting.btn.color = "transparent";
-		this.btnSetting.btn.background = "transparent";
-		this.btnSetting.btn.hoverCursor = "pointer";
-		this.btnSetting.btn.zIndex = 2;        
-		this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/setting.png");
-		this.btnSetting.btn.addControl(this.btnSetting.imgSetting);
-		this.btnSetting.btn.onPointerClickObservable.add(() => {
-			//TODO
-		});
-		this.panel.addControl(this.btnSetting.btn);
+        //Nut cai dat
+        this.settings = {};
+        this.settings.isShow = false;
+        this.settings.container = new BABYLON.GUI.ScrollViewer();
+        this.settings.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+	    this.settings.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        this.settings.container.width = "300px";
+        this.settings.container.height = "400px";
+        this.settings.container.leftInPixels = 400;
+        this.settings.container.background = "#c0c0c0";
+        this.settings.container.thickness = 2;
+        this.settings.container.zIndex = 3;
+        this.settings.container.cornerRadius = 10;
+        engine.advancedTexture.addControl(this.settings.container);
+        
+        // //Khung cai dat Grid (dieu chinh so dong Setting)
+        this.settings.selPanel = new BABYLON.GUI.SelectionPanel("settings");
+        //this.settings.selPanel.background = "white";
+        this.settings.selPanel.height = "399px";
+        this.settings.container.addControl(this.settings.selPanel);
 
+        this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup("Hiệu Ứng");
+        this.settings.effectsGroup.addCheckbox("Lóa Sáng Mặt Trời", (isChecked) => {
+            if (isChecked) {
+                //TODO
+                console.log()
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+        this.settings.effectsGroup.addCheckbox("Hạt Bụi Bay", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.effectsGroup.addCheckbox("Sáng Viền", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.effectsGroup.addCheckbox("Chuyển Động Mờ", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.effectsGroup.addCheckbox("Khử Răng Cưa", (isChecked) => {
+            if (isChecked) {
+                //TODO
+            }
+            else 
+            {
+               //TODO
+            }
+        });
+
+        this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup("Góc Nhìn");
+        this.settings.projectionsGroup.addRadio("Bình Thường", (chosen) => {   
+            //TODO
+        }, true);
+        this.settings.projectionsGroup.addRadio("Trực Giao", (chosen) => {   
+            //TODO
+        });
+        this.settings.projectionsGroup.addRadio("Cách Tâm", (chosen) => {   
+            //TODO
+        });
+        this.settings.projectionsGroup.addRadio("Hành Tinh Tí Hon", (chosen) => {   
+            //TODO
+        });
+        this.settings.projectionsGroup.addRadio("Dạng Ống", (chosen) => {   
+            //TODO
+        });
+
+        this.settings.selPanel.addGroup(this.settings.projectionsGroup);
+        this.settings.selPanel.addGroup(this.settings.effectsGroup);
+        
+        
+        //Nut sound
+        this.btnSetting = {};
+        this.btnSetting.btn = new BABYLON.GUI.Button();
+        this.btnSetting.btn.width = "55px";
+        this.btnSetting.btn.height = "35px";
+        this.btnSetting.btn.paddingRight = "10px";
+        this.btnSetting.btn.paddingLeft = "10px";
+        this.btnSetting.btn.top = "30%";
+        this.btnSetting.btn.color = "transparent";
+        this.btnSetting.btn.background = "transparent";
+        this.btnSetting.btn.hoverCursor = "pointer";
+        this.btnSetting.btn.zIndex = 2;        
+        this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/setting.png");
+        this.btnSetting.btn.addControl(this.btnSetting.imgSetting);
+        this.btnSetting.btn.onPointerClickObservable.add(() => {
+            if (this.settings.isShow === false)
+            {
+        	    engine.animation.drawerAnimX(this.settings.container, 400, -1);
+                this.settings.isShow = true;
+            }
+            else
+            {
+                engine.animation.drawerAnimX(this.settings.container, -1, 400);
+                this.settings.isShow = false;
+            }
+        });
+        this.panel.addControl(this.btnSetting.btn);
+       
 		//Thanh sound
 		this.btnSound = {};
 		this.btnSound.slider = new BABYLON.GUI.Slider();
@@ -244,6 +347,7 @@ export default class Interfaces
 		this.btnSound.btn.onPointerMoveObservable.add(() => {
 			this.btnSound.slider.isVisible = true;       	
 		});
+
 
 		this.btnSound.btn.onPointerOutObservable.add(() => {
 			setTimeout(() => {

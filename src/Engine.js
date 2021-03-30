@@ -44,6 +44,7 @@ const engine =
 		this.camera.attachControl(this.canvas, true);
 		this.camera.fov = BABYLON.Tools.ToRadians(60); // Tam nhin
         this.camera.useAutoRotationBehavior = true; //tu dong xoay camera
+
 		this.camera.angularSensibilityX = -500;
 		this.camera.angularSensibilityY = -500;
 		this.camera.inertia = 0;

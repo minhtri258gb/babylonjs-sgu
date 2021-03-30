@@ -8,23 +8,29 @@ export default class Animation
         BABYLON.GUI.Control.prototype.getScene = function() {
             return engine.scene;
         };
+        
+        this.ease = new BABYLON.CubicEase();
+        this.ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
     }
     
     fadeAnimIn(control)
     {
-        this.ease = new BABYLON.CubicEase();
-        this.ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
-
-        BABYLON.Animation.CreateAndStartAnimation(control+"fadeIn", control, "alpha", 5, 2, 0, 1, 0, this.ease);
-        //BABYLON.Animation.CreateAndStartAnimation("VisAnim", controlTwo, "alpha", speed, 10, alphaOne, alphaTwo, 0, ease);
+        //BABYLON.Animation.CreateAndStartAnimation("Name", BABYLON.node, targetProperty, framePerSecond, totalFrame, from, to, loop: 0-1, this.ease);
+        BABYLON.Animation.CreateAndStartAnimation(control+"fadeIn", control, "alpha", 50, 20, 0, 1, 0, this.ease);       
     }
 
     fadeAnimOut(control)
     {
-        this.ease = new BABYLON.CubicEase();
-        this.ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+        BABYLON.Animation.CreateAndStartAnimation(control+"fadeOut", control, "alpha", 50, 20, 1, 0, 0, this.ease);       
+    }
 
-        BABYLON.Animation.CreateAndStartAnimation(control+"fadeOut", control, "alpha", 5, 2, 1, 0, 0, this.ease);
-        //BABYLON.Animation.CreateAndStartAnimation("VisAnim", controlTwo, "alpha", speed, 10, alphaOne, alphaTwo, 0, ease);
+    drawerAnimX(control, from, to)
+    {
+        BABYLON.Animation.CreateAndStartAnimation(control+"drawerIn", control, "leftInPixels", 60, 30, from, to, 0, this.ease);   
+    }
+
+    drawerAnimY(control, from, to)
+    {
+        BABYLON.Animation.CreateAndStartAnimation(control+"drawerIn", control, "topInPixels", 60, 30, from, to, 0, this.ease);   
     }
 }
