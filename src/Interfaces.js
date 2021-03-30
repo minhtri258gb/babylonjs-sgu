@@ -7,17 +7,73 @@ export default class Interfaces
 	// Forwards
 	constructor()
 	{
+		//FPS
 		// this.text = new BABYLON.GUI.TextBlock();
 		// this.text.text = engine.getFps() + " fps";
 		// engine.advancedTexture.addControl(this.text);
 
+		//Rectangle danh cho logo va ngon ngu
+		this.logoNav = {};
+		this.logoNav.container = new BABYLON.GUI.Rectangle();
+		this.logoNav.container.width = "200px";
+		this.logoNav.container.height = "100px";
+		this.logoNav.container.verticalAlignment = 0;
+		this.logoNav.container.horizontalAlignment = 0;
+		this.logoNav.container.left = "10px";
+		this.logoNav.container.top = "10px";
+		this.logoNav.container.color = "transparent";
+		engine.advancedTexture.addControl(this.logoNav.container);
+
+		//Nut logo ve trang SGU
+		this.logoNav.btnLogo = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/logo.png");
+		this.logoNav.btnLogo.width = "100px";
+		this.logoNav.btnLogo.height = "100px";
+		this.logoNav.btnLogo.color = "transparent";
+		this.logoNav.btnLogo.hoverCursor = "pointer";
+		this.logoNav.btnLogo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;        
+		this.logoNav.btnLogo.onPointerClickObservable.add(() => {
+			if (confirm('Bạn có muốn chuyển hướng đến trang chủ trường Đại học Sài Gòn?')) 
+				window.open("https://sgu.edu.vn");		
+		});
+		this.logoNav.container.addControl(this.logoNav.btnLogo);
+
+
+		//Nut ngon ngu VietNam
+		this.logoNav.btnLangVn = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/vn-flag.png");
+		this.logoNav.btnLangVn.width = "30px";
+		this.logoNav.btnLangVn.height = "20px";
+		this.logoNav.btnLangVn.color = "transparent";
+		this.logoNav.btnLangVn.hoverCursor = "pointer";
+		this.logoNav.btnLangVn.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;   
+		this.logoNav.btnLangVn.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+		this.logoNav.btnLangVn.left = "15px";        
+		this.logoNav.btnLangVn.onPointerClickObservable.add(() => {
+			//TODO
+		});
+		this.logoNav.container.addControl(this.logoNav.btnLangVn);
+
+		//Nut ngon ngu English
+		this.logoNav.btnLangEn = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/uk-flag.png");
+		this.logoNav.btnLangEn.width = "30px";
+		this.logoNav.btnLangEn.height = "20px";
+		this.logoNav.btnLangEn.color = "transparent";
+		this.logoNav.btnLangEn.hoverCursor = "pointer";
+		this.logoNav.btnLangEn.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;   
+		this.logoNav.btnLangEn.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+		this.logoNav.btnLangEn.left = "50px";          
+		this.logoNav.btnLangEn.onPointerClickObservable.add(() => {
+			//TODO
+		});
+		this.logoNav.container.addControl(this.logoNav.btnLangEn);
+
+		//StackPanel cho GUI (phai/duoi)
 		this.panel = new BABYLON.GUI.StackPanel();
 		this.panel.isVertical = false;
 		//this.panel.width = "240px";
 		this.panel.height = "160px";
 		this.panel.horizontalAlignment = 1;
 		this.panel.verticalAlignment = 1;
-    //this.panel.isPointerBlocker = true;			
+    	//this.panel.isPointerBlocker = true;			
 		engine.advancedTexture.addControl(this.panel);
 
 		//Nut an/hien UI
@@ -143,9 +199,10 @@ export default class Interfaces
 
 
         //Nut cai dat
-        this.settings = {};
+        this.settings = {};		
         this.settings.isShow = false;
         this.settings.container = new BABYLON.GUI.ScrollViewer();
+		this.settings.container.isPointerBlocker = true;
         this.settings.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
 	    this.settings.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
         this.settings.container.width = "300px";
