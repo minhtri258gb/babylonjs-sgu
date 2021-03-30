@@ -153,13 +153,37 @@ export default class Location
 
 	static registerMousePicking()
 	{
-		engine.scene.onPointerDown = function (event, pickResult)
-		{
-			if(event.button == 2)
+		engine.scene.onPointerDown = (event, pickResult) => { // event mouse click pre
+			if(event.button == 0)
+			{
+				// move type
+				this.isDrag = true;
+				engine.canvas.style.cursor = "move";
+			}
+			else if(event.button == 2)
 			{
 				let vector = pickResult.pickedPoint;
 				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
 			}
 		}
+		engine.scene.onPointerMove = () => { // event mouse move
+			if (this.isDrag)
+				engine.canvas.style.cursor = "move";
+			else
+				engine.canvas.style.cursor = "default";
+		}
+		engine.scene.onPointerUp = (event) => { // event mouse click post
+			if(event.button == 0)
+			{
+				// move type
+				this.isDrag = false;
+				engine.canvas.style.cursor = "default";
+			}
+		}
+		const POINTERWHEEL = 0x08;
+		engine.scene.onPointerObservable.add((evt) => { // event mouse wheel
+			engine.interfaces.FOV.slider.value += (evt.event.deltaY / -1000);
+		}, POINTERWHEEL);
+
 	}
 }

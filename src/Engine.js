@@ -2,12 +2,13 @@
 /// <reference path="../lib/babylon.gui.js" />
 
 import DataSource from "./DataSource.js";
-import Manager from "./Manager.js";
 import Map from "./Map.js";
 import Interfaces from "./Interfaces.js";
 import Animation from "./Animation.js";
 import Location from './Location.js'
 import Effect from "./Effect.js";
+import Music from "./Music.js";
+import Language from "./Language.js";
 
 const engine =
 {
@@ -38,27 +39,27 @@ const engine =
 
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-		this.light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0,100,0), this.scene);
-        // this.light.groundColor = new BABYLON.Color3(0.2, 0.2, 0.2);
-        // this.light.intensity = 0.5;
-
-
 		// Camera setup
         this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
 		this.camera.attachControl(this.canvas, true);
 		this.camera.fov = BABYLON.Tools.ToRadians(60); // Tam nhin
-		this.camera.angularSensibility = 1000; // toc do chuot
         this.camera.useAutoRotationBehavior = true; //tu dong xoay camera
-		//this.camera.inertialRadiusOffset = 100;
+
+		this.camera.angularSensibilityX = -500;
+		this.camera.angularSensibilityY = -500;
+		this.camera.inertia = 0;
+		this.camera.inputs.remove(this.camera.inputs.attached.mousewheel);
+		this.camera.inputs.remove(this.camera.inputs.attached.keyboard);
+
 		// Component
-		DataSource.init();
 		Location.registerMousePicking();
-		this.manager = new Manager();
+		this.data = new DataSource();
+		this.language = new Language();
+		this.animation = new Animation();
         this.interfaces = new Interfaces();
 		this.map = new Map();
-		this.animation = new Animation();
-
-		Effect.lenFlare();
+		this.effect = new Effect();
+		this.music = new Music();
 		
 		this.changeLocation('SGU_A_01');
 	},

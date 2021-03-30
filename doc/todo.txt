@@ -1,9 +1,15 @@
 
-len flare
-particle
+
 icon color
 icon svg file
 move animation
 
 fix F11 fullscreen
-fix sound bar //tam thoi fix duoc
+
+upload image 360 by client
+
+help panel
+
+download some music no copy right sound
+
+tiny plane type cam
