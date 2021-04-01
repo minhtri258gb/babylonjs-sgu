@@ -6,32 +6,32 @@ export default class Effect
 	constructor()
 	{
 		// ===================================================
-		// LEN FLARE
+		// // LEN FLARE
 
-		// Light
-		this.sunLight = new BABYLON.PointLight("sunLight", new BABYLON.Vector3(453,181,-105), engine.scene);
+		// // Light
+		// this.sunLight = new BABYLON.PointLight("sunLight", new BABYLON.Vector3(453,181,-105), engine.scene);
 		
-		// System
-		this.lensFlareSystem = new BABYLON.LensFlareSystem("lensFlareSystem", this.sunLight, engine.scene);
-		// this.lensFlareSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD; // BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
+		// // System
+		// this.lensFlareSystem = new BABYLON.LensFlareSystem("lensFlareSystem", this.sunLight, engine.scene);
+		// // this.lensFlareSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD; // BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
 
-		// Texture
-		this.lenFlares = [];
-		this.lenFlares[0] = new BABYLON.LensFlare(0.2, 0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens5.png", this.lensFlareSystem);
-		this.lenFlares[1] = new BABYLON.LensFlare(0.5, 0.2, new BABYLON.Color3(0.5, 0.5, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
-		this.lenFlares[2] = new BABYLON.LensFlare(0.2, 1.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
-		this.lenFlares[3] = new BABYLON.LensFlare(0.4, 0.4, new BABYLON.Color3(1, 0.5, 1), "asset/lenFlare/Flare.png", this.lensFlareSystem);
-		this.lenFlares[4] = new BABYLON.LensFlare(0.1, 0.6, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens5.png", this.lensFlareSystem);
-		this.lenFlares[5] = new BABYLON.LensFlare(0.3, 0.8, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
+		// // Texture
+		// this.lenFlares = [];
+		// this.lenFlares[0] = new BABYLON.LensFlare(0.2, 0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens5.png", this.lensFlareSystem);
+		// this.lenFlares[1] = new BABYLON.LensFlare(0.5, 0.2, new BABYLON.Color3(0.5, 0.5, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
+		// this.lenFlares[2] = new BABYLON.LensFlare(0.2, 1.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
+		// this.lenFlares[3] = new BABYLON.LensFlare(0.4, 0.4, new BABYLON.Color3(1, 0.5, 1), "asset/lenFlare/Flare.png", this.lensFlareSystem);
+		// this.lenFlares[4] = new BABYLON.LensFlare(0.1, 0.6, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens5.png", this.lensFlareSystem);
+		// this.lenFlares[5] = new BABYLON.LensFlare(0.3, 0.8, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
 		
-		// this.lenFlares[0] = new BABYLON.LensFlare(0.2, 1.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len1.png", this.lensFlareSystem);
-		// this.lenFlares[1] = new BABYLON.LensFlare(0.5, 0.8, new BABYLON.Color3(0.5, 0.5, 1), "asset/lenFlare/len2.png", this.lensFlareSystem);
-		// this.lenFlares[2] = new BABYLON.LensFlare(0.2, 0.6, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len3.png", this.lensFlareSystem);
-		// this.lenFlares[3] = new BABYLON.LensFlare(0.4, 0.4, new BABYLON.Color3(1, 0.5, 1), "asset/lenFlare/len4.png", this.lensFlareSystem);
-		// this.lenFlares[4] = new BABYLON.LensFlare(0.1, 0.2, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len5.png", this.lensFlareSystem);
-		// this.lenFlares[5] = new BABYLON.LensFlare(0.3, 0.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len6.png", this.lensFlareSystem);
-		// this.lenFlares[5] = new BABYLON.LensFlare(0.2, -0.2, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len7.png", this.lensFlareSystem);
-		// this.lenFlares[5] = new BABYLON.LensFlare(0.8, -0.5, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len8.png", this.lensFlareSystem);
+		// // this.lenFlares[0] = new BABYLON.LensFlare(0.2, 1.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len1.png", this.lensFlareSystem);
+		// // this.lenFlares[1] = new BABYLON.LensFlare(0.5, 0.8, new BABYLON.Color3(0.5, 0.5, 1), "asset/lenFlare/len2.png", this.lensFlareSystem);
+		// // this.lenFlares[2] = new BABYLON.LensFlare(0.2, 0.6, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len3.png", this.lensFlareSystem);
+		// // this.lenFlares[3] = new BABYLON.LensFlare(0.4, 0.4, new BABYLON.Color3(1, 0.5, 1), "asset/lenFlare/len4.png", this.lensFlareSystem);
+		// // this.lenFlares[4] = new BABYLON.LensFlare(0.1, 0.2, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len5.png", this.lensFlareSystem);
+		// // this.lenFlares[5] = new BABYLON.LensFlare(0.3, 0.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len6.png", this.lensFlareSystem);
+		// // this.lenFlares[5] = new BABYLON.LensFlare(0.2, -0.2, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len7.png", this.lensFlareSystem);
+		// // this.lenFlares[5] = new BABYLON.LensFlare(0.8, -0.5, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/len8.png", this.lensFlareSystem);
 
 		
 		// ===================================================

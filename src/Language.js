@@ -31,7 +31,7 @@ export default class Language
 	{
 		switch (tag)
 		{
-			case 'title': return 'SGU Sightseeing';
+			case 'title': return 'Saigon University Sightseeing';
 		}
 		return '[en] unavailable';
 	}
@@ -40,7 +40,7 @@ export default class Language
 	{
 		switch (tag)
 		{
-			case 'title': return 'Tham quan SGU';
+			case 'title': return 'Tham quan Đại học Sài Gòn';
 		}
 		return '[vn] không có sẵn';
 	}

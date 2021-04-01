@@ -88,7 +88,7 @@ export default class Location
         line.connectedControl = rectPre;
         line.isVisible = false;
 
-        let textPre = new BABYLON.GUI.TextBlock("textPre","Sân "+_name);
+        let textPre = new BABYLON.GUI.TextBlock("textPre",engine.language.get(_name));
         //textPre.linkWithMesh(box);
         textPre.color = "white";
         textPre.fontFamily = "Time News Roman"

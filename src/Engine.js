@@ -9,6 +9,7 @@ import Location from './Location.js'
 import Effect from "./Effect.js";
 import Music from "./Music.js";
 import Language from "./Language.js";
+import detectMobile from './DetectMobileAPI.js'
 
 const engine =
 {
@@ -43,7 +44,7 @@ const engine =
         this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
 		this.camera.attachControl(this.canvas, true);
 		this.camera.fov = BABYLON.Tools.ToRadians(60); // Tam nhin
-        this.camera.useAutoRotationBehavior = true; //tu dong xoay camera
+        this.camera.useAutoRotationBehavior = false; //tu dong xoay camera
 
 		this.camera.angularSensibilityX = -500;
 		this.camera.angularSensibilityY = -500;
@@ -61,7 +62,7 @@ const engine =
 		this.effect = new Effect();
 		this.music = new Music();
 		
-		this.changeLocation('SGU_A_01');
+		this.changeLocation('C02');
 	},
   
 	run: function()
@@ -102,7 +103,35 @@ const engine =
 	{
 		this.camera.fov = BABYLON.Tools.ToRadians(value);
 	
+	},
+
+	setCameraType(type)
+	{
+		switch(type)
+		{
+			case 0: // cam thuong
+				engine.camera.position = new BABYLON.Vector3(0,0,-1);
+				engine.camera.fov = BABYLON.Tools.ToRadians(60)
+				break;
+			case 1:
+				break;
+			case 2:
+				let pos = engine.camera.position.normalize();
+				engine.camera.position = new BABYLON.Vector3(0,0,-60);
+				engine.camera.fov = BABYLON.Tools.ToRadians(60)
+
+				break;
+			case 3:
+				engine.camera.position = new BABYLON.Vector3(0,500,0);
+				engine.camera.fov = BABYLON.Tools.ToRadians(120)
+				break;
+			case 4:
+				engine.camera.position = new BABYLON.Vector3(0,-500,0);
+				engine.camera.fov = BABYLON.Tools.ToRadians(120)
+				break;
+		}
 	}
+
 }
 
 export default engine;

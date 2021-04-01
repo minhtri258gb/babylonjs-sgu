@@ -38,7 +38,7 @@ export default class Interfaces
 		this.logoNav.container.addControl(this.logoNav.btnLogo);
 
 
-		//Nut ngon ngu VietNam
+		//Nut ngon ngu Viet Nam
 		this.logoNav.btnLangVi = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/vi-flag.png");
 		this.logoNav.btnLangVi.width = "30px";
 		this.logoNav.btnLangVi.height = "20px";
@@ -278,21 +278,11 @@ export default class Interfaces
         });
 
         this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup("Góc Nhìn");
-        this.settings.projectionsGroup.addRadio("Bình Thường", (chosen) => {   
-            //TODO
-        }, true);
-        this.settings.projectionsGroup.addRadio("Trực Giao", (chosen) => {   
-            //TODO
-        });
-        this.settings.projectionsGroup.addRadio("Cách Tâm", (chosen) => {   
-            //TODO
-        });
-        this.settings.projectionsGroup.addRadio("Hành Tinh Tí Hon", (chosen) => {   
-            //TODO
-        });
-        this.settings.projectionsGroup.addRadio("Dạng Ống", (chosen) => {   
-            //TODO
-        });
+        this.settings.projectionsGroup.addRadio("Bình Thường",engine.setCameraType, true);
+        this.settings.projectionsGroup.addRadio("Trực Giao", engine.setCameraType);
+        this.settings.projectionsGroup.addRadio("Cách Tâm", engine.setCameraType);
+        this.settings.projectionsGroup.addRadio("Hành Tinh Tí Hon", engine.setCameraType);
+        this.settings.projectionsGroup.addRadio("Dạng Ống", engine.setCameraType);
 
         this.settings.selPanel.addGroup(this.settings.projectionsGroup);
         this.settings.selPanel.addGroup(this.settings.effectsGroup);
@@ -514,7 +504,7 @@ export default class Interfaces
 		this.FOV.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
 		this.FOV.container.color = "transparent";
 		this.FOV.container.width = "70px";
-		this.FOV.container.height = "220px";
+		this.FOV.container.height = "200px";
 		engine.advancedTexture.addControl(this.FOV.container);
 	   
 		this.FOV.slider = new BABYLON.GUI.Slider();
@@ -530,8 +520,8 @@ export default class Interfaces
 		this.FOV.slider.color = "black";
 		this.FOV.slider.thumbColor = "white";
 		this.FOV.slider.background = "black";	    
-		this.FOV.slider.height = "30px";
-		this.FOV.slider.width = "150px";
+		this.FOV.slider.height = "25px";
+		this.FOV.slider.width = "130px";
 		//this.FOV.slider.thumbWidth = "20px"
 		this.FOV.slider.rotation = -Math.PI/2;
 		this.FOV.slider.onValueChangedObservable.add((value) => {
