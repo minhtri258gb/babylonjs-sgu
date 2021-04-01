@@ -32,7 +32,7 @@ export default class Interfaces
 		this.logoNav.btnLogo.hoverCursor = "pointer";
 		this.logoNav.btnLogo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;        
 		this.logoNav.btnLogo.onPointerClickObservable.add(() => {
-			if (confirm('Bạn có muốn chuyển hướng đến trang chủ trường Đại học Sài Gòn?')) 
+			if (confirm(engine.language.get('confirm_direct_sguhome'))) 
 				window.open("https://sgu.edu.vn");		
 		});
 		this.logoNav.container.addControl(this.logoNav.btnLogo);
@@ -48,7 +48,7 @@ export default class Interfaces
 		this.logoNav.btnLangVi.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 		this.logoNav.btnLangVi.left = "15px";        
 		this.logoNav.btnLangVi.onPointerClickObservable.add(() => {
-			//TODO
+			engine.language.changeLanguage('vi')
 		});
 		this.logoNav.container.addControl(this.logoNav.btnLangVi);
 
@@ -62,7 +62,7 @@ export default class Interfaces
 		this.logoNav.btnLangEn.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 		this.logoNav.btnLangEn.left = "50px";          
 		this.logoNav.btnLangEn.onPointerClickObservable.add(() => {
-			//TODO
+			engine.language.changeLanguage('en')
 		});
 		this.logoNav.container.addControl(this.logoNav.btnLangEn);
 
@@ -226,56 +226,12 @@ export default class Interfaces
         this.settings.selPanel.height = "399px";
         this.settings.container.addControl(this.settings.selPanel);
 
-        this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup("Hiệu Ứng");
-        this.settings.effectsGroup.addCheckbox("Lóa Sáng Mặt Trời", (isChecked) => {
-            if (isChecked) {
-                //TODO
-                console.log()
-            }
-            else 
-            {
-               //TODO
-            }
-        });
-        this.settings.effectsGroup.addCheckbox("Hạt Bụi Bay", (isChecked) => {
-            if (isChecked) {
-                //TODO
-            }
-            else 
-            {
-               //TODO
-            }
-        });
-
-        this.settings.effectsGroup.addCheckbox("Sáng Viền", (isChecked) => {
-            if (isChecked) {
-                //TODO
-            }
-            else 
-            {
-               //TODO
-            }
-        });
-
-        this.settings.effectsGroup.addCheckbox("Chuyển Động Mờ", (isChecked) => {
-            if (isChecked) {
-                //TODO
-            }
-            else 
-            {
-               //TODO
-            }
-        });
-
-        this.settings.effectsGroup.addCheckbox("Khử Răng Cưa", (isChecked) => {
-            if (isChecked) {
-                //TODO
-            }
-            else 
-            {
-               //TODO
-            }
-        });
+        this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup(engine.language.get('effect'));
+        this.settings.effectsGroup.addCheckbox(engine.language.get('lenflare'), engine.effect.turnLensFlare);
+        this.settings.effectsGroup.addCheckbox(engine.language.get('particle'), engine.effect.turnParticle);
+        this.settings.effectsGroup.addCheckbox(engine.language.get('bloom'), engine.effect.turnBloom);
+        this.settings.effectsGroup.addCheckbox(engine.language.get('mosionblur'), engine.effect.turnMosionBlur);
+        this.settings.effectsGroup.addCheckbox(engine.language.get('antialias'), engine.effect.turnAntiAlias);
 
         this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup("Góc Nhìn");
         this.settings.projectionsGroup.addRadio("Bình Thường",engine.setCameraType, true);
