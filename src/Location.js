@@ -137,7 +137,7 @@ export default class Location
         });
 
 		// Walk icon
-		let imgwalk = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/walk.svg");
+		let imgwalk = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/walk.png");
         rect.addControl(imgwalk);
 
 		
@@ -159,6 +159,9 @@ export default class Location
 				// move type
 				this.isDrag = true;
 				engine.canvas.style.cursor = "move";
+			}
+			else if(event.button == 1)
+			{
 			}
 			else if(event.button == 2)
 			{

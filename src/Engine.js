@@ -56,9 +56,9 @@ const engine =
 		this.data = new DataSource();
 		this.language = new Language();
 		this.animation = new Animation();
+		this.effect = new Effect();
         this.interfaces = new Interfaces();
 		this.map = new Map();
-		this.effect = new Effect();
 		this.music = new Music();
 		
 		this.changeLocation('SGU_A_01');
