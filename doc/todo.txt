@@ -1,13 +1,10 @@
 
-
-icon color
 icon svg file
-move animation
 
 fix F11 fullscreen
 
 upload image 360 by client
-
 help panel
 
 download some music no copy right sound
+

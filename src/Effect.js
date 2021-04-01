@@ -3,17 +3,6 @@ import engine from './Engine.js'
 
 export default class Effect
 {
-	constructor()
-	{
-		// this.lensFlareSystem();
-		// this.particleSystem();
-		
-		// this.mosionBlur();
-
-		// this.bloomEffect();
-		// this.antiAlias();
-	}
-
 	turnLensFlare(toogle)
 	{
 		if (toogle)
