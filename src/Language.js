@@ -46,8 +46,8 @@ export default class Language
 			case 'lenflare': return 'Lens Flare';
 			case 'particle': return 'Particle';
 			case 'bloom': return 'Bloom';
-			case 'mosionblur': return 'Mosion Blur';
-			case 'antialias': return 'Anti Alias';
+			case 'motionblur': return 'Motion Blur';
+			case 'antialias': return 'Anti-alias';
 			case 'cameratype': return 'Camera type';
 			case 'normal': return 'Normal';
 			case 'ortho': return 'Orthographic';
@@ -69,7 +69,7 @@ export default class Language
 			case 'lenflare': return 'Lóa Sáng Mặt Trời';
 			case 'particle': return 'Đóm Sáng';
 			case 'bloom': return 'Sáng Viền';
-			case 'mosionblur': return 'Chuyển Động Mờ';
+			case 'motionblur': return 'Chuyển Động Mờ';
 			case 'antialias': return 'Khử Răng Cưa';
 			case 'cameratype': return 'Góc Nhìn';
 			case 'normal': return 'Bình Thường';

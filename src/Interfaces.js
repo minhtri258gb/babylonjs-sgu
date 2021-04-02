@@ -227,18 +227,28 @@ export default class Interfaces
         this.settings.container.addControl(this.settings.selPanel);
 
         this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup(engine.language.get('effect'));
-        this.settings.effectsGroup.addCheckbox(engine.language.get('lenflare'), engine.effect.turnLensFlare);
-        this.settings.effectsGroup.addCheckbox(engine.language.get('particle'), engine.effect.turnParticle);
-        this.settings.effectsGroup.addCheckbox(engine.language.get('bloom'), engine.effect.turnBloom);
-        this.settings.effectsGroup.addCheckbox(engine.language.get('mosionblur'), engine.effect.turnMosionBlur);
-        this.settings.effectsGroup.addCheckbox(engine.language.get('antialias'), engine.effect.turnAntiAlias);
+        this.settings.effectsGroup.addCheckbox(engine.language.get('lenflare'), (isCheck) => {
+			engine.effect.turnLensFlare(isCheck);
+		});
+        this.settings.effectsGroup.addCheckbox(engine.language.get('particle'), (isCheck) => {
+			engine.effect.turnParticle(isCheck);
+		});
+        this.settings.effectsGroup.addCheckbox(engine.language.get('bloom'), (isCheck) => {
+			engine.effect.turnBloom(isCheck);
+		});
+        this.settings.effectsGroup.addCheckbox(engine.language.get('motionblur'), (isCheck) => {
+			engine.effect.turnMosionBlur(isCheck);
+		});
+        this.settings.effectsGroup.addCheckbox(engine.language.get('antialias'), (isCheck) => {
+			engine.effect.turnAntiAlias(isCheck);
+		});
 
-        this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup("Góc Nhìn");
-        this.settings.projectionsGroup.addRadio("Bình Thường",engine.setCameraType, true);
-        this.settings.projectionsGroup.addRadio("Trực Giao", engine.setCameraType);
-        this.settings.projectionsGroup.addRadio("Cách Tâm", engine.setCameraType);
-        this.settings.projectionsGroup.addRadio("Hành Tinh Tí Hon", engine.setCameraType);
-        this.settings.projectionsGroup.addRadio("Dạng Ống", engine.setCameraType);
+        this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup(engine.language.get('cameratype'));
+        this.settings.projectionsGroup.addRadio(engine.language.get('normal'),engine.setCameraType, true);
+        this.settings.projectionsGroup.addRadio(engine.language.get('ortho'), engine.setCameraType);
+        this.settings.projectionsGroup.addRadio(engine.language.get('fisheye'), engine.setCameraType);
+        this.settings.projectionsGroup.addRadio(engine.language.get('tinyplanet'), engine.setCameraType);
+        this.settings.projectionsGroup.addRadio(engine.language.get('tubeview'), engine.setCameraType);
 
         this.settings.selPanel.addGroup(this.settings.projectionsGroup);
         this.settings.selPanel.addGroup(this.settings.effectsGroup);
