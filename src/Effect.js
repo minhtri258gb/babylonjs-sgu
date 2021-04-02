@@ -7,7 +7,7 @@ export default class Effect
 	{
 		if (toogle)
 		{
-			if (this.lensFlareSystem === undefined)
+			if (this.sunLight === undefined)
 				this.sunLight = new BABYLON.PointLight("sunLight", new BABYLON.Vector3(453,181,-105), engine.scene);
 			
 			this.lensFlareSystem = new BABYLON.LensFlareSystem("lensFlareSystem", this.sunLight, engine.scene);
