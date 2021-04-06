@@ -16,15 +16,8 @@ const engine =
 	// Forwards
 	main: function()
 	{
-		// INIT
 		this.initEngine();
 		this.run();
-		
-		// setInterval(() => { // loop function
-			
-		// 	// console.log(engine.camera.position);
-
-		// }, 1000);
 	},
 
 	initEngine: function()
@@ -61,8 +54,7 @@ const engine =
         this.interfaces = new Interfaces();
 		this.map = new Map();
 		this.music = new Music();
-		
-		this.changeLocation('C02');
+		this.loc = new Location('C02');
 	},
   
 	run: function()
@@ -83,26 +75,11 @@ const engine =
 			this.map.resize();
 			this.engine.resize();
 		});
-
-	},
-
-	// Natives
-	changeLocation: function(_name)
-	{
-		if (this.loc !== undefined) // first case when init
-		{
-			if (this.loc.name.localeCompare(_name) == 0) // skip same location
-				return;
-			this.loc.dispose();
-		}
-		this.loc = new Location(_name);
-		this.map.updateLocation();
 	},
 
 	setCameraFOV(value)
 	{
 		this.camera.fov = BABYLON.Tools.ToRadians(value);
-	
 	},
 
 	setCameraType(type)
@@ -131,7 +108,6 @@ const engine =
 				break;
 		}
 	}
-
 }
 
 export default engine;

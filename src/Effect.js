@@ -83,8 +83,6 @@ export default class Effect
 		{
 			this.mosionBlur.dispose();
 		}
-		//  var mb = new BABYLON.MotionBlurPostProcess('mb', engine.scene, 1.0, engine.camera);
-		//  mb.motionStrength = 0.2;
 	}
 
 	turnBloom(toogle)
@@ -103,8 +101,5 @@ export default class Effect
 
 		this.defaultPipeline.fxaaEnabled = toogle;
 	}
-
-		// ===================================================
-		// POST PROCESS
 
 }

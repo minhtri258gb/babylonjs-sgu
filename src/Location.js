@@ -8,10 +8,10 @@ export default class Location
 	constructor(_name)
 	{
 		// Set default
-		let info = DataSource.loc[_name];
+		this.info = DataSource.loc[_name];
 
 		this.name = _name;
-		this.position = info.position;
+		this.position = this.info.position;
 		
 		// Create PhotoDome
 		this.dome = new BABYLON.PhotoDome(
@@ -24,40 +24,24 @@ export default class Location
 			},
 			engine.scene
 		);
-		this.dome.rotation.y = info.rotation;
-
+		this.dome.rotation.y = this.info.rotation;
+		
 		// Set link
 		this.link = [];
-		for (let i=0; i<info.link.length; i++)
+		for (let i=0; i<this.info.link.length; i++)
 		{
-			let l = info.link[i];
+			let l = this.info.link[i];
 			this.addLink(l.name, l.pos)
 		}
 
-		// hook map
-		// engine.map.hookMini(this.position);
+		engine.map.goLocation(this.name, this.position); // hook map
 	}
 
 	// Natives
-	dispose()
-	{
-		this.dome.dispose();
-
-		// mtl.dispose()
-		// Location.mesh.material.dispose();
-
-		let nloop = this.link.length;
-		for (let i=0; i<nloop; i++)
-		{
-			this.link[i].pointer.dispose();
-			this.link[i].preview.dispose();
-			this.link[i].button.dispose();
-			this.link[i].mesh.dispose();
-		}
-	}
 
 	addLink(_name, _position)
 	{
+
 		let box = BABYLON.MeshBuilder.CreateBox(_name + "_box", {});
 		box.position = new BABYLON.Vector3(_position[0], _position[1], _position[2]);
 		box.isVisible = false;
@@ -117,7 +101,7 @@ export default class Location
 		engine.advancedTexture.addControl(rect);
 		rect.linkWithMesh(box);
 		rect.onPointerDownObservable.add(() => {
-			engine.changeLocation(_name);
+			this.goto(_name);
 		});
 
 		rect.onPointerMoveObservable.add(() => {            
@@ -149,6 +133,86 @@ export default class Location
 			preview: rectPre,
 			//textblock: textPre
 		});
+	}
+
+	goto(_name)
+	{
+		if (this.name.localeCompare(_name) == 0) // skip same location
+			return;
+		
+		// Get info
+		this.name_next = _name;
+		this.info = DataSource.loc[this.name_next];
+
+		// Update new link
+		let nloop = this.link.length;
+		for (let i=0; i<nloop; i++)
+		{
+			this.link[i].pointer.dispose();
+			this.link[i].preview.dispose();
+			this.link[i].button.dispose();
+			this.link[i].mesh.dispose();
+		}
+		
+		// Set flag go
+		this.flag_timeout = false;
+		this.flag_load_done = false;
+		setTimeout(() => {
+			this.flag_timeout = true;
+		}, 250);
+
+		// Load new dome
+		this.dome_next = new BABYLON.PhotoDome("skyDome_next",
+			"./asset/skysphere/"+this.name_next+".jpg",
+			{faceForward: false, resolution: 32, size: 1000},
+			engine.scene
+		);
+		this.dome_next.setEnabled(false);
+		this.dome_next.rotation.y = this.info.rotation;
+		this.dome_next.onReady = () => {
+			this.flag_load_done = true;
+		};
+
+		// Wait flag
+		this.waitFunc = setInterval(() => {
+			if ( this.flag_timeout && this.flag_load_done)
+				this.goto2();
+		}, 100);
+		
+		// Anim go to
+		engine.animation.zoom(false);
+	}
+
+	goto2()
+	{
+		// Stop waiting
+		clearInterval(this.waitFunc);
+
+		// Anim go to
+		engine.animation.zoom(true);
+
+		// Set default
+		this.name = this.name_next;
+		this.position = this.info.position;
+		
+		// Set dome
+		this.dome.setEnabled(false);
+		this.dome_next.setEnabled(true);
+
+		// Add link
+		this.link = [];
+		for (let i=0; i<this.info.link.length; i++)
+		{
+			let l = this.info.link[i];
+			this.addLink(l.name, l.pos)
+		}
+		// hook map
+		engine.map.goLocation(this.name, this.position); // hook map
+
+		// remove old
+		this.dome.dispose();
+		this.dome = this.dome_next; // Change to main dome
+		this.dome_next = undefined;
 	}
 
 	static registerMousePicking()

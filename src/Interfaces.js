@@ -516,7 +516,8 @@ export default class Interfaces
 			this.FOV.slider.value -= 0.05;
 		});	
 		this.FOV.container.addControl(this.FOV.btnMinus);
-	}   
+	}
+
 	hideInterfaces()
 	{
 		//TODO
