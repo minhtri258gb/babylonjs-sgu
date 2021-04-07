@@ -800,6 +800,5 @@ export default class Interfaces
 			//TODO
 		});
 		this.areaNav.grid.addControl(this.areaNav.areaPL, 8, 0);
-
 	} 
 }

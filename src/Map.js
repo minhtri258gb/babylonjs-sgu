@@ -331,7 +331,7 @@ export default class Map
 		rect.leftInPixels = (_position.x - 0.5) * (this.mat.imgSize * this.mat.scale) + this.totalImg.leftInPixels;
 		rect.topInPixels = (_position.y - 0.5) * (this.mat.imgSize * this.mat.scale) + this.totalImg.topInPixels;
 		rect.onPointerClickObservable.add((evt) => { // Mouse click
-			engine.changeLocation(_name);
+			engine.loc.goto(_name);
 		});
 		
 		this.totalMap.addControl(rect);
@@ -343,19 +343,18 @@ export default class Map
 		});
 	}
 
-	updateLocation()
+	goLocation(name, position)
 	{
 		// hook mini map
-		let pos = DataSource.loc[engine.loc.name].position;
-		this.miniImg.leftInPixels = -(pos.x - 0.5) * (200 * 5);
-		this.miniImg.topInPixels = -(pos.y - 0.5) * (200 * 5);
+		this.miniImg.leftInPixels = -(position.x - 0.5) * (200 * 5);
+		this.miniImg.topInPixels = -(position.y - 0.5) * (200 * 5);
 		
 		// TODO
 
 		// link total map
 		for (let i=0; i<this.link.length; i++)
 		{
-			if (this.link[i].name.localeCompare(engine.loc.name) == 0)
+			if (this.link[i].name.localeCompare(name) == 0)
 				this.link[i].rect.background = "Orange";
 			else if (this.link[i].rect.background.localeCompare("White") != 0)
 				this.link[i].rect.background = "White";
