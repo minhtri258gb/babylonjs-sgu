@@ -55,6 +55,15 @@ export default class Language
 			case 'stereographic': return 'Stereographic';
 			case 'tinyplanet': return 'Tiny Planet';
 			case 'tubeview': return 'Tube View';
+			case 'localtitle': return 'List of areas in school:'
+			case 'localADV': return "An Duong Vuong Gate"
+			case 'localNT': return "Nguyen Trai Gate"
+			case 'localA': return "School Area A"
+			case 'localB': return "School Area B"
+			case 'localC': return "School Area C"
+			case 'localD': return "School Area D"
+			case 'localE': return "School Area E"
+			case 'localPL': return "Parking Lot"			
 		}
 		return '[en] unavailable';
 	}
@@ -78,6 +87,15 @@ export default class Language
 			case 'stereographic': return 'Lập Thể';
 			case 'tinyplanet': return 'Hành Tinh Tý Hon';
 			case 'tubeview': return 'Dạng Ống';
+			case 'localtitle': return 'CÁC KHU VỰC CỦA TRƯỜNG:'
+			case 'localADV': return "Cổng An Dương Vương"
+			case 'localNT': return "Cổng Nguyễn Trãi"
+			case 'localA': return "Khu vực A"
+			case 'localB': return "Khu vực B"
+			case 'localC': return "Khu vực C"
+			case 'localD': return "Khu vực D"
+			case 'localE': return "Khu vực E"
+			case 'localPL': return "Bãi gửi xe"	
 		}
 		return '[vn] không có sẵn';
 	}

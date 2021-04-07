@@ -7,4 +7,11 @@ upload image 360 by client
 help panel
 
 download some music no copy right sound
+chup 1 so anh vi tri dac biet
+
+add info (2 rect - 1 img 1 cap)
+add help panel
+add main menu
+
+xám đen "#8e927e"
 

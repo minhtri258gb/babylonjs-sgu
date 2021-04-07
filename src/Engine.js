@@ -62,7 +62,7 @@ const engine =
 		this.map = new Map();
 		this.music = new Music();
 		
-		this.changeLocation('C02');
+		this.changeLocation('A02');
 	},
   
 	run: function()
@@ -89,6 +89,7 @@ const engine =
 	// Natives
 	changeLocation: function(_name)
 	{
+		
 		if (this.loc !== undefined) // first case when init
 		{
 			if (this.loc.name.localeCompare(_name) == 0) // skip same location
