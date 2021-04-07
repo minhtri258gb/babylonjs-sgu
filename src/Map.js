@@ -195,19 +195,24 @@ export default class Map
         		engine.interfaces.btnSetting.btn.isVisible = true;
         		engine.interfaces.btnMap.btn.isVisible = true;
         		engine.interfaces.btnSound.btn.isVisible = true;
+        		//engine.interfaces.btnSound.slider.isVisible = true;
         		engine.interfaces.btnRotation.btn.isVisible = true;	
         		engine.interfaces.FOV.container.isVisible = true;	
         		engine.interfaces.logoNav.container.isVisible = true;	
-
+        		engine.interfaces.settings.container.isVisible = true;	
+        		engine.interfaces.areaNav.container.isVisible = true;	
 
 				engine.animation.fadeAnimIn(engine.interfaces.btnUI.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.btnFullScreen.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.btnSetting.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.btnSound.btn);
+				//engine.animation.fadeAnimIn(engine.interfaces.btnSound.slider);
 				engine.animation.fadeAnimIn(engine.interfaces.btnMap.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.btnRotation.btn);
 				engine.animation.fadeAnimIn(engine.interfaces.FOV.container);
-				engine.animation.fadeAnimIn(engine.interfaces.logoNav	.container);
+				engine.animation.fadeAnimIn(engine.interfaces.logoNav.container);
+				engine.animation.fadeAnimIn(engine.interfaces.settings.container);
+				engine.animation.fadeAnimIn(engine.interfaces.areaNav.container);
 				
         		//----
 				engine.animation.fadeAnimOut(this.totalMap);
@@ -271,19 +276,25 @@ export default class Map
 			engine.animation.fadeAnimOut(engine.interfaces.btnFullScreen.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.btnSetting.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.btnSound.btn);
+			//engine.animation.fadeAnimOut(engine.interfaces.btnSound.slider);
 			engine.animation.fadeAnimOut(engine.interfaces.btnMap.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.btnRotation.btn);
 			engine.animation.fadeAnimOut(engine.interfaces.FOV.container);
 			engine.animation.fadeAnimOut(engine.interfaces.logoNav.container);
+			engine.animation.fadeAnimOut(engine.interfaces.settings.container);
+			engine.animation.fadeAnimOut(engine.interfaces.areaNav.container);
 			setTimeout(() => {
 				engine.interfaces.btnUI.btn.isVisible = false;
 				engine.interfaces.btnFullScreen.btn.isVisible = false;
 				engine.interfaces.btnSetting.btn.isVisible = false;
 				engine.interfaces.btnMap.btn.isVisible = false;
 				engine.interfaces.btnSound.btn.isVisible = false;
+				//engine.interfaces.btnSound.slider.isVisible = false;
 				engine.interfaces.btnRotation.btn.isVisible = false;
 			  	engine.interfaces.FOV.container.isVisible = false;
 			  	engine.interfaces.logoNav.container.isVisible = false;				
+			  	engine.interfaces.settings.container.isVisible = false;				
+			  	engine.interfaces.areaNav.container.isVisible = false;				
 			},400);
 
 			//----
