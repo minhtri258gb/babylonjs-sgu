@@ -7,7 +7,7 @@ export default class Language
 	constructor(_name)
 	{
 		// Default
-		var url = new URL(window.location.href);
+		let url = new URL(window.location.href);
 		this.language = url.searchParams.get("lang");
 		if (this.language === null)
 			this.language = 'en'
@@ -18,13 +18,11 @@ export default class Language
 
 	changeLanguage(lang)
 	{
-		var url = new URL(window.location.href);
-		var paramLang = url.searchParams.get("lang");
-
-		if (paramLang === null)
-			window.location.href = window.location.href+"?lang="+lang
-		else
-			window.location.href = url.origin+"?lang="+lang
+		let url = new URL(window.location.href);
+		let param = url.searchParams;
+		param.set("lang", lang);
+		url.search = param.toString();
+		window.location.href = url.toString();
 	}
 
 	get(tag)

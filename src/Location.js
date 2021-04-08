@@ -16,7 +16,7 @@ export default class Location
 		// Create PhotoDome
 		this.dome = new BABYLON.PhotoDome(
 			"skyDome",
-			"./asset/skysphere/"+this.name+".jpg",
+			"./asset/dome/"+this.name+".jpg",
 			{
 				faceForward: false,
 				resolution: 32,
@@ -58,7 +58,7 @@ export default class Location
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
 		
-		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/skysphere/"+_name+"_pre"+".jpg");
+		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/dome/"+_name+"_pre"+".jpg");
         rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
@@ -163,7 +163,7 @@ export default class Location
 
 		// Load new dome
 		this.dome_next = new BABYLON.PhotoDome("skyDome_next",
-			"./asset/skysphere/"+this.name_next+".jpg",
+			"./asset/dome/"+this.name_next+".jpg",
 			{faceForward: false, resolution: 32, size: 1000},
 			engine.scene
 		);

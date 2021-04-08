@@ -54,7 +54,7 @@ const engine =
         this.interfaces = new Interfaces();
 		this.map = new Map();
 		this.music = new Music();
-		this.loc = new Location('C02');
+		this.loc = new Location('CADV');
 	},
   
 	run: function()
