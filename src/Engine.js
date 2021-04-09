@@ -22,6 +22,9 @@ const engine =
 
 	initEngine: function()
 	{
+		// set default
+		this.onInit = true;
+
 		// Scene setup
 		this.canvas = document.getElementById('renderCanvas');
 
@@ -55,6 +58,9 @@ const engine =
 		this.map = new Map();
 		this.music = new Music();
 		this.loc = new Location('C02');
+
+		// set flag
+		this.onInit = false;
 	},
   
 	run: function()
@@ -86,19 +92,19 @@ const engine =
 	{
 		switch(type)
 		{
-			case 0: // cam thuong
+			case 0: //cam thuong
 				engine.camera.position = new BABYLON.Vector3(0,0,-1);
 				engine.camera.fov = BABYLON.Tools.ToRadians(60)
 				break;
-			case 1:
+			case 1: //kien truc
 				break;
-			case 2:
+			case 2: //mat ca
 				let pos = engine.camera.position.normalize();
 				engine.camera.position = new BABYLON.Vector3(0,0,-60);
 				engine.camera.fov = BABYLON.Tools.ToRadians(60)
 
 				break;
-			case 3:
+			case 3: //
 				engine.camera.position = new BABYLON.Vector3(0,500,0);
 				engine.camera.fov = BABYLON.Tools.ToRadians(120)
 				break;
