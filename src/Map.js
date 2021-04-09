@@ -186,7 +186,7 @@ export default class Map
 		this.btnCloseTotalMap.horizontalAlignment = 1;
 		this.btnCloseTotalMap.top = "10px";
 		this.btnCloseTotalMap.left = "-10px";		
-		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close1.png");
+		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close.png");
         this.btnCloseTotalMap.onPointerClickObservable.add(() => {
 
 				//btn list
