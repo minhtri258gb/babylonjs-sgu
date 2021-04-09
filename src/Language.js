@@ -19,6 +19,7 @@ export default class Language
 	changeLanguage(lang)
 	{
 		let url = new URL(window.location.href);
+
 		let param = url.searchParams;
 		param.set("lang", lang);
 		url.search = param.toString();
@@ -53,7 +54,10 @@ export default class Language
 			case 'stereographic': return 'Stereographic';
 			case 'tinyplanet': return 'Tiny Planet';
 			case 'tubeview': return 'Tube View';
-			case 'localtitle': return 'List of areas in school:'
+			case 'themes': return 'Themes';
+			case 'darkmode': return 'Dark Mode';
+			case 'lightmode': return 'Light Mode';
+			case 'localtitle': return 'List of areas in school:';
 			case 'localADV': return "An Duong Vuong Gate"
 			case 'localNT': return "Nguyen Trai Gate"
 			case 'localA': return "School Area A"
@@ -61,7 +65,7 @@ export default class Language
 			case 'localC': return "School Area C"
 			case 'localD': return "School Area D"
 			case 'localE': return "School Area E"
-			case 'localPL': return "Parking Lot"			
+			case 'localPL': return "Parking Lot"
 		}
 		return '[en] unavailable';
 	}
@@ -85,6 +89,9 @@ export default class Language
 			case 'stereographic': return 'Lập Thể';
 			case 'tinyplanet': return 'Hành Tinh Tý Hon';
 			case 'tubeview': return 'Dạng Ống';
+			case 'themes': return 'Chủ Đề';
+			case 'darkmode': return 'Nền Tối';
+			case 'lightmode': return 'Nền Sáng';
 			case 'localtitle': return 'CÁC KHU VỰC CỦA TRƯỜNG:'
 			case 'localADV': return "Cổng An Dương Vương"
 			case 'localNT': return "Cổng Nguyễn Trãi"
