@@ -15,3 +15,10 @@ add main menu
 
 xám đen "#8e927e"
 
+Infomation cac khu vuc trong truong
+
+location on URL
+
+// DEBUG & DEV
+Remove func right click to get information
+
