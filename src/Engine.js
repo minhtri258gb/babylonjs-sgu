@@ -57,13 +57,12 @@ const engine =
         this.interfaces = new Interfaces();
 		this.map = new Map();
 		this.music = new Music();
-    this.loc = new Location('CADV');
+		this.loc = new Location('B02'); // CADV
     
 		// set flag
 		this.onInit = false;
-
 	},
-  
+
 	run: function()
 	{
 		// Update
