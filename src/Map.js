@@ -222,8 +222,16 @@ export default class Map
 		
 		// Mini map
 		this.miniMap = new BABYLON.GUI.Ellipse();
-		this.miniMap.width = "200px";
-		this.miniMap.height = "200px";
+		if (detectMobile())
+		{
+			this.miniMap.width = "100px";
+			this.miniMap.height = "100px";
+		}
+		else
+		{
+			this.miniMap.width = "200px";
+			this.miniMap.height = "200px";
+		}		
 		this.miniMap.hoverCursor = "pointer";
 		this.miniMap.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 		this.miniMap.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
@@ -246,7 +254,7 @@ export default class Map
 			this.totalMap.isVisible = true;
 			engine.animation.fadeAnimIn(this.totalMap);
 		});
-		this.miniMap.isVisible = !detectMobile(); // chi hien khi su dung pc
+		//this.miniMap.isVisible = !detectMobile(); // chi hien khi su dung pc
 		engine.advancedTexture.addControl(this.miniMap);
 	}
 
@@ -362,11 +370,11 @@ export default class Map
 
 	showMiniMap(toggle)
 	{
-		if (detectMobile())
-		{
-			engine.map.miniMap.isVisible = false;
-			return;
-		}
+		// if (detectMobile())
+		// {
+		// 	engine.map.miniMap.isVisible = false;
+		// 	return;
+		// }
 		if (toggle)
 		{
 			engine.map.miniMap.isVisible = true;

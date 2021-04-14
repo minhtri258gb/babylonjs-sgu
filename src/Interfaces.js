@@ -100,13 +100,22 @@ export default class Interfaces
 		this.logoNav.container.left = "10px";
 		this.logoNav.container.top = "10px";
 		this.logoNav.container.color = "transparent";
-		this.logoNav.container.zIndex = 3;
+		this.logoNav.container.zIndex = 2;
 		engine.advancedTexture.addControl(this.logoNav.container);
 
 		//Nut logo ve trang SGU
 		this.logoNav.btnLogo = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/logo.png");
-		this.logoNav.btnLogo.width = "100px";
-		this.logoNav.btnLogo.height = "100px";
+		if (detectMobile())
+		{
+			this.logoNav.btnLogo.width = "60px";
+			this.logoNav.btnLogo.height = "60px";
+			this.logoNav.btnLogo.top = "-20px";			
+		}
+		else
+		{
+			this.logoNav.btnLogo.width = "100px";
+			this.logoNav.btnLogo.height = "100px";
+		}		
 		this.logoNav.btnLogo.color = "transparent";
 		this.logoNav.btnLogo.hoverCursor = "pointer";
 		this.logoNav.btnLogo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;        
