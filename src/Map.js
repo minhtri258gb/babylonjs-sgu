@@ -66,7 +66,6 @@ export default class Map
 		this.totalMap.width = 0.9;
 		this.totalMap.height = 0.9;
 		this.totalMap.cornerRadius = 20;
-		this.totalMap.color = "black";
 		this.totalMap.thickness = 0;
 		this.totalMap.background = "transparent";
 		this.totalMap.zIndex = 3;
@@ -190,6 +189,7 @@ export default class Map
 		this.btnCloseTotalMap.left = "-10px";		
 		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close.png");
         this.btnCloseTotalMap.onPointerClickObservable.add(() => {
+
 				// Show interfaces
 				engine.interfaces.showInterfaces(true);
         		// Hidden map
@@ -204,9 +204,9 @@ export default class Map
 		this.totalMap.addControl(this.btnCloseTotalMap);
 		
 		// Add link to totalmap
-		Object.keys(DataSource.loc).forEach((key) => {
+		Object.keys(engine.data.loc).forEach((key) => {
 			// if(storage[key].barcode === barcode) { console.log("do something")}
-			let pos = DataSource.loc[key].position;
+			let pos = engine.data.loc[key].position;
 			this.addLink(key, pos);
 			// console.log();
 		});
@@ -283,9 +283,9 @@ export default class Map
 	goLocation(name, position)
 	{
 		// hook mini map
-		this.miniImg.leftInPixels = -(position.x - 0.5) * (200 * 5);
-		this.miniImg.topInPixels = -(position.y - 0.5) * (200 * 5);
-		
+		BABYLON.Animation.CreateAndStartAnimation("miniHookX", this.miniImg, "transformCenterX", 60, 60, this.miniImg.transformCenterX, position.x*1.25 - 0.125, 0);
+		BABYLON.Animation.CreateAndStartAnimation("miniHookY", this.miniImg, "transformCenterY", 60, 60, this.miniImg.transformCenterY, position.y*1.25 - 0.125, 0);
+
 		// TODO
 
 		// link total map

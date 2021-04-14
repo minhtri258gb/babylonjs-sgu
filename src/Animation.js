@@ -16,12 +16,12 @@ export default class Animation
 	fadeAnimIn(control)
 	{
 		//BABYLON.Animation.CreateAndStartAnimation("Name", BABYLON.node, targetProperty, framePerSecond, totalFrame, from, to, loop: 0-1, this.ease);
-		BABYLON.Animation.CreateAndStartAnimation(control+"fadeIn", control, "alpha", 50, 20, 0, 1, 0, this.ease);       
+		BABYLON.Animation.CreateAndStartAnimation(control+"fadeIn", control, "alpha", 50, 20, 0, 1, 0, this.ease);
 	}
 
 	fadeAnimOut(control)
 	{
-		BABYLON.Animation.CreateAndStartAnimation(control+"fadeOut", control, "alpha", 50, 20, 1, 0, 0, this.ease);       
+		BABYLON.Animation.CreateAndStartAnimation(control+"fadeOut", control, "alpha", 50, 20, 1, 0, 0, this.ease);
 	}
 
 	drawerAnimX(control, from, to)
@@ -46,6 +46,16 @@ export default class Animation
 		}
 		else
 		{
+			// look at pos go
+			// let end = new BABYLON.Vector3(-_pos_target[0], -_pos_target[1], -_pos_target[2]).normalize();
+			// let start = engine.camera.position;
+
+			// BABYLON.Animation.CreateAndStartAnimation("lookAtX", engine.camera, "target", 60, 30, start.x, end.x, 0);
+			// BABYLON.Animation.CreateAndStartAnimation("lookAtY", engine.camera, "target", 60, 30, start.y, end.y, 0);
+			// BABYLON.Animation.CreateAndStartAnimation("lookAtZ", engine.camera, "target", 60, 30, start.z, end.z, 0);
+			// console.log(start.y, end.y)
+
+			// fov anim
 			curFov = BABYLON.Tools.ToRadians(camfov);
 			nextFov = curFov - BABYLON.Tools.ToRadians(20);
 		}

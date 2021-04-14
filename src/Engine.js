@@ -10,6 +10,7 @@ import Effect from "./Effect.js";
 import Music from "./Music.js";
 import Language from "./Language.js";
 import detectMobile from './DetectMobileAPI.js'
+import MainMenu from "./MainMenu.js";
 
 const engine =
 {
@@ -57,7 +58,8 @@ const engine =
         this.interfaces = new Interfaces();
 		this.map = new Map();
 		this.music = new Music();
-		this.loc = new Location('B02'); // CADV
+		this.loc = new Location();
+		this.menu = new MainMenu();
     
 		// set flag
 		this.onInit = false;
@@ -82,6 +84,12 @@ const engine =
 			this.engine.resize();
 		});
 	},
+
+	// Natives
+	// reload: function(_url)
+	// {
+	// 	window.location.href = _url.toString();
+	// },
 
 	setCameraFOV(value)
 	{

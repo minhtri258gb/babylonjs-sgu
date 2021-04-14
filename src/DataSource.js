@@ -17,6 +17,7 @@ export default class DataSource
 		loc['CADV'].info = [];
 		loc['CADV'].position = {x: 0.47276688453159044, y: 0.3340213278293774};
 		loc['CADV'].rotation = BABYLON.Tools.ToRadians(92);
+		loc['CADV'].sun = {x: 383, y: 296, z: -122};
 
 		loc['C02'] = {};
 		loc['C02'].link = [];
@@ -63,6 +64,7 @@ export default class DataSource
 		loc['B01'].info = [];
 		loc['B01'].position = {x: 0.5715386308606647, y: 0.5253748135104067};
 		loc['B01'].rotation = BABYLON.Tools.ToRadians(265);
+		loc['B01'].sun = {x: 424, y: 184, z: -188};
 		
 		loc['B02'] = {};
 		loc['B02'].link = [];
@@ -74,6 +76,7 @@ export default class DataSource
 		loc['B02'].info[0] = {name: 'C01', pos: [-499,9,9]};
 		loc['B02'].position = {x: 0.5415663341359935, y: 0.4670335970645568};
 		loc['B02'].rotation = BABYLON.Tools.ToRadians(178);
+		loc['B02'].sun = {x: 422, y: 229, z: -138};
 		
 		loc['CT'] = {};
 		loc['CT'].link = [];
@@ -84,6 +87,7 @@ export default class DataSource
 		loc['CT'].info = [];
 		loc['CT'].position = {x: 0.515193211787639, y: 0.515193211787639};
 		loc['CT'].rotation = BABYLON.Tools.ToRadians(272);
+		loc['CT'].sun = {x: 457, y: 117, z: -163};
 		
 		//PLACEHOLDER
 		loc['KLF'] = {};
@@ -112,7 +116,6 @@ export default class DataSource
 		loc['A02'].info = [];
 		loc['A02'].position = {x: 0.6023391812865497, y: 0.572526086457975};
 		loc['A02'].rotation = BABYLON.Tools.ToRadians(158);
-		loc['A02'].sun = {x: 453, y: 181, z: -105};
 
 		//PLACEHOLDER
 		loc['A03'] = {};
@@ -137,6 +140,7 @@ export default class DataSource
 		loc['GX1'].info = [];
 		loc['GX1'].position = {x: 0.44926040591675265, y: 0.6252723311546841};
 		loc['GX1'].rotation = BABYLON.Tools.ToRadians(270);
+		loc['GX1'].sun = {x: 433, y: 118, z: -219};;
 		
 		loc['GX2'] = {};
 		loc['GX2'].link = [];
@@ -187,7 +191,7 @@ export default class DataSource
 		loc['CNT'].info = [];
 		loc['CNT'].position = {x: 0.4968466918931315, y: 0.7342047930283224};
 		loc['CNT'].rotation = BABYLON.Tools.ToRadians(0);
-		loc['CNT'].sun = {x: 397, y: 260, z: -156};
+		loc['CNT'].sun = {x: 404, y: 243, z: -165};
 
 		//PLACEHOLDER
 		loc['SBR'] = {};
@@ -196,7 +200,7 @@ export default class DataSource
 		loc['SBR'].position = {x: 0.42116729732828806, y: 0.5685127852310514};
 		loc['SBR'].rotation = BABYLON.Tools.ToRadians(0);
 
-		DataSource.loc = loc;
+		this.loc = loc;
 	}
 
 	initMusic()

@@ -5,11 +5,22 @@ export default class Effect
 {
 	turnLensFlare(toogle)
 	{
+		this.onLensFlare = toogle;
+
+		let sunPos = engine.data.loc[engine.loc.name].sun;
+		if (sunPos === undefined)
+			return;
+
 		if (toogle)
 		{
+			let sunPos = engine.data.loc[engine.loc.name].sun;
+			if (sunPos === undefined)
+				return;
+
 			if (this.sunLight === undefined)
-				this.sunLight = new BABYLON.PointLight("sunLight", new BABYLON.Vector3(453,181,-105), engine.scene);
-			
+				this.sunLight = new BABYLON.PointLight("sunLight", new BABYLON.Vector3(sunPos.x,sunPos.y,sunPos.z), engine.scene);
+			else
+				this.sunLight.position = new BABYLON.Vector3(sunPos.x,sunPos.y,sunPos.z);
 			this.lensFlareSystem = new BABYLON.LensFlareSystem("lensFlareSystem", this.sunLight, engine.scene);
 			// this.lensFlareSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD; // BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
 
@@ -24,6 +35,30 @@ export default class Effect
 		else
 		{
 			this.lensFlareSystem.dispose();
+			this.lensFlareSystem = undefined;
+		}
+	}
+
+	lensFlare_update()
+	{
+		if (!this.onLensFlare)
+			return;
+		
+		let sunPos = engine.data.loc[engine.loc.name].sun;
+		if (sunPos === undefined)
+		{
+			if (this.lensFlareSystem !== undefined)
+			{
+				this.lensFlareSystem.dispose();
+				this.lensFlareSystem = undefined;
+			}
+		}
+		else
+		{
+			if (this.lensFlareSystem !== undefined)
+				this.sunLight.position = new BABYLON.Vector3(sunPos.x,sunPos.y,sunPos.z);
+			else
+				this.turnLensFlare(true);
 		}
 	}
 

@@ -360,7 +360,6 @@ export default class Interfaces
 		});
 		this.panel.addControl(this.btnFullScreen.btn);
 
-
 		//Nut setting
 		this.btnSetting = {};
 		this.btnSetting.btn = new BABYLON.GUI.Button();
@@ -380,9 +379,8 @@ export default class Interfaces
 		});
 		this.panel.addControl(this.btnSetting.btn);
 	   
-		   
-		this.btnSound = {};
 		//Thanh sound
+		this.btnSound = {};
 		this.btnSound.slider = new BABYLON.GUI.Slider();
 		this.btnSound.slider.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
 		this.btnSound.slider.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
