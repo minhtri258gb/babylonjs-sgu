@@ -100,13 +100,22 @@ export default class Interfaces
 		this.logoNav.container.left = "10px";
 		this.logoNav.container.top = "10px";
 		this.logoNav.container.color = "transparent";
-		this.logoNav.zIndex = 3;
+		this.logoNav.container.zIndex = 2;
 		engine.advancedTexture.addControl(this.logoNav.container);
 
 		//Nut logo ve trang SGU
 		this.logoNav.btnLogo = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/logo.png");
-		this.logoNav.btnLogo.width = "100px";
-		this.logoNav.btnLogo.height = "100px";
+		if (detectMobile())
+		{
+			this.logoNav.btnLogo.width = "60px";
+			this.logoNav.btnLogo.height = "60px";
+			this.logoNav.btnLogo.top = "-20px";			
+		}
+		else
+		{
+			this.logoNav.btnLogo.width = "100px";
+			this.logoNav.btnLogo.height = "100px";
+		}		
 		this.logoNav.btnLogo.color = "transparent";
 		this.logoNav.btnLogo.hoverCursor = "pointer";
 		this.logoNav.btnLogo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;        
@@ -269,16 +278,21 @@ export default class Interfaces
 				}, 400);
 				//----add link
 
-				engine.animation.fadeAnimOut(engine.map.miniMap);
-				setTimeout(() => {
-				engine.map.miniMap.isVisible = false;
-				}, 400);
+				engine.map.showMiniMap(false);
 
 				for (let i=0; i<engine.loc.link.length; i++)
 				{
 					engine.animation.fadeAnimOut(engine.loc.link[i].button);
 					setTimeout(() => {
 					engine.loc.link[i].button.isVisible = false;
+					}, 400);  
+				}
+
+				for (let i=0; i<engine.loc.info.length; i++)
+				{
+					engine.animation.fadeAnimOut(engine.loc.info[i].button);
+					setTimeout(() => {
+					engine.loc.info[i].button.isVisible = false;
 					}, 400);  
 				}   		
 			}
@@ -310,13 +324,18 @@ export default class Interfaces
 				
 
 				//----add link
-				engine.map.miniMap.isVisible = true;
-				engine.animation.fadeAnimIn(engine.map.miniMap);
+				engine.map.showMiniMap(true);
 
 				for (let i=0; i<engine.loc.link.length; i++)
 				{                    
 					engine.loc.link[i].button.isVisible = true; 
 					engine.animation.fadeAnimIn(engine.loc.link[i].button);
+				}
+
+				for (let i=0; i<engine.loc.info.length; i++)
+				{                    
+					engine.loc.info[i].button.isVisible = true; 
+					engine.animation.fadeAnimIn(engine.loc.info[i].button);
 				}       		
 			}
 		});
@@ -572,9 +591,7 @@ export default class Interfaces
 		this.btnMap.btn.onPointerClickObservable.add(() => {
 			this.onShow = "map";
 			// Show map
-			engine.map.totalMap.isVisible = true;
-			engine.animation.fadeAnimIn(engine.map.totalMap);
-			engine.animation.animBlock(true);
+			engine.map.showTotalMap(true);
 			// Hidden interface
 			this.showInterfaces(false);
 		});
@@ -981,7 +998,7 @@ export default class Interfaces
 			this.logoNav.container.isVisible = true;	
 			this.settings.container.isVisible = true;	
 			this.areaNav.container.isVisible = true;	
-			engine.map.miniMap.isVisible = true;
+			
 
 			engine.animation.fadeAnimIn(this.btnUI.btn);
 			engine.animation.fadeAnimIn(this.btnFullScreen.btn);
@@ -994,12 +1011,18 @@ export default class Interfaces
 			engine.animation.fadeAnimIn(this.logoNav.container);
 			engine.animation.fadeAnimIn(this.settings.container);
 			engine.animation.fadeAnimIn(this.areaNav.container);
-			engine.animation.fadeAnimIn(engine.map.miniMap);
+			engine.map.showMiniMap(true);
+			
 			
 			for (let i=0; i< engine.loc.link.length; i++)
 			{
 				engine.loc.link[i].button.isVisible = true;
 				engine.animation.fadeAnimIn(engine.loc.link[i].button);
+			}
+			for (let i=0; i< engine.loc.info.length; i++)
+			{
+				engine.loc.info[i].button.isVisible = true;
+				engine.animation.fadeAnimIn(engine.loc.info[i].button);
 			}
 		}
 		else
@@ -1010,8 +1033,7 @@ export default class Interfaces
 			engine.animation.fadeAnimOut(this.btnMap.btn);
 			engine.animation.fadeAnimOut(this.btnSound.btn);
 			engine.animation.fadeAnimOut(this.btnRotation.btn);
-			engine.animation.fadeAnimOut(this.btnHelp.btn);
-			engine.animation.fadeAnimOut(engine.map.miniMap);
+			engine.animation.fadeAnimOut(this.btnHelp.btn);		
 			engine.animation.fadeAnimOut(this.FOV.container);
 			engine.animation.fadeAnimOut(this.logoNav.container);
 			engine.animation.fadeAnimOut(this.settings.container);
@@ -1025,18 +1047,25 @@ export default class Interfaces
 				this.btnSound.btn.isVisible = false;
 				this.btnRotation.btn.isVisible = false;
 				this.btnHelp.btn.isVisible = false;
-				engine.map.miniMap.isVisible = false;
 				this.FOV.container.isVisible = false; 
 				this.logoNav.container.isVisible = false; 
 				this.settings.container.isVisible = false; 
 				this.areaNav.container.isVisible = false; 
 			},400);
+			engine.map.showMiniMap(false);
 			
 			for (let i=0; i<engine.loc.link.length; i++)
 			{
 				engine.animation.fadeAnimOut(engine.loc.link[i].button);
 				setTimeout(() => {	
 					engine.loc.link[i].button.isVisible = false;  
+				},400);
+			}
+			for (let i=0; i<engine.loc.info.length; i++)
+			{
+				engine.animation.fadeAnimOut(engine.loc.info[i].button);
+				setTimeout(() => {	// ko toi uu
+					engine.loc.info[i].button.isVisible = false;  
 				},400);
 			}
 		}

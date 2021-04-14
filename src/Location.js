@@ -48,6 +48,7 @@ export default class Location
 			this.addInfo(info.name, info.pos)
 		}
 
+		
 		//Scrollview info
 		this.infoScroll = new BABYLON.GUI.ScrollViewer();
 		this.infoScroll.width = "700px";
@@ -58,26 +59,6 @@ export default class Location
 		this.infoScroll.isVisible = false;
 		this.infoScroll.isPointerBlocker = true;
 		engine.advancedTexture.addControl(this.infoScroll);
-
-		// this.btnCloseInfo = new BABYLON.GUI.Ellipse();
-		// this.btnCloseInfo.background = "white";
-		// this.btnCloseInfo.color = "black";
-		// this.btnCloseInfo.thickness = 2;
-		// this.btnCloseInfo.width = "35px";
-		// this.btnCloseInfo.height = "35px";
-		// this.btnCloseInfo.hoverCursor = "pointer";
-		// this.btnCloseInfo.verticalAlignment = 0;
-		// this.btnCloseInfo.horizontalAlignment = 1;
-		// this.btnCloseInfo.top = "10px";
-		// this.btnCloseInfo.left = "-10px";
-		// this.btnCloseInfo.zIndex = 3;
-		
-		// this.imgCloseInfo = new BABYLON.GUI.Image("imgCloseInfo","./asset/icon/close.png");
-        // this.btnCloseInfo.onPointerClickObservable.add(() => {
-		// 		
-		// });
-		// this.btnCloseInfo.addControl(this.imgCloseInfo);
-		// this.infoScroll.addControl(this.btnCloseInfo);
 
 		//Khung ben trong scroll
 		this.infoContainer = new BABYLON.GUI.Rectangle();
@@ -93,7 +74,7 @@ export default class Location
 		this.infoContainer.addControl(this.infoImgContainer);
 		
 		//Anh cua info
-		this.infoImage = new BABYLON.GUI.Image(_name+"_imgInfo","./asset/img.jpg");
+		this.infoImage = new BABYLON.GUI.Image("_imgInfo","./asset/img.jpg");
 		this.infoImage.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		//this.infoImage.top = "-100px";
 		this.infoImgContainer.addControl(this.infoImage);
