@@ -1,2 +1,8 @@
 
 Cổng trường lệch 27 độ so với hướng Bắc
+
+
+icon link and info 1
+block rect icon gui 2
+panel gui 3
+map va info panel 4

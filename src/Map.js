@@ -1,4 +1,5 @@
 
+import detectMobile from './DetectMobileAPI.js';
 import DataSource from './DataSource.js';
 import engine from './Engine.js'
 
@@ -25,7 +26,8 @@ export default class Map
 		}
 
 		this.link = [];
-		
+
+
 		// Caculator
 		this.mat.xbound = engine.canvas.width * 90 / 100;
 		this.mat.ybound = engine.canvas.height * 90 / 100;
@@ -47,7 +49,6 @@ export default class Map
 		// Init map
 		this.initTotalMap();
 		this.initMiniMap();
-
 		// Register callback
 		this.registerUpdateCamera();
 	}
@@ -55,7 +56,7 @@ export default class Map
 	initTotalMap()
 	{
 		// Total map
-		this.totalImg = new BABYLON.GUI.Image("mapImg","./asset/map.png");
+		this.totalImg = new BABYLON.GUI.Image("mapImg","./asset/total_map.png");
 		this.totalImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.totalImg.scaleX = 2.0;
 		this.totalImg.scaleY = 2.0;
@@ -65,8 +66,8 @@ export default class Map
 		this.totalMap.height = 0.9;
 		this.totalMap.cornerRadius = 20;
 		this.totalMap.color = "black";
-		this.totalMap.thickness = 1;
-		this.totalMap.background = "green";
+		this.totalMap.thickness = 0;
+		this.totalMap.background = "transparent";
 		this.totalMap.zIndex = 3;
         this.totalMap.isPointerBlocker = true;
         this.totalMap.isVisible = false;
@@ -188,46 +189,10 @@ export default class Map
 		this.btnCloseTotalMap.left = "-10px";		
 		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close.png");
         this.btnCloseTotalMap.onPointerClickObservable.add(() => {
-
-				//btn list
-				engine.interfaces.btnUI.btn.isVisible = true;
-        		engine.interfaces.btnFullScreen.btn.isVisible = true;
-        		engine.interfaces.btnSetting.btn.isVisible = true;
-        		engine.interfaces.btnMap.btn.isVisible = true;
-        		engine.interfaces.btnSound.btn.isVisible = true;
-        		//engine.interfaces.btnSound.slider.isVisible = true;
-        		engine.interfaces.btnRotation.btn.isVisible = true;	
-        		engine.interfaces.FOV.container.isVisible = true;	
-        		engine.interfaces.logoNav.container.isVisible = true;	
-        		engine.interfaces.settings.container.isVisible = true;	
-        		engine.interfaces.areaNav.container.isVisible = true;	
-
-				engine.animation.fadeAnimIn(engine.interfaces.btnUI.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnFullScreen.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnSetting.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnSound.btn);
-				//engine.animation.fadeAnimIn(engine.interfaces.btnSound.slider);
-				engine.animation.fadeAnimIn(engine.interfaces.btnMap.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnRotation.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.FOV.container);
-				engine.animation.fadeAnimIn(engine.interfaces.logoNav.container);
-				engine.animation.fadeAnimIn(engine.interfaces.settings.container);
-				engine.animation.fadeAnimIn(engine.interfaces.areaNav.container);
-				
-        		//----
-				engine.animation.fadeAnimOut(this.totalMap);
-				setTimeout(() => {	
-					this.totalMap.isVisible = false;
-				},400);
-
-                this.miniMap.isVisible = true;
-				engine.animation.fadeAnimIn(this.miniMap);
-
-                for (let i=0; i< engine.loc.link.length; i++)
-				{
-                    engine.loc.link[i].button.isVisible = true;
-					engine.animation.fadeAnimIn(engine.loc.link[i].button);
-				}
+				// Show interfaces
+				engine.interfaces.showInterfaces(true);
+        		// Hidden map
+				this.showTotalMap(false);
 		});
 
 		this.btnCloseTotalMap.addControl(this.imgTotalMapCloseBtn);
@@ -240,6 +205,8 @@ export default class Map
 			this.addLink(key, pos);
 			// console.log();
 		});
+
+	
 	}
 
 	initMiniMap()
@@ -271,49 +238,15 @@ export default class Map
 		this.miniMap.addControl(this.crossImg);
 		this.miniMap.isPointerBlocker = true;
 		this.miniMap.onPointerClickObservable.add(() => {
-			//btn list
-			engine.animation.fadeAnimOut(engine.interfaces.btnUI.btn);
-			engine.animation.fadeAnimOut(engine.interfaces.btnFullScreen.btn);
-			engine.animation.fadeAnimOut(engine.interfaces.btnSetting.btn);
-			engine.animation.fadeAnimOut(engine.interfaces.btnSound.btn);
-			//engine.animation.fadeAnimOut(engine.interfaces.btnSound.slider);
-			engine.animation.fadeAnimOut(engine.interfaces.btnMap.btn);
-			engine.animation.fadeAnimOut(engine.interfaces.btnRotation.btn);
-			engine.animation.fadeAnimOut(engine.interfaces.FOV.container);
-			engine.animation.fadeAnimOut(engine.interfaces.logoNav.container);
-			engine.animation.fadeAnimOut(engine.interfaces.settings.container);
-			engine.animation.fadeAnimOut(engine.interfaces.areaNav.container);
-			setTimeout(() => {
-				engine.interfaces.btnUI.btn.isVisible = false;
-				engine.interfaces.btnFullScreen.btn.isVisible = false;
-				engine.interfaces.btnSetting.btn.isVisible = false;
-				engine.interfaces.btnMap.btn.isVisible = false;
-				engine.interfaces.btnSound.btn.isVisible = false;
-				//engine.interfaces.btnSound.slider.isVisible = false;
-				engine.interfaces.btnRotation.btn.isVisible = false;
-			  	engine.interfaces.FOV.container.isVisible = false;
-			  	engine.interfaces.logoNav.container.isVisible = false;				
-			  	engine.interfaces.settings.container.isVisible = false;				
-			  	engine.interfaces.areaNav.container.isVisible = false;				
-			},400);
-
-			//----
+			engine.interfaces.onShow = "map";
+			// Hidden interfaces
+			engine.interfaces.showInterfaces(false);
+			engine.animation.animBlock(true);
+			// show map
 			this.totalMap.isVisible = true;
 			engine.animation.fadeAnimIn(this.totalMap);
-
-			engine.animation.fadeAnimOut(this.miniMap);
-			setTimeout(() => {
-			this.miniMap.isVisible = false;
-			},400);
-
-			for (let i=0; i< engine.loc.link.length; i++)
-			{
-				engine.animation.fadeAnimOut(engine.loc.link[i].button);
-				setTimeout(() => {
-					engine.loc.link[i].button.isVisible = false;
-				}, 400);
-			}
 		});
+		this.miniMap.isVisible = !detectMobile(); // chi hien khi su dung pc
 		engine.advancedTexture.addControl(this.miniMap);
 	}
 
@@ -406,6 +339,45 @@ export default class Map
 			let l = this.link[i];
 			l.rect.leftInPixels = (l.position.x - 0.5) * (this.mat.imgSize * this.mat.scale);
 			l.rect.topInPixels = (l.position.y - 0.5) * (this.mat.imgSize * this.mat.scale);
+		}
+	}
+
+	showTotalMap(toggle)
+	{
+		if (toggle)
+		{
+			engine.map.totalMap.isVisible = true;
+			engine.animation.fadeAnimIn(engine.map.totalMap);
+			engine.animation.animBlock(true);
+		}
+		else
+		{
+			engine.animation.animBlock(false);
+			engine.animation.fadeAnimOut(this.totalMap);
+			setTimeout(() => {	
+				this.totalMap.isVisible = false;
+			},400);
+		}
+	}
+
+	showMiniMap(toggle)
+	{
+		if (detectMobile())
+		{
+			engine.map.miniMap.isVisible = false;
+			return;
+		}
+		if (toggle)
+		{
+			engine.map.miniMap.isVisible = true;
+			engine.animation.fadeAnimIn(engine.map.miniMap);
+		}
+		else
+		{
+			engine.animation.fadeAnimOut(engine.map.miniMap);
+			setTimeout(() => {	
+				engine.map.miniMap.isVisible = false;
+			},400);
 		}
 	}
 }

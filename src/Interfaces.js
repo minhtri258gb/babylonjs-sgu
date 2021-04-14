@@ -1,22 +1,90 @@
 
-import CheckboxDef from './Component/CheckboxDef.js';
+import detectMobile from './DetectMobileAPI.js';
 import engine from './Engine.js'
+
 
 export default class Interfaces
 {
 	// Forwards
 	constructor()
-	{
-		
+	{	
 		// Default
 		let url = new URL(window.location.href);
 		this.isDark = (url.searchParams.get("dark") === 'false') ? false : true;
-			
+
 		this.initLogoNav();
 		this.initFOV();
 		this.initMenuNav();
 		this.initAreaNav();
 		this.initSettings();
+
+		//Rect block background
+		this.rectBlock = new BABYLON.GUI.Rectangle();
+		this.rectBlock.color = "transparent";
+		this.rectBlock.background = "black";
+		this.rectBlock.alpha = "0";
+		this.rectBlock.zIndex = 2;
+		this.rectBlock.isPointerBlocker = true;
+		this.rectBlock.isVisible = false;
+		this.rectBlock.onPointerClickObservable.add(() => {
+			
+			switch (this.onShow)
+			{
+				case "info":
+				{			
+					// Hidden info
+					engine.animation.fadeAnimOut(engine.loc.infoScroll);
+					engine.animation.animBlock(false);
+					setTimeout(() => {
+						engine.loc.infoScroll.isVisible = false;
+					}, 400);
+					this.showInterfaces(true);
+					break;
+				}
+				case "map":
+				{
+				
+					// Hidden map
+					engine.animation.animBlock(false);
+					engine.animation.fadeAnimOut(engine.map.totalMap);
+					setTimeout(() => {	
+						engine.map.totalMap.isVisible = false;
+					},400);
+					this.showInterfaces(true);
+					break;
+				}
+				case "help":
+				{
+					engine.animation.animBlock(false);
+					engine.animation.fadeAnimOut(this.btnHelp.container);
+					
+					setTimeout(() => {	
+						this.btnHelp.container.isVisible = false;
+					},400);
+					this.showInterfaces(true);
+					break;
+				}
+				case "setting":
+				{
+					this.showSettingPanel(false);
+					break;
+				}
+			}
+			
+		});
+		engine.advancedTexture.addControl(this.rectBlock);
+
+		this.rectHelp = new BABYLON.GUI.Rectangle();
+		this.rectHelp.width = 0.8;
+		this.rectHelp.height = 0.8;
+		this.rectHelp.cornerRadius = 10;
+		this.rectHelp.color = "transparent";
+		this.rectHelp.background = "red";
+		this.rectHelp.zIndex = 3;
+		this.rectHelp.isVisible = false;
+
+		engine.advancedTexture.addControl(this.rectHelp);
+
 		
 	}
 	
@@ -32,7 +100,7 @@ export default class Interfaces
 		this.logoNav.container.left = "10px";
 		this.logoNav.container.top = "10px";
 		this.logoNav.container.color = "transparent";
-		this.logoNav.zIndex = 3;
+		this.logoNav.container.zIndex = 3;
 		engine.advancedTexture.addControl(this.logoNav.container);
 
 		//Nut logo ve trang SGU
@@ -148,8 +216,9 @@ export default class Interfaces
 		this.panel.horizontalAlignment = 1;
 		this.panel.verticalAlignment = 1;
 		this.panel.zIndex = 2;
-    	//this.panel.isPointerBlocker = true;			
+		//this.panel.isPointerBlocker = true;			
 		engine.advancedTexture.addControl(this.panel);
+
 
 		//Nut an/hien UI
 		this.btnUI = {};
@@ -180,6 +249,7 @@ export default class Interfaces
 				engine.animation.fadeAnimOut(this.btnMap.btn);
 				engine.animation.fadeAnimOut(this.btnSound.btn);
 				engine.animation.fadeAnimOut(this.btnRotation.btn);
+				engine.animation.fadeAnimOut(this.btnHelp.btn);
 				engine.animation.fadeAnimOut(this.FOV.container);
 				engine.animation.fadeAnimOut(this.logoNav.container);
 				engine.animation.fadeAnimOut(this.settings.container);			
@@ -191,6 +261,7 @@ export default class Interfaces
 				this.btnMap.btn.isVisible = false;
 				this.btnSound.btn.isVisible = false;
 				this.btnRotation.btn.isVisible = false;
+				this.btnHelp.btn.isVisible = false;
 				this.FOV.container.isVisible = false;
 				this.logoNav.container.isVisible = false;
 				this.settings.container.isVisible = false;
@@ -198,10 +269,7 @@ export default class Interfaces
 				}, 400);
 				//----add link
 
-				engine.animation.fadeAnimOut(engine.map.miniMap);
-				setTimeout(() => {
-				engine.map.miniMap.isVisible = false;
-				}, 400);
+				engine.map.showMiniMap(false);
 
 				for (let i=0; i<engine.loc.link.length; i++)
 				{
@@ -209,18 +277,26 @@ export default class Interfaces
 					setTimeout(() => {
 					engine.loc.link[i].button.isVisible = false;
 					}, 400);  
+				}
+
+				for (let i=0; i<engine.loc.info.length; i++)
+				{
+					engine.animation.fadeAnimOut(engine.loc.info[i].button);
+					setTimeout(() => {
+					engine.loc.info[i].button.isVisible = false;
+					}, 400);  
 				}   		
 			}
 			else
 			{
 				this.btnUI.imgUIOff.isVisible = false;
 				this.btnUI.imgUIOn.isVisible = true;
-				//----
 				this.btnFullScreen.btn.isVisible = true;
 				this.btnSetting.btn.isVisible = true;
 				this.btnMap.btn.isVisible = true;
 				this.btnSound.btn.isVisible = true;
 				this.btnRotation.btn.isVisible = true;
+				this.btnHelp.btn.isVisible = true;
 				this.FOV.container.isVisible = true;
 				this.logoNav.container.isVisible = true;
 				this.settings.container.isVisible = true;
@@ -231,6 +307,7 @@ export default class Interfaces
 				engine.animation.fadeAnimIn(this.btnMap.btn);
 				engine.animation.fadeAnimIn(this.btnSound.btn);
 				engine.animation.fadeAnimIn(this.btnRotation.btn);
+				engine.animation.fadeAnimIn(this.btnHelp.btn);
 				engine.animation.fadeAnimIn(this.FOV.container);
 				engine.animation.fadeAnimIn(this.logoNav.container);
 				engine.animation.fadeAnimIn(this.settings.container);
@@ -238,18 +315,24 @@ export default class Interfaces
 				
 
 				//----add link
-				engine.map.miniMap.isVisible = true;
-				engine.animation.fadeAnimIn(engine.map.miniMap);
+				engine.map.showMiniMap(true);
 
 				for (let i=0; i<engine.loc.link.length; i++)
 				{                    
 					engine.loc.link[i].button.isVisible = true; 
 					engine.animation.fadeAnimIn(engine.loc.link[i].button);
+				}
+
+				for (let i=0; i<engine.loc.info.length; i++)
+				{                    
+					engine.loc.info[i].button.isVisible = true; 
+					engine.animation.fadeAnimIn(engine.loc.info[i].button);
 				}       		
 			}
 		});
 		this.panel.addControl(this.btnUI.btn);
 		
+
 		//Nut fullscreen
 		this.btnFullScreen = {};
 		this.btnFullScreen.btn = new BABYLON.GUI.Button();
@@ -288,34 +371,25 @@ export default class Interfaces
 		this.panel.addControl(this.btnFullScreen.btn);
 
 
-        //Nut setting
-        this.btnSetting = {};
-        this.btnSetting.btn = new BABYLON.GUI.Button();
-        this.btnSetting.btn.width = "55px";
-        this.btnSetting.btn.height = "35px";
-        this.btnSetting.btn.paddingRight = "10px";
-        this.btnSetting.btn.paddingLeft = "10px";
-        this.btnSetting.btn.top = "30%";
-        this.btnSetting.btn.color = "transparent";
-        this.btnSetting.btn.background = "transparent";
-        this.btnSetting.btn.hoverCursor = "pointer";
-        this.btnSetting.btn.zIndex = 2;        
-        this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/"+(this.isDark?"dark":"light")+"/setting.png");
-        this.btnSetting.btn.addControl(this.btnSetting.imgSetting);
-        this.btnSetting.btn.onPointerClickObservable.add(() => {
-            if (this.settings.isShow === false)
-            {
-        	    engine.animation.drawerAnimX(this.settings.container, 400, -1);
-                this.settings.isShow = true;
-            }
-            else
-            {
-                engine.animation.drawerAnimX(this.settings.container, -1, 400);
-                this.settings.isShow = false;
-            }
-        });
-        this.panel.addControl(this.btnSetting.btn);
-       
+		//Nut setting
+		this.btnSetting = {};
+		this.btnSetting.btn = new BABYLON.GUI.Button();
+		this.btnSetting.btn.width = "55px";
+		this.btnSetting.btn.height = "35px";
+		this.btnSetting.btn.paddingRight = "10px";
+		this.btnSetting.btn.paddingLeft = "10px";
+		this.btnSetting.btn.top = "30%";
+		this.btnSetting.btn.color = "transparent";
+		this.btnSetting.btn.background = "transparent";
+		this.btnSetting.btn.hoverCursor = "pointer";
+		this.btnSetting.btn.zIndex = 2;        
+		this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/"+(this.isDark?"dark":"light")+"/setting.png");
+		this.btnSetting.btn.addControl(this.btnSetting.imgSetting);
+		this.btnSetting.btn.onPointerClickObservable.add(() => {
+			this.showSettingPanel(!this.settings.isShow);
+		});
+		this.panel.addControl(this.btnSetting.btn);
+	   
 		   
 		this.btnSound = {};
 		//Thanh sound
@@ -363,7 +437,7 @@ export default class Interfaces
 			{
 				if (!this.btnSound.imgSoundOn2.isVisible)
 				{
-					this.btnSound.imgSoundOn3.isVisible = false;
+					this.btnSound.imgSoundOn3.isVisiblep = false;
 					this.btnSound.imgSoundOn2.isVisible = true;
 					this.btnSound.imgSoundOn1.isVisible = false;
 					this.btnSound.imgSoundOff.isVisible = false;
@@ -391,6 +465,7 @@ export default class Interfaces
 			}
 		});
 		engine.advancedTexture.addControl(this.btnSound.slider);
+
 
 		//Nut sound   
 		this.btnSound.btn = new BABYLON.GUI.Button();
@@ -453,9 +528,7 @@ export default class Interfaces
 			},3000);            
 		});
 		this.panel.addControl(this.btnSound.btn);
-		//this.manger.GUIs["btnSound"] = btnSound;
 
-		
 
 
 		//Nut bat/tat tu xoay
@@ -509,93 +582,104 @@ export default class Interfaces
 		this.btnMap.btn.addControl(this.btnMap.imgMap);
 		this.btnMap.btn.isPointerBlocker = true;
 		this.btnMap.btn.onPointerClickObservable.add(() => {
-			//TODO
-			engine.map.totalMap.isVisible = true;
-			engine.animation.fadeAnimIn(engine.map.totalMap);
-			
-			engine.animation.fadeAnimOut(this.btnUI.btn);
-			engine.animation.fadeAnimOut(this.btnFullScreen.btn);
-			engine.animation.fadeAnimOut(this.btnSetting.btn);
-			engine.animation.fadeAnimOut(this.btnMap.btn);
-			engine.animation.fadeAnimOut(this.btnSound.btn);
-			engine.animation.fadeAnimOut(this.btnRotation.btn);
-			engine.animation.fadeAnimOut(engine.map.miniMap);
-			engine.animation.fadeAnimOut(this.FOV.container);
-			engine.animation.fadeAnimOut(this.logoNav.container);
-			engine.animation.fadeAnimOut(this.settings.container);
-			engine.animation.fadeAnimOut(this.areaNav.container);
-			
-			setTimeout(() => {			
-			this.btnUI.btn.isVisible = false;
-			this.btnFullScreen.btn.isVisible = false;
-			this.btnSetting.btn.isVisible = false;
-			this.btnMap.btn.isVisible = false;
-			this.btnSound.btn.isVisible = false;
-			this.btnRotation.btn.isVisible = false;
-			engine.map.miniMap.isVisible = false;
-			this.FOV.container.isVisible = false; 
-			this.logoNav.container.isVisible = false; 
-			this.settings.container.isVisible = false; 
-			this.areaNav.container.isVisible = false; 
-			},400);
-			//----add link
-			
-			for (let i=0; i<engine.loc.link.length; i++)
-				engine.loc.link[i].button.isVisible = false;  
-				  
+			this.onShow = "map";
+			// Show map
+			engine.map.showTotalMap(true);
+			// Hidden interface
+			this.showInterfaces(false);
 		});
 		this.panel.addControl(this.btnMap.btn);
+
+
+		//Nut help
+		let helpSize = (engine.canvas.width < engine.canvas.height) ? engine.canvas.width * 0.9 : engine.canvas.height * 0.9;
+		this.btnHelp = {};
+		this.btnHelp.container = new BABYLON.GUI.Rectangle();
+		this.btnHelp.container.widthInPixels = helpSize;
+		this.btnHelp.container.heightInPixels = helpSize;
+		this.btnHelp.container.cornerRadius = 10;
+		this.btnHelp.container.color = "transparent";
+		this.btnHelp.container.background = "red";
+		this.btnHelp.container.zIndex = 3;
+		this.btnHelp.container.isVisible = false;
+		engine.advancedTexture.addControl(this.btnHelp.container);
+
+		this.btnHelp.btn = new BABYLON.GUI.Button();
+		this.btnHelp.btn.width = "55px";
+		this.btnHelp.btn.height = "35px";
+		this.btnHelp.btn.paddingRight = "10px";
+		this.btnHelp.btn.paddingLeft = "10px";
+		this.btnHelp.btn.top = "30%";
+		this.btnHelp.btn.color = "transparent";
+		this.btnHelp.btn.background = "transparent";
+		this.btnHelp.btn.hoverCursor = "pointer";
+		this.btnHelp.btn.zIndex = 2;       
+		this.btnHelp.imgHelp = new BABYLON.GUI.Image("imgHelp","./asset/icon/"+(this.isDark?"dark":"light")+"/help.png");
+		this.btnHelp.btn.addControl(this.btnHelp.imgHelp);
+		this.btnHelp.btn.isPointerBlocker = true;
+		this.btnHelp.btn.onPointerClickObservable.add(() => {
+			this.onShow = "help";
+			// Show help
+			this.btnHelp.container.isVisible = true;
+			engine.animation.fadeAnimIn(this.btnHelp.container);
+			engine.animation.animBlock(true);
+			// Hidden interface
+			this.showInterfaces(false);
+		});
+		this.panel.addControl(this.btnHelp.btn);
+
+
 		this.panel.children.reverse();  //Reverse panel ĐỂ CUỐI PANEL!!!
 	}
 
 	initSettings()
 	{
 		//Nut cai dat
-        this.settings = {};		
-        this.settings.isShow = false;
-        this.settings.container = new BABYLON.GUI.ScrollViewer();
+		this.settings = {};		
+		this.settings.isShow = false;
+		this.settings.container = new BABYLON.GUI.ScrollViewer();
 		this.settings.container.isPointerBlocker = true;
-        this.settings.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-	    this.settings.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-        this.settings.container.width = "300px";
-        this.settings.container.height = "400px";
-        this.settings.container.leftInPixels = 400;
-        this.settings.container.background = this.isDark?"#23272A":"#DEE4E7";     
-        this.settings.container.thickness = 0;
-        this.settings.container.zIndex = 4;
-        this.settings.container.cornerRadius = 5;
-        engine.advancedTexture.addControl(this.settings.container);
-        
-        //Khung cai dat Grid (dieu chinh so dong Setting)
-        this.settings.selPanel = new BABYLON.GUI.SelectionPanel("settings");
+		this.settings.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+		this.settings.container.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+		this.settings.container.width = "300px";
+		this.settings.container.height = "400px";
+		this.settings.container.leftInPixels = 400;
+		this.settings.container.background = this.isDark?"#23272A":"#DEE4E7";     
+		this.settings.container.thickness = 0;
+		this.settings.container.zIndex = 4;
+		this.settings.container.cornerRadius = 5;
+		engine.advancedTexture.addControl(this.settings.container);
+		
+		//Khung cai dat Grid (dieu chinh so dong Setting)
+		this.settings.selPanel = new BABYLON.GUI.SelectionPanel("settings");
 		this.settings.selPanel.headerColor = "white";
-        this.settings.selPanel.color = "white";
-        this.settings.selPanel.background = this.isDark?"#23272A":"#DEE4E7";
+		this.settings.selPanel.color = "white";
+		this.settings.selPanel.background = this.isDark?"#23272A":"#DEE4E7";
 		this.settings.selPanel.headerColor = this.isDark?"#ffffff":"#000000";
 		
 		
-        this.settings.selPanel.thickness = 0;   
-        this.settings.selPanel.height = "500px";
+		this.settings.selPanel.thickness = 0;   
+		this.settings.selPanel.height = "500px";
 		
 		//this.settings.selPanel.barColor = "#4F7DF2";
-        this.settings.container.addControl(this.settings.selPanel);
+		this.settings.container.addControl(this.settings.selPanel);
 
-        this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup(engine.language.get('effect'));
+		this.settings.effectsGroup = new BABYLON.GUI.CheckboxGroup(engine.language.get('effect'));
 
 
-        this.settings.effectsGroup.addCheckbox(engine.language.get('lenflare'), (isCheck) => {
+		this.settings.effectsGroup.addCheckbox(engine.language.get('lenflare'), (isCheck) => {
 			engine.effect.turnLensFlare(isCheck);
 		});
-        this.settings.effectsGroup.addCheckbox(engine.language.get('particle'), (isCheck) => {
+		this.settings.effectsGroup.addCheckbox(engine.language.get('particle'), (isCheck) => {
 			engine.effect.turnParticle(isCheck);
 		});
-        this.settings.effectsGroup.addCheckbox(engine.language.get('bloom'), (isCheck) => {
+		this.settings.effectsGroup.addCheckbox(engine.language.get('bloom'), (isCheck) => {
 			engine.effect.turnBloom(isCheck);
 		});
-        this.settings.effectsGroup.addCheckbox(engine.language.get('motionblur'), (isCheck) => {
+		this.settings.effectsGroup.addCheckbox(engine.language.get('motionblur'), (isCheck) => {
 			engine.effect.turnMosionBlur(isCheck);
 		});
-        this.settings.effectsGroup.addCheckbox(engine.language.get('antialias'), (isCheck) => {
+		this.settings.effectsGroup.addCheckbox(engine.language.get('antialias'), (isCheck) => {
 			engine.effect.turnAntiAlias(isCheck);
 		});
 
@@ -613,12 +697,12 @@ export default class Interfaces
 			});
 		}
 
-        this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup(engine.language.get('cameratype'));
-        this.settings.projectionsGroup.addRadio(engine.language.get('normal'),engine.setCameraType, true);
-        this.settings.projectionsGroup.addRadio(engine.language.get('ortho'), engine.setCameraType);
-        this.settings.projectionsGroup.addRadio(engine.language.get('fisheye'), engine.setCameraType);
-        this.settings.projectionsGroup.addRadio(engine.language.get('tinyplanet'), engine.setCameraType);
-        this.settings.projectionsGroup.addRadio(engine.language.get('tubeview'), engine.setCameraType);
+		this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup(engine.language.get('cameratype'));
+		this.settings.projectionsGroup.addRadio(engine.language.get('normal'),engine.setCameraType, true);
+		this.settings.projectionsGroup.addRadio(engine.language.get('ortho'), engine.setCameraType);
+		this.settings.projectionsGroup.addRadio(engine.language.get('fisheye'), engine.setCameraType);
+		this.settings.projectionsGroup.addRadio(engine.language.get('tinyplanet'), engine.setCameraType);
+		this.settings.projectionsGroup.addRadio(engine.language.get('tubeview'), engine.setCameraType);
 
 		numloop = this.settings.projectionsGroup.selectors.length;
 		for (let i=0; i<numloop; i++)
@@ -635,8 +719,8 @@ export default class Interfaces
 		}
 
 		this.settings.themesGroup = new BABYLON.GUI.RadioGroup(engine.language.get('themes'));
-        this.settings.themesGroup.addRadio(engine.language.get('darkmode'), (evt)=>{ this.changeTheme(evt)}, this.isDark);
-        this.settings.themesGroup.addRadio(engine.language.get('lightmode'), (evt)=>{ this.changeTheme(evt)}, !this.isDark);
+		this.settings.themesGroup.addRadio(engine.language.get('darkmode'), (evt)=>{ this.changeTheme(evt)}, this.isDark);
+		this.settings.themesGroup.addRadio(engine.language.get('lightmode'), (evt)=>{ this.changeTheme(evt)}, !this.isDark);
 
 		numloop = this.settings.themesGroup.selectors.length;
 		for (let i=0; i<numloop; i++)
@@ -652,10 +736,10 @@ export default class Interfaces
 			});
 		}
 
-        this.settings.selPanel.addGroup(this.settings.projectionsGroup);
+		this.settings.selPanel.addGroup(this.settings.projectionsGroup);
 		this.settings.selPanel.addGroup(this.settings.themesGroup);
-        this.settings.selPanel.addGroup(this.settings.effectsGroup);
-        
+		this.settings.selPanel.addGroup(this.settings.effectsGroup);
+		
 	}  
 
 	initAreaNav()
@@ -718,17 +802,17 @@ export default class Interfaces
 
 		//Grid khu vuc
 		this.areaNav.grid = new BABYLON.GUI.Grid();
-        this.areaNav.grid.isPointerBlocker = true;
+		this.areaNav.grid.isPointerBlocker = true;
 		//this.areaNav.grid.height = "415px"
 		//this.areaNav.grid.background = "#2C2F33";
 		this.areaNav.grid.color = "white";
 		this.areaNav.grid.thickness = 0;
-        this.areaNav.grid.addColumnDefinition(1);
-        this.areaNav.grid.addRowDefinition(60, true);
-        this.areaNav.grid.addRowDefinition(32, true);
+		this.areaNav.grid.addColumnDefinition(1);
+		this.areaNav.grid.addRowDefinition(60, true);
 		this.areaNav.grid.addRowDefinition(32, true);
-        this.areaNav.grid.addRowDefinition(32, true);
-        this.areaNav.grid.addRowDefinition(32, true);
+		this.areaNav.grid.addRowDefinition(32, true);
+		this.areaNav.grid.addRowDefinition(32, true);
+		this.areaNav.grid.addRowDefinition(32, true);
 		this.areaNav.grid.addRowDefinition(32, true);
 		this.areaNav.grid.addRowDefinition(32, true);
 		this.areaNav.grid.addRowDefinition(32, true);
@@ -889,5 +973,119 @@ export default class Interfaces
 		param.set("dark", this.isDark);
 		url.search = param.toString();
 		window.location.href = url.toString();
-	} 
+	}
+	
+	showInterfaces(toggle)
+	{
+	
+		if (toggle)
+		{
+			this.btnUI.btn.isVisible = true;
+			this.btnFullScreen.btn.isVisible = true;
+			this.btnSetting.btn.isVisible = true;
+			this.btnMap.btn.isVisible = true;
+			this.btnSound.btn.isVisible = true;
+			this.btnRotation.btn.isVisible = true;
+			this.btnHelp.btn.isVisible = true;	
+			this.FOV.container.isVisible = true;	
+			this.logoNav.container.isVisible = true;	
+			this.settings.container.isVisible = true;	
+			this.areaNav.container.isVisible = true;	
+			
+
+			engine.animation.fadeAnimIn(this.btnUI.btn);
+			engine.animation.fadeAnimIn(this.btnFullScreen.btn);
+			engine.animation.fadeAnimIn(this.btnSetting.btn);
+			engine.animation.fadeAnimIn(this.btnSound.btn);
+			engine.animation.fadeAnimIn(this.btnMap.btn);
+			engine.animation.fadeAnimIn(this.btnRotation.btn);
+			engine.animation.fadeAnimIn(this.btnHelp.btn);
+			engine.animation.fadeAnimIn(this.FOV.container);
+			engine.animation.fadeAnimIn(this.logoNav.container);
+			engine.animation.fadeAnimIn(this.settings.container);
+			engine.animation.fadeAnimIn(this.areaNav.container);
+			engine.map.showMiniMap(true);
+			
+			
+			for (let i=0; i< engine.loc.link.length; i++)
+			{
+				engine.loc.link[i].button.isVisible = true;
+				engine.animation.fadeAnimIn(engine.loc.link[i].button);
+			}
+			for (let i=0; i< engine.loc.info.length; i++)
+			{
+				engine.loc.info[i].button.isVisible = true;
+				engine.animation.fadeAnimIn(engine.loc.info[i].button);
+			}
+		}
+		else
+		{
+			engine.animation.fadeAnimOut(this.btnUI.btn);
+			engine.animation.fadeAnimOut(this.btnFullScreen.btn);
+			engine.animation.fadeAnimOut(this.btnSetting.btn);
+			engine.animation.fadeAnimOut(this.btnMap.btn);
+			engine.animation.fadeAnimOut(this.btnSound.btn);
+			engine.animation.fadeAnimOut(this.btnRotation.btn);
+			engine.animation.fadeAnimOut(this.btnHelp.btn);		
+			engine.animation.fadeAnimOut(this.FOV.container);
+			engine.animation.fadeAnimOut(this.logoNav.container);
+			engine.animation.fadeAnimOut(this.settings.container);
+			engine.animation.fadeAnimOut(this.areaNav.container);
+			
+			setTimeout(() => {			
+				this.btnUI.btn.isVisible = false;
+				this.btnFullScreen.btn.isVisible = false;
+				this.btnSetting.btn.isVisible = false;
+				this.btnMap.btn.isVisible = false;
+				this.btnSound.btn.isVisible = false;
+				this.btnRotation.btn.isVisible = false;
+				this.btnHelp.btn.isVisible = false;
+				this.FOV.container.isVisible = false; 
+				this.logoNav.container.isVisible = false; 
+				this.settings.container.isVisible = false; 
+				this.areaNav.container.isVisible = false; 
+			},400);
+			engine.map.showMiniMap(false);
+			
+			for (let i=0; i<engine.loc.link.length; i++)
+			{
+				engine.animation.fadeAnimOut(engine.loc.link[i].button);
+				setTimeout(() => {	
+					engine.loc.link[i].button.isVisible = false;  
+				},400);
+			}
+			for (let i=0; i<engine.loc.info.length; i++)
+			{
+				engine.animation.fadeAnimOut(engine.loc.info[i].button);
+				setTimeout(() => {	// ko toi uu
+					engine.loc.info[i].button.isVisible = false;  
+				},400);
+			}
+		}
+	}
+
+	showSettingPanel(toggle)
+	{
+		if (detectMobile())
+		{
+			if (toggle)
+			{
+				engine.interfaces.onShow = "setting";
+				engine.animation.animBlock(true);
+			}
+			else
+			{
+				engine.animation.animBlock(false);
+			}
+		}
+
+		if (toggle)
+		{
+			engine.animation.drawerAnimX(this.settings.container, 400, -1);
+		}
+		else
+			engine.animation.drawerAnimX(this.settings.container, -1, 400);
+		this.settings.isShow = toggle;
+	}
 }
+	

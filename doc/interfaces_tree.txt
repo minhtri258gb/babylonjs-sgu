@@ -1,0 +1,7 @@
+0.0 Advanced Texture
+    1.0 Icon Walk, Icon Info    
+    2.0 Interfaces Container   
+        2.1 GUI
+        2.2 Panel Navigator, Settings
+    3.0 Block Rect
+    4.0 Total Map, Main Menu, Help panel, Info Panel
