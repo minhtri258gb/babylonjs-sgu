@@ -48,6 +48,7 @@ export default class Location
 			this.addInfo(info.name, info.pos)
 		}
 
+		
 		//Scrollview info
 		this.infoScroll = new BABYLON.GUI.ScrollViewer();
 		this.infoScroll.width = "700px";
