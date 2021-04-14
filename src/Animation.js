@@ -51,4 +51,21 @@ export default class Animation
 		}
 		BABYLON.Animation.CreateAndStartAnimation("zoom"+come?"In":"Out", engine.camera, "fov", 60, 30, curFov, nextFov, 0);
 	}
+
+	animBlock(toggle)
+	{
+
+		if (toggle)
+		{
+			engine.interfaces.rectBlock.isVisible = true;
+			BABYLON.Animation.CreateAndStartAnimation("animBlock"+toggle?"On":"Off", engine.interfaces.rectBlock, "alpha", 50, 20, 0, 0.7, 0);
+		}
+		else
+		{
+			BABYLON.Animation.CreateAndStartAnimation("animBlock"+toggle?"On":"Off", engine.interfaces.rectBlock, "alpha", 50, 20, 0.7, 0, 0);
+			setTimeout(()=>{
+				engine.interfaces.rectBlock.isVisible = false;
+			},400);
+		}
+	}
 }

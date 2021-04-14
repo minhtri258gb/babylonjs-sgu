@@ -44,6 +44,89 @@ export default class Location
 			this.addInfo(info.name, info.pos)
 		}
 
+		//Scrollview info
+		this.infoScroll = new BABYLON.GUI.ScrollViewer();
+		this.infoScroll.width = "700px";
+		this.infoScroll.height = "600px";
+		this.infoScroll.background = "white";
+		this.infoScroll.zIndex = 3;
+		this.infoScroll.cornerRadius = 10;
+		this.infoScroll.isVisible = false;
+		this.infoScroll.isPointerBlocker = true;
+		engine.advancedTexture.addControl(this.infoScroll);
+
+		// this.btnCloseInfo = new BABYLON.GUI.Ellipse();
+		// this.btnCloseInfo.background = "white";
+		// this.btnCloseInfo.color = "black";
+		// this.btnCloseInfo.thickness = 2;
+		// this.btnCloseInfo.width = "35px";
+		// this.btnCloseInfo.height = "35px";
+		// this.btnCloseInfo.hoverCursor = "pointer";
+		// this.btnCloseInfo.verticalAlignment = 0;
+		// this.btnCloseInfo.horizontalAlignment = 1;
+		// this.btnCloseInfo.top = "10px";
+		// this.btnCloseInfo.left = "-10px";
+		// this.btnCloseInfo.zIndex = 3;
+		
+		// this.imgCloseInfo = new BABYLON.GUI.Image("imgCloseInfo","./asset/icon/close.png");
+        // this.btnCloseInfo.onPointerClickObservable.add(() => {
+		// 		
+		// });
+		// this.btnCloseInfo.addControl(this.imgCloseInfo);
+		// this.infoScroll.addControl(this.btnCloseInfo);
+
+		//Khung ben trong scroll
+		this.infoContainer = new BABYLON.GUI.Rectangle();
+		this.infoContainer.height = "800px";
+		this.infoScroll.addControl(this.infoContainer);
+		
+		//Khung chua anh
+		this.infoImgContainer = new BABYLON.GUI.Rectangle();
+		this.infoImgContainer.width = "640px";
+		this.infoImgContainer.height = "360px";
+		this.infoImgContainer.top = "20px";
+		this.infoImgContainer.verticalAlignment = 0;
+		this.infoContainer.addControl(this.infoImgContainer);
+		
+		//Anh cua info
+		this.infoImage = new BABYLON.GUI.Image(_name+"_imgInfo","./asset/img.jpg");
+		this.infoImage.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
+		//this.infoImage.top = "-100px";
+		this.infoImgContainer.addControl(this.infoImage);
+
+		//Khung chua text
+		this.infoTextContainer = new BABYLON.GUI.Rectangle();
+		this.infoTextContainer.width = "640px";
+		this.infoTextContainer.height = "380px";
+		this.infoTextContainer.top = "20px";
+		this.infoTextContainer.verticalAlignment = 0;
+		this.infoTextContainer.topInPixels = 400;
+		this.infoContainer.addControl(this.infoTextContainer);
+
+		//Text cua info
+		this.infoText = new BABYLON.GUI.TextBlock();
+		this.infoText.text = "  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis enim finibus ligula dignissim congue. "+
+		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
+		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
+		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
+		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
+		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
+		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
+		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
+		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
+		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
+		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel";
+		this.infoText.textWrapping = true;
+		this.infoText.textHorizontalAlignment = 0;	
+		this.infoText.textVerticalAlignment = 0;
+		this.infoTextContainer.addControl(this.infoText);
+
 		engine.map.goLocation(this.name, this.position); // hook map
 	}
 
@@ -149,44 +232,7 @@ export default class Location
 		let box = BABYLON.MeshBuilder.CreateBox(_name+"_boxInfo", {});
 		box.position = new BABYLON.Vector3(_position[0], _position[1], _position[2]);
 		box.isVisible = false;
-
-		let rectPre = new BABYLON.GUI.Rectangle();
-        rectPre.width = "300px";
-        rectPre.height = "200px";
-        rectPre.cornerRadius = 40;
-        rectPre.color = "white";
-        rectPre.thickness = 3;
-        rectPre.background = "green";
-        engine.advancedTexture.addControl(rectPre);
-        rectPre.linkWithMesh(box);
-        rectPre.linkOffsetY = -150;
-        rectPre.isVisible = false;
 		
-		let imgPreview = new BABYLON.GUI.Image(_name+"_imgInfo","./asset/dome/"+_name+"_pre"+".jpg");
-        rectPre.addControl(imgPreview);
-
-		let line = new BABYLON.GUI.Line();
-        line.lineWidth = 3;
-        line.color = "white";
-        line.y2 = 98;
-        // line.dash = [5, 10];
-        line.linkOffsetY = -15;
-        engine.advancedTexture.addControl(line);
-        line.linkWithMesh(box);
-        line.connectedControl = rectPre;
-        line.isVisible = false;
-
-        let textPre = new BABYLON.GUI.TextBlock(_name+"textPreInfo",engine.language.get(_name));
-        //textPre.linkWithMesh(box);
-        textPre.color = "white";
-        textPre.fontFamily = "Time News Roman"
-        textPre.drawOutline = true;
-        textPre.outlineColor = "Black";
-        textPre.outlineWidth = 3;
-        textPre.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        textPre.height = 0.15
-        rectPre.addControl(textPre);
-
 		// Icon walk
 		let rect = new BABYLON.GUI.Ellipse();
 		rect.width = "30px";
@@ -205,37 +251,27 @@ export default class Location
 		engine.advancedTexture.addControl(rect);
 		rect.linkWithMesh(box);
 		rect.onPointerDownObservable.add(() => {
-			this.goto(_name);
+			engine.interfaces.onShow = "info";
+			engine.interfaces.showInterfaces(false);
+			this.infoScroll.isVisible = true;
+			engine.animation.fadeAnimIn(this.infoScroll);
+			engine.animation.animBlock(true);
 		});
 
-		rect.onPointerMoveObservable.add(() => {            
-			rectPre.isVisible = true;
-            line.isVisible = true;
-			//engine.animation.fadeAnimIn(rectPre);
-			//engine.animation.fadeAnimIn(line);
-        });
 
-        rect.onPointerOutObservable.add(() => {
-			//engine.animation.fadeAnimOut(rectPre);
-			//engine.animation.fadeAnimOut(line);           
-			//setTimeout(() => {
-				rectPre.isVisible = false;
-            	line.isVisible = false;
-			//},400);
-        });
 
 		// Walk icon
-		let imgwalk = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/info.png");
-        rect.addControl(imgwalk);
+		let imginfo = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/info.png");
+        rect.addControl(imginfo);
+
+
 
 		
-		this.link.push({
+		this.info.push({
 			name: _name,
 			mesh: box,
 			button: rect,
-			pointer: line,
-			preview: rectPre,
-			//textblock: textPre
+			imgIcon: imginfo
 		});
 	}
 
@@ -266,8 +302,7 @@ export default class Location
 		nloop = this.info.length;
 		for (let i=0; i<nloop; i++)
 		{
-			this.info[i].pointer.dispose();
-			this.info[i].preview.dispose();
+			this.info[i].imgIcon.dispose();
 			this.info[i].button.dispose();
 			this.info[i].mesh.dispose();
 		}
