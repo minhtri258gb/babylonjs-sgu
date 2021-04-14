@@ -5,14 +5,18 @@ import DataSource from "./DataSource.js";
 export default class Location
 {
 	// Forwards
-	constructor(_name)
+	constructor()
 	{
 		// Set default
 		this.onLoad = false;
 
-		this.data = DataSource.loc[_name];
+		// Get location
+		let url = new URL(window.location.href);
+		this.name = url.searchParams.get("location");
+		if (this.name === null)
+			this.name = 'CADV'
 
-		this.name = _name;
+		this.data = engine.data.loc[this.name];
 		this.position = this.data.position;
 		
 		// Create PhotoDome
@@ -250,9 +254,16 @@ export default class Location
 		// Set flag
 		this.onLoad = true;
 
+		// update url
+		let url = new URL(window.location.href);
+		let param = url.searchParams;
+		param.set("location", _name);
+		url.search = param.toString();
+		history.pushState({}, null, url.toString());
+
 		// Get data
 		this.name_next = _name;
-		this.data = DataSource.loc[this.name_next];
+		this.data = engine.data.loc[this.name_next];
 
 		// Remove link and infomation
 		let nloop = this.link.length;
@@ -295,10 +306,13 @@ export default class Location
 		this.waitFunc = setInterval(() => {
 			if ( this.flag_timeout && this.flag_load_done)
 				this.goto2();
-		}, 100);
+		}, 250);
 		
 		// Anim go to
 		engine.animation.zoom(false);
+		
+		// hook map
+		engine.map.goLocation(this.name_next, this.data.position);
 	}
 
 	goto2()
@@ -331,8 +345,8 @@ export default class Location
 			this.addInfo(info.name, info.pos)
 		}
 
-		// hook map
-		engine.map.goLocation(this.name, this.position); // hook map
+		// Update lenflare
+		engine.effect.lensFlare_update();
 
 		// remove old
 		this.dome.dispose();
@@ -358,7 +372,8 @@ export default class Location
 			else if(event.button == 2)
 			{
 				let vector = pickResult.pickedPoint;
-				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
+				// console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
+				console.log("{x: "+vector.x.toFixed()+", y: "+vector.y.toFixed()+", z: "+vector.z.toFixed()+"}");
 			}
 		}
 		engine.scene.onPointerMove = () => { // event mouse move

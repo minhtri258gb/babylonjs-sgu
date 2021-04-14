@@ -55,7 +55,7 @@ export default class Map
 	initTotalMap()
 	{
 		// Total map
-		this.totalImg = new BABYLON.GUI.Image("mapImg","./asset/map.png");
+		this.totalImg = new BABYLON.GUI.Image("mapImg","./asset/map2.png");
 		this.totalImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.totalImg.scaleX = 2.0;
 		this.totalImg.scaleY = 2.0;
@@ -64,9 +64,8 @@ export default class Map
 		this.totalMap.width = 0.9;
 		this.totalMap.height = 0.9;
 		this.totalMap.cornerRadius = 20;
-		this.totalMap.color = "black";
-		this.totalMap.thickness = 1;
-		this.totalMap.background = "green";
+		this.totalMap.thickness = 0;
+		this.totalMap.background = "transparent";
 		this.totalMap.zIndex = 3;
         this.totalMap.isPointerBlocker = true;
         this.totalMap.isVisible = false;
@@ -189,54 +188,54 @@ export default class Map
 		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close.png");
         this.btnCloseTotalMap.onPointerClickObservable.add(() => {
 
-				//btn list
-				engine.interfaces.btnUI.btn.isVisible = true;
-        		engine.interfaces.btnFullScreen.btn.isVisible = true;
-        		engine.interfaces.btnSetting.btn.isVisible = true;
-        		engine.interfaces.btnMap.btn.isVisible = true;
-        		engine.interfaces.btnSound.btn.isVisible = true;
-        		//engine.interfaces.btnSound.slider.isVisible = true;
-        		engine.interfaces.btnRotation.btn.isVisible = true;	
-        		engine.interfaces.FOV.container.isVisible = true;	
-        		engine.interfaces.logoNav.container.isVisible = true;	
-        		engine.interfaces.settings.container.isVisible = true;	
-        		engine.interfaces.areaNav.container.isVisible = true;	
+			//btn list
+			engine.interfaces.btnUI.btn.isVisible = true;
+			engine.interfaces.btnFullScreen.btn.isVisible = true;
+			engine.interfaces.btnSetting.btn.isVisible = true;
+			engine.interfaces.btnMap.btn.isVisible = true;
+			engine.interfaces.btnSound.btn.isVisible = true;
+			//engine.interfaces.btnSound.slider.isVisible = true;
+			engine.interfaces.btnRotation.btn.isVisible = true;	
+			engine.interfaces.FOV.container.isVisible = true;	
+			engine.interfaces.logoNav.container.isVisible = true;	
+			engine.interfaces.settings.container.isVisible = true;	
+			engine.interfaces.areaNav.container.isVisible = true;	
 
-				engine.animation.fadeAnimIn(engine.interfaces.btnUI.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnFullScreen.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnSetting.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnSound.btn);
-				//engine.animation.fadeAnimIn(engine.interfaces.btnSound.slider);
-				engine.animation.fadeAnimIn(engine.interfaces.btnMap.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.btnRotation.btn);
-				engine.animation.fadeAnimIn(engine.interfaces.FOV.container);
-				engine.animation.fadeAnimIn(engine.interfaces.logoNav.container);
-				engine.animation.fadeAnimIn(engine.interfaces.settings.container);
-				engine.animation.fadeAnimIn(engine.interfaces.areaNav.container);
-				
-        		//----
-				engine.animation.fadeAnimOut(this.totalMap);
-				setTimeout(() => {	
-					this.totalMap.isVisible = false;
-				},400);
+			engine.animation.fadeAnimIn(engine.interfaces.btnUI.btn);
+			engine.animation.fadeAnimIn(engine.interfaces.btnFullScreen.btn);
+			engine.animation.fadeAnimIn(engine.interfaces.btnSetting.btn);
+			engine.animation.fadeAnimIn(engine.interfaces.btnSound.btn);
+			//engine.animation.fadeAnimIn(engine.interfaces.btnSound.slider);
+			engine.animation.fadeAnimIn(engine.interfaces.btnMap.btn);
+			engine.animation.fadeAnimIn(engine.interfaces.btnRotation.btn);
+			engine.animation.fadeAnimIn(engine.interfaces.FOV.container);
+			engine.animation.fadeAnimIn(engine.interfaces.logoNav.container);
+			engine.animation.fadeAnimIn(engine.interfaces.settings.container);
+			engine.animation.fadeAnimIn(engine.interfaces.areaNav.container);
+			
+			//----
+			engine.animation.fadeAnimOut(this.totalMap);
+			setTimeout(() => {	
+				this.totalMap.isVisible = false;
+			},400);
 
-                this.miniMap.isVisible = true;
-				engine.animation.fadeAnimIn(this.miniMap);
+			this.miniMap.isVisible = true;
+			engine.animation.fadeAnimIn(this.miniMap);
 
-                for (let i=0; i< engine.loc.link.length; i++)
-				{
-                    engine.loc.link[i].button.isVisible = true;
-					engine.animation.fadeAnimIn(engine.loc.link[i].button);
-				}
+			for (let i=0; i< engine.loc.link.length; i++)
+			{
+				engine.loc.link[i].button.isVisible = true;
+				engine.animation.fadeAnimIn(engine.loc.link[i].button);
+			}
 		});
 
 		this.btnCloseTotalMap.addControl(this.imgTotalMapCloseBtn);
 		this.totalMap.addControl(this.btnCloseTotalMap);
 		
 		// Add link to totalmap
-		Object.keys(DataSource.loc).forEach((key) => {
+		Object.keys(engine.data.loc).forEach((key) => {
 			// if(storage[key].barcode === barcode) { console.log("do something")}
-			let pos = DataSource.loc[key].position;
+			let pos = engine.data.loc[key].position;
 			this.addLink(key, pos);
 			// console.log();
 		});
@@ -346,9 +345,9 @@ export default class Map
 	goLocation(name, position)
 	{
 		// hook mini map
-		this.miniImg.leftInPixels = -(position.x - 0.5) * (200 * 5);
-		this.miniImg.topInPixels = -(position.y - 0.5) * (200 * 5);
-		
+		BABYLON.Animation.CreateAndStartAnimation("miniHookX", this.miniImg, "transformCenterX", 60, 60, this.miniImg.transformCenterX, position.x*1.25 - 0.125, 0);
+		BABYLON.Animation.CreateAndStartAnimation("miniHookY", this.miniImg, "transformCenterY", 60, 60, this.miniImg.transformCenterY, position.y*1.25 - 0.125, 0);
+
 		// TODO
 
 		// link total map
