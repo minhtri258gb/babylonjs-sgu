@@ -1,4 +1,5 @@
 
+import detectMobile from './DetectMobileAPI.js';
 import DataSource from './DataSource.js';
 import engine from './Engine.js'
 
@@ -26,8 +27,7 @@ export default class Map
 
 		this.link = [];
 
-		
-		
+
 		// Caculator
 		this.mat.xbound = engine.canvas.width * 90 / 100;
 		this.mat.ybound = engine.canvas.height * 90 / 100;
@@ -49,7 +49,6 @@ export default class Map
 		// Init map
 		this.initTotalMap();
 		this.initMiniMap();
-
 		// Register callback
 		this.registerUpdateCamera();
 	}
@@ -193,11 +192,7 @@ export default class Map
 				// Show interfaces
 				engine.interfaces.showInterfaces(true);
         		// Hidden map
-				engine.animation.animBlock(false);
-				engine.animation.fadeAnimOut(this.totalMap);
-				setTimeout(() => {	
-					this.totalMap.isVisible = false;
-				},400);
+				this.showTotalMap(false);
 		});
 
 		this.btnCloseTotalMap.addControl(this.imgTotalMapCloseBtn);
@@ -251,6 +246,7 @@ export default class Map
 			this.totalMap.isVisible = true;
 			engine.animation.fadeAnimIn(this.totalMap);
 		});
+		this.miniMap.isVisible = !detectMobile(); // chi hien khi su dung pc
 		engine.advancedTexture.addControl(this.miniMap);
 	}
 
@@ -343,6 +339,45 @@ export default class Map
 			let l = this.link[i];
 			l.rect.leftInPixels = (l.position.x - 0.5) * (this.mat.imgSize * this.mat.scale);
 			l.rect.topInPixels = (l.position.y - 0.5) * (this.mat.imgSize * this.mat.scale);
+		}
+	}
+
+	showTotalMap(toggle)
+	{
+		if (toggle)
+		{
+			engine.map.totalMap.isVisible = true;
+			engine.animation.fadeAnimIn(engine.map.totalMap);
+			engine.animation.animBlock(true);
+		}
+		else
+		{
+			engine.animation.animBlock(false);
+			engine.animation.fadeAnimOut(this.totalMap);
+			setTimeout(() => {	
+				this.totalMap.isVisible = false;
+			},400);
+		}
+	}
+
+	showMiniMap(toggle)
+	{
+		if (detectMobile())
+		{
+			engine.map.miniMap.isVisible = false;
+			return;
+		}
+		if (toggle)
+		{
+			engine.map.miniMap.isVisible = true;
+			engine.animation.fadeAnimIn(engine.map.miniMap);
+		}
+		else
+		{
+			engine.animation.fadeAnimOut(engine.map.miniMap);
+			setTimeout(() => {	
+				engine.map.miniMap.isVisible = false;
+			},400);
 		}
 	}
 }
