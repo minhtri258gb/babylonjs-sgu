@@ -27,7 +27,6 @@ export default class Map
 
 		this.link = [];
 
-
 		// Caculator
 		this.mat.xbound = engine.canvas.width * 90 / 100;
 		this.mat.ybound = engine.canvas.height * 90 / 100;

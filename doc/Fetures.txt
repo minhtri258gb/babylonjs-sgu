@@ -35,4 +35,3 @@ Help panel
 // Some function
 Auto rotate
 
-
