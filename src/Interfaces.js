@@ -30,8 +30,6 @@ export default class Interfaces
 		this.rectHelp.isVisible = false;
 
 		engine.advancedTexture.addControl(this.rectHelp);
-
-		
 	}
 	
 	initLogoNav()

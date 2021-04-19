@@ -6,10 +6,15 @@ export default class MainMenu
 	// Forwards
 	constructor()
 	{
-		if (window.location.href.indexOf('?') > -1)
+		// Default
+		let url = new URL(window.location.href);
+		this.language = url.searchParams.get("location");
+		if (this.language !== null)
 			return;
 
-		this.menuImg = new BABYLON.GUI.Image("mapImg","./asset/background.jpg");
+		this.menuImg = new BABYLON.GUI.Image("mapImg",
+				"./asset/background/"+Math.floor(Math.random()*4)+".jpg");
+		
 		// this.menuImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.menuImg.scaleX = 1.15;
 		this.menuImg.scaleY = 1.15;

@@ -1,27 +1,16 @@
 
-Infomation change fix
-Add some location infomation
+// Done
 
-
-
-look at anim (error)
-
-============================
+// TODO
+BABYLON.Engine.isSupported()
 icon svg file
+upload image 360 by client
+download some music no copy right sound
 
+// issue
+anim look loc link
+zoom on mobile
 fix F11 fullscreen
 
-upload image 360 by client
-
-download some music no copy right sound
-chup 1 so anh vi tri dac biet //WIP
-
-add help panel 
-add main menu //WIP
-
-
-// DEBUG & DEV
+// Final
 Remove func right click to get information
-
-
-anim look loc link

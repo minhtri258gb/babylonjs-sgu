@@ -70,7 +70,7 @@ export default class Location
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
 		
-		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/dome/"+_name+"_pre"+".jpg");
+		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/preview/"+_name+".jpg");
         rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
