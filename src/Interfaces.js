@@ -897,6 +897,112 @@ export default class Interfaces
 		this.areaNav.grid.addControl(this.areaNav.areaPL, 8, 0);
 	}
 
+	initInfoPanel()
+	{
+		
+		//Scrollview info
+		this.infoScroll = new BABYLON.GUI.ScrollViewer();
+		this.infoScroll.width = "700px";
+		this.infoScroll.height = "600px";
+		this.infoScroll.background = "white";
+		this.infoScroll.zIndex = 3;
+		this.infoScroll.cornerRadius = 10;
+		this.infoScroll.isVisible = false;
+		this.infoScroll.isPointerBlocker = true;
+		engine.advancedTexture.addControl(this.infoScroll);
+
+		//Khung ben trong scroll
+		this.infoContainer = new BABYLON.GUI.Rectangle();
+		this.infoContainer.height = "800px";
+		this.infoScroll.addControl(this.infoContainer);
+		
+		//Khung chua anh
+		this.infoImgContainer = new BABYLON.GUI.Rectangle();
+		this.infoImgContainer.width = "640px";
+		this.infoImgContainer.height = "360px";
+		this.infoImgContainer.top = "20px";
+		this.infoImgContainer.verticalAlignment = 0;
+		this.infoContainer.addControl(this.infoImgContainer);
+		
+		//Anh cua info
+		this.infoImage = new BABYLON.GUI.Image("imgInfo","./asset/logo.png");
+		this.infoImage.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
+		//this.infoImage.top = "-100px";
+		this.infoImgContainer.addControl(this.infoImage);
+
+		//Khung chua text
+		this.infoTextContainer = new BABYLON.GUI.Rectangle();
+		this.infoTextContainer.width = "640px";
+		this.infoTextContainer.height = "380px";
+		this.infoTextContainer.top = "20px";
+		this.infoTextContainer.verticalAlignment = 0;
+		this.infoTextContainer.topInPixels = 400;
+		this.infoContainer.addControl(this.infoTextContainer);
+
+		//Text cua info
+		this.infoText = new BABYLON.GUI.TextBlock();
+		this.infoText.text = "";
+		this.infoText.textWrapping = true;
+		this.infoText.textHorizontalAlignment = 0;	
+		this.infoText.textVerticalAlignment = 0;
+		this.infoTextContainer.addControl(this.infoText);
+	}
+
+	initRectBlock()
+	{
+
+		//Rect block background
+		this.rectBlock = new BABYLON.GUI.Rectangle();
+		this.rectBlock.color = "transparent";
+		this.rectBlock.background = "black";
+		this.rectBlock.alpha = "0";
+		this.rectBlock.zIndex = 2;
+		this.rectBlock.isPointerBlocker = true;
+		this.rectBlock.isVisible = false;
+		this.rectBlock.onPointerClickObservable.add(() => {
+			
+			switch (this.onShow)
+			{
+				case "info":
+				{	
+					this.showInfoPanel(false);
+					break;
+				}
+				case "map":
+				{
+				
+					// Hidden map
+					engine.animation.animBlock(false);
+					engine.animation.fadeAnimOut(engine.map.totalMap);
+					setTimeout(() => {	
+						engine.map.totalMap.isVisible = false;
+					},400);
+					this.showInterfaces(true);
+					break;
+				}
+				case "help":
+				{
+					engine.animation.animBlock(false);
+					engine.animation.fadeAnimOut(this.btnHelp.container);
+					
+					setTimeout(() => {	
+						this.btnHelp.container.isVisible = false;
+					},400);
+					this.showInterfaces(true);
+					break;
+				}
+				case "setting":
+				{
+					this.showSettingPanel(false);
+					break;
+				}
+			}
+			
+		});
+		engine.advancedTexture.addControl(this.rectBlock);
+
+	}
+
 	changeTheme(value)
 	{
 		if (engine.onInit) // ignore first time called
@@ -1021,5 +1127,31 @@ export default class Interfaces
 		else
 			engine.animation.drawerAnimX(this.settings.container, -1, 400);
 		this.settings.isShow = toggle;
+	}
+
+	showInfoPanel(toggle, name = "")
+	{
+		if (toggle)
+		{
+			// Change content
+			this.infoImage.source = "./asset/preview/"+name+".jpg";
+			this.infoText.text = engine.language.get(name);
+
+			// Show
+			this.onShow = "info";
+			this.showInterfaces(false);
+			this.infoScroll.isVisible = true;
+			engine.animation.fadeAnimIn(this.infoScroll);
+			engine.animation.animBlock(true);
+		}
+		else
+		{	
+			engine.animation.fadeAnimOut(this.infoScroll);
+			engine.animation.animBlock(false);
+			setTimeout(() => {
+				this.infoScroll.isVisible = false;
+			}, 400);
+			this.showInterfaces(true);
+		}
 	}
 }

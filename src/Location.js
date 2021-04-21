@@ -1,6 +1,5 @@
 
 import engine from './Engine.js'
-import DataSource from "./DataSource.js";
 
 export default class Location
 {
@@ -48,70 +47,6 @@ export default class Location
 			this.addInfo(info.name, info.pos)
 		}
 
-		
-		//Scrollview info
-		this.infoScroll = new BABYLON.GUI.ScrollViewer();
-		this.infoScroll.width = "700px";
-		this.infoScroll.height = "600px";
-		this.infoScroll.background = "white";
-		this.infoScroll.zIndex = 3;
-		this.infoScroll.cornerRadius = 10;
-		this.infoScroll.isVisible = false;
-		this.infoScroll.isPointerBlocker = true;
-		engine.advancedTexture.addControl(this.infoScroll);
-
-		//Khung ben trong scroll
-		this.infoContainer = new BABYLON.GUI.Rectangle();
-		this.infoContainer.height = "800px";
-		this.infoScroll.addControl(this.infoContainer);
-		
-		//Khung chua anh
-		this.infoImgContainer = new BABYLON.GUI.Rectangle();
-		this.infoImgContainer.width = "640px";
-		this.infoImgContainer.height = "360px";
-		this.infoImgContainer.top = "20px";
-		this.infoImgContainer.verticalAlignment = 0;
-		this.infoContainer.addControl(this.infoImgContainer);
-		
-		//Anh cua info
-		this.infoImage = new BABYLON.GUI.Image("_imgInfo","./asset/img.jpg");
-		this.infoImage.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
-		//this.infoImage.top = "-100px";
-		this.infoImgContainer.addControl(this.infoImage);
-
-		//Khung chua text
-		this.infoTextContainer = new BABYLON.GUI.Rectangle();
-		this.infoTextContainer.width = "640px";
-		this.infoTextContainer.height = "380px";
-		this.infoTextContainer.top = "20px";
-		this.infoTextContainer.verticalAlignment = 0;
-		this.infoTextContainer.topInPixels = 400;
-		this.infoContainer.addControl(this.infoTextContainer);
-
-		//Text cua info
-		this.infoText = new BABYLON.GUI.TextBlock();
-		this.infoText.text = "  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras iaculis enim finibus ligula dignissim congue. "+
-		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
-		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
-		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
-		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
-		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
-		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
-		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		"Proin porttitor dui sed sapien sagittis, a lacinia lacus facilisis. Proin pharetra vitae est et facilisis. Nam eleifend, erat quis ma"+
-		"ttis accumsan, magna nisl varius sem, ut porta nisi leo eu purus. Aenean et ligula pretium, cursus eros eu,"+
-		" accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel"+
-		" posuere nunc. Vivamus imperdiet varius sodales. accumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam velaccumsan purus. Morbi a enim venenatis, finibus justo id, tristique ipsum. Aenean et accumsan risus, fringilla posuere felis. Nullam vel";
-		this.infoText.textWrapping = true;
-		this.infoText.textHorizontalAlignment = 0;	
-		this.infoText.textVerticalAlignment = 0;
-		this.infoTextContainer.addControl(this.infoText);
-
 		engine.map.goLocation(this.name, this.position); // hook map
 	}
 
@@ -135,7 +70,7 @@ export default class Location
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
 		
-		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/dome/"+_name+"_pre"+".jpg");
+		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/preview/"+_name+".jpg");
         rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
@@ -236,17 +171,13 @@ export default class Location
 		engine.advancedTexture.addControl(rect);
 		rect.linkWithMesh(box);
 		rect.onPointerDownObservable.add(() => {
-			engine.interfaces.onShow = "info";
-			engine.interfaces.showInterfaces(false);
-			this.infoScroll.isVisible = true;
-			engine.animation.fadeAnimIn(this.infoScroll);
-			engine.animation.animBlock(true);
+			engine.interfaces.showInfoPanel(true, _name);
 		});
 
 		// Walk icon
 		let imginfo = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/info.png");
         rect.addControl(imginfo);
-		
+
 		this.info.push({
 			name: _name,
 			mesh: box,
@@ -383,8 +314,8 @@ export default class Location
 			else if(event.button == 2)
 			{
 				let vector = pickResult.pickedPoint;
-				// console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
-				console.log("{x: "+vector.x.toFixed()+", y: "+vector.y.toFixed()+", z: "+vector.z.toFixed()+"}");
+				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
+				// console.log("{x: "+vector.x.toFixed()+", y: "+vector.y.toFixed()+", z: "+vector.z.toFixed()+"}");
 			}
 		}
 		engine.scene.onPointerMove = () => { // event mouse move

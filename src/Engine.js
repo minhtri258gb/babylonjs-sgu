@@ -9,8 +9,8 @@ import Location from './Location.js'
 import Effect from "./Effect.js";
 import Music from "./Music.js";
 import Language from "./Language.js";
-import detectMobile from './DetectMobileAPI.js'
 import MainMenu from "./MainMenu.js";
+import detectMobile from "./DetectMobileAPI.js"
 
 const engine =
 {
@@ -28,6 +28,7 @@ const engine =
 
 		// Scene setup
 		this.canvas = document.getElementById('renderCanvas');
+		this.setCanvasSizeMobile();
 
 		this.engine = new BABYLON.Engine(this.canvas, true);
 		this.engine.enableOfflineSupport = false;
@@ -51,6 +52,14 @@ const engine =
 		this.camera.useNaturalPinchZoom = false;
 		this.camera.inputs.remove(this.camera.inputs.attached.mousewheel);
 		this.camera.inputs.remove(this.camera.inputs.attached.keyboard);
+
+		// this.camera.panningSensibility = 0;
+		// this.camera.inputs.attached.pointers.multiTouchPanAndZoom = false;
+    	// this.camera.inputs.attached.pointers.multiTouchPanning = false;
+		// this.camera.inputs.attached.pointers.panningSensibility = 0;
+		// this.camera.inputs.attached.pointers.pinchInwards = false;
+		// this.camera.inputs.attached.pointers.pinchPrecision = 0; // 
+		// this.camera.pinchToPanMaxDistance = 0;
 
 		// Component
 		Location.registerMousePicking();
@@ -83,7 +92,9 @@ const engine =
 
 		// Resize window event
 		window.addEventListener("resize", () => {
+			// alert("ASAS")
 			this.map.resize();
+			this.setCanvasSizeMobile();
 			this.engine.resize();
 		});
 	},
@@ -123,6 +134,22 @@ const engine =
 				engine.camera.position = new BABYLON.Vector3(0,-500,0);
 				engine.camera.fov = BABYLON.Tools.ToRadians(120)
 				break;
+		}
+	},
+
+	setCanvasSizeMobile: function()
+	{
+		if (!detectMobile())
+			return;
+
+		if (window.innerHeight > window.innerWidth)
+		{
+			let size = ((window.innerWidth / 16 * 9) / window.innerHeight * 100).toFixed(2);
+			this.canvas.style.height = size+'%';
+		}
+		else
+		{
+			this.canvas.style.height = '100%';
 		}
 	}
 }
