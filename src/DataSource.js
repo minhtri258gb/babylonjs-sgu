@@ -19,6 +19,13 @@ export default class DataSource
 		loc['CADV'].rotation = BABYLON.Tools.ToRadians(92);
 		loc['CADV'].sun = {x: 383, y: 296, z: -122};
 
+		//PLACEHOLDER
+		loc['CADV2'] = {};
+		loc['CADV2'].link = [];
+		loc['CADV2'].info = [];
+		loc['CADV2'].position = {x: 0.3815564039422436, y: 0.37467014835749035};
+		loc['CADV2'].rotation = BABYLON.Tools.ToRadians(0);
+
 		loc['C02'] = {};
 		loc['C02'].link = [];
 		loc['C02'].link[0] = {name: 'HB', pos: [-492,37,74]};
@@ -83,7 +90,7 @@ export default class DataSource
 		loc['CT'].link[0] = {name: 'B01', pos: [-298,-13,400]};
 		loc['CT'].link[1] = {name: 'B02', pos: [-318,-1,-385]};
 		loc['CT'].link[2] = {name: 'KLF', pos: [-499,-6,5]};
-		loc['CT'].link[3] = {name: 'GX2', pos: [499,-12,-10]};
+		loc['CT'].link[3] = {name: 'STT', pos: [499,-12,-10]};
 		loc['CT'].info = [];
 		loc['CT'].position = {x: 0.515193211787639, y: 0.515193211787639};
 		loc['CT'].rotation = BABYLON.Tools.ToRadians(272);
@@ -125,46 +132,74 @@ export default class DataSource
 		loc['A03'].rotation = BABYLON.Tools.ToRadians(0);
 
 		//PLACEHOLDER
+		loc['A04'] = {};
+		loc['A04'].link = [];
+		loc['A04'].info = [];
+		loc['A04'].position = {x: 0.6642586859305125, y: 0.5633528265107213};
+		loc['A04'].rotation = BABYLON.Tools.ToRadians(0);
+
+		//PLACEHOLDER
 		loc['HTA'] = {};
 		loc['HTA'].link = [];
 		loc['HTA'].info = [];
-		loc['HTA'].position = {x: 0.6642586859305125, y: 0.5633528265107213};
+		loc['HTA'].position = {x: 0.7201582387340901, y: 0.5427129916294003};
 		loc['HTA'].rotation = BABYLON.Tools.ToRadians(0);
+
+		//PLACEHOLDER
+		loc['KNT'] = {};
+		loc['KNT'].link = [];
+		loc['KNT'].info = [];
+		loc['KNT'].position = {x: 0.8193441119137713, y: 0.507166609333792};
+		loc['KNT'].rotation = BABYLON.Tools.ToRadians(0);
 
 		loc['GX1'] = {};
 		loc['GX1'].link = [];
 		loc['GX1'].link[0] = {name: 'A02', pos: [-481,-2,137]};
 		loc['GX1'].link[1] = {name: 'E02', pos: [-220,24,448]};
 		loc['GX1'].link[2] = {name: 'E01', pos: [180,38,465]};
-		loc['GX1'].link[3] = {name: 'GX2', pos: [0,-1,-500]};
+		loc['GX1'].link[3] = {name: 'STT', pos: [-141,1,-479]};
 		loc['GX1'].info = [];
-		loc['GX1'].position = {x: 0.44926040591675265, y: 0.6252723311546841};
+		loc['GX1'].position = {x: 0.4580966918834789, y: 0.6186013274369393};
 		loc['GX1'].rotation = BABYLON.Tools.ToRadians(270);
 		loc['GX1'].sun = {x: 433, y: 118, z: -219};;
 		
+		loc['STT'] = {};
+		loc['STT'].link = [];
+		loc['STT'].link[0] = {name: 'GX1', pos: [72,28,493]};
+		loc['STT'].link[1] = {name: 'GX2', pos: [40,2,-498]};
+		loc['STT'].link[2] = {name: 'CT', pos: [-499,-13,-19]};
+		loc['STT'].info = [];
+		loc['STT'].position = {x: 0.45012039903680773, y: 0.5576195390436877};
+		loc['STT'].rotation = BABYLON.Tools.ToRadians(270);
+
+		//PLACEHOLDER
+		loc['SBB'] = {};
+		loc['SBB'].link = [];
+		loc['SBB'].info = [];
+		loc['SBB'].position = {x: 0.41626313208940013, y: 0.6027429333245189};
+		loc['SBB'].rotation = BABYLON.Tools.ToRadians(0);
+
+		//PLACEHOLDER
+		loc['SBD'] = {};
+		loc['SBD'].link = [];
+		loc['SBD'].info = [];
+		loc['SBD'].position = {x: 0.4019607843137255, y: 0.5329664029354432};
+		loc['SBD'].rotation = BABYLON.Tools.ToRadians(0);
+
 		loc['GX2'] = {};
 		loc['GX2'].link = [];
-		loc['GX2'].link[0] = {name: 'GX1', pos: [-10,24,498]};
-		loc['GX2'].link[1] = {name: 'GX3', pos: [40,2,-498]};
-		loc['GX2'].link[2] = {name: 'CT', pos: [-499,-13,-19]};
+		loc['GX2'].link[0] = {name: 'STT', pos: [-46,15,497]};
+		loc['GX2'].link[1] = {name: 'GX3', pos: [-84,9,-492]};
 		loc['GX2'].info = [];
-		loc['GX2'].position = {x: 0.47964682949203075, y: 0.5415663341359935};
-		loc['GX2'].rotation = BABYLON.Tools.ToRadians(270);
+		loc['GX2'].position = {x: 0.4137140236211444, y: 0.48767343194587776};
+		loc['GX2'].rotation = BABYLON.Tools.ToRadians(272);
 
 		loc['GX3'] = {};
 		loc['GX3'].link = [];
-		loc['GX3'].link[0] = {name: 'GX2', pos: [-46,15,497]};
-		loc['GX3'].link[1] = {name: 'GX4', pos: [-84,9,-492]};
+		loc['GX3'].link[0] = {name: 'GX2', pos: [386,-32,314]};
 		loc['GX3'].info = [];
-		loc['GX3'].position = {x: 0.4137140236211444, y: 0.48767343194587776};
-		loc['GX3'].rotation = BABYLON.Tools.ToRadians(272);
-
-		loc['GX4'] = {};
-		loc['GX4'].link = [];
-		loc['GX4'].link[0] = {name: 'GX3', pos: [386,-32,314]};
-		loc['GX4'].info = [];
-		loc['GX4'].position = {x: 0.3994627090602323, y: 0.41830065359477125};
-		loc['GX4'].rotation = BABYLON.Tools.ToRadians(0);
+		loc['GX3'].position = {x: 0.3994627090602323, y: 0.41830065359477125};
+		loc['GX3'].rotation = BABYLON.Tools.ToRadians(0);
 		
 		loc['E01'] = {};
 		loc['E01'].link = [];
@@ -172,7 +207,7 @@ export default class DataSource
 		loc['E01'].link[1] = {name: 'E02', pos: [-264,-3,-424]};
 		loc['E01'].link[2] = {name: 'CNT', pos: [48,-52,494]};
 		loc['E01'].info = [];
-		loc['E01'].position = {x: 0.48079348698543745, y: 0.6717119596376562};
+		loc['E01'].position = {x: 0.47936016511867907, y: 0.6906318082788672};
 		loc['E01'].rotation = BABYLON.Tools.ToRadians(356);
 
 		loc['E02'] = {};
@@ -184,6 +219,13 @@ export default class DataSource
 		loc['E02'].position = {x: 0.5249398004815962, y: 0.6550854259832588};
 		loc['E02'].rotation = BABYLON.Tools.ToRadians(268);
 
+		//PLACEHOLDER
+		loc['E03'] = {};
+		loc['E03'].link = [];
+		loc['E03'].info = [];
+		loc['E03'].position = {x: 0.48681343882582273, y: 0.6711386308909528};
+		loc['E03'].rotation = BABYLON.Tools.ToRadians(0);
+		
 		loc['CNT'] = {};
 		loc['CNT'].link = [];
 		loc['CNT'].link[0] = {name: 'E01', pos: [-39,43,-496]};
@@ -193,12 +235,7 @@ export default class DataSource
 		loc['CNT'].rotation = BABYLON.Tools.ToRadians(0);
 		loc['CNT'].sun = {x: 404, y: 243, z: -165};
 
-		//PLACEHOLDER
-		loc['SBR'] = {};
-		loc['SBR'].link = [];
-		loc['SBR'].info = [];
-		loc['SBR'].position = {x: 0.42116729732828806, y: 0.5685127852310514};
-		loc['SBR'].rotation = BABYLON.Tools.ToRadians(0);
+		
 
 		this.loc = loc;
 	}

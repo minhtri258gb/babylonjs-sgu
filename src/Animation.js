@@ -78,4 +78,22 @@ export default class Animation
 			},400);
 		}
 	}
+	
+	animTextStart(toggle)
+	{
+		if (toggle)
+		{
+			this.textStart = {};
+			this.textStart.factor = 0.2;
+			this.textStart.loop = setInterval(() => {
+				if (engine.menu.textStart.fontSizeInPixels > 24 || engine.menu.textStart.fontSizeInPixels < 22) // neu vuot bien
+					this.textStart.factor *= -1; // thi doi chieu
+				engine.menu.textStart.fontSizeInPixels += this.textStart.factor; // anim
+			}, 80);
+		}
+		else
+		{
+			clearInterval(this.textStart.loop);
+		}
+	}
 }

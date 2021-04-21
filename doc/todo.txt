@@ -2,18 +2,16 @@
 location on URL (done)
 minimap transform fix (done)
 minimap hook animation (done)
-fix lenflare
+fix lenflare (Done)
 
 look at anim (error)
 
 ============================
-icon svg file
 
 fix F11 fullscreen
 
-upload image 360 by client
+upload image 360 by client (Not done)
 
-download some music no copy right sound
 chup 1 so anh vi tri dac biet //WIP
 
 add info  //done
@@ -37,5 +35,15 @@ anim look loc link
 transparent total map //done
 
 change all GUI content into a fullscreen rect //cant be done cuz of isVisible element hide interfaces unstable
+
+HTA
+CADV2
+A03
+KLF
+E03
+SB
+SBB
+Khu Nghe Thua
+
 
 

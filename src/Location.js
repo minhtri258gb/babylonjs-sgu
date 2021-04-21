@@ -243,14 +243,9 @@ export default class Location
 			engine.animation.animBlock(true);
 		});
 
-
-
 		// Walk icon
 		let imginfo = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/info.png");
         rect.addControl(imginfo);
-
-
-
 		
 		this.info.push({
 			name: _name,

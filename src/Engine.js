@@ -46,6 +46,9 @@ const engine =
 		this.camera.angularSensibilityX = -500;
 		this.camera.angularSensibilityY = -500;
 		this.camera.inertia = 0;
+		this.camera.pinchPercentage = 0;
+		this.camera.panningSensibility = 0;
+		this.camera.useNaturalPinchZoom = false;
 		this.camera.inputs.remove(this.camera.inputs.attached.mousewheel);
 		this.camera.inputs.remove(this.camera.inputs.attached.keyboard);
 

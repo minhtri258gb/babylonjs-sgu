@@ -133,7 +133,7 @@ export default class Map
 		this.totalMap.onWheelObservable.add((evt) => { // mouse wheel
 
 			// Check bounding
-			let scale = Math.max(this.mat.scale + (evt.y / -500), this.mat.scaleMin);
+			let scale = Math.max(this.mat.scale + (evt.y / -2000), this.mat.scaleMin);
 			if (scale > this.mat.scaleMin && scale < this.mat.scaleMax)
 			{
 				// zoom
