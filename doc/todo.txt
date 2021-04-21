@@ -1,41 +1,16 @@
 
-location on URL (done)
-minimap transform fix (done)
-minimap hook animation (done)
-fix lenflare
+// Done
 
-look at anim (error)
-
-============================
+// TODO
+BABYLON.Engine.isSupported()
 icon svg file
+upload image 360 by client
+download some music no copy right sound
 
+// issue
+anim look loc link
+zoom on mobile
 fix F11 fullscreen
 
-upload image 360 by client
-
-download some music no copy right sound
-chup 1 so anh vi tri dac biet //WIP
-
-add info  //done
-add help panel 
-add main menu //WIP
-
-xám đen "#8e927e"
-
-Infomation cac khu vuc trong truong //done
-
-
-
-// DEBUG & DEV
+// Final
 Remove func right click to get information
-
-
-location dispose element
-
-anim look loc link
-
-transparent total map //done
-
-change all GUI content into a fullscreen rect //cant be done cuz of isVisible element hide interfaces unstable
-
-
