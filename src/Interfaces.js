@@ -17,46 +17,8 @@ export default class Interfaces
 		this.initMenuNav();
 		this.initAreaNav();
 		this.initSettings();
-
-		//Rect block background
-		this.rectBlock = new BABYLON.GUI.Rectangle();
-		this.rectBlock.color = "transparent";
-		this.rectBlock.background = "black";
-		this.rectBlock.alpha = "0";
-		this.rectBlock.zIndex = 2;
-		this.rectBlock.isPointerBlocker = true;
-		this.rectBlock.isVisible = false;
-		this.rectBlock.onPointerClickObservable.add(() => {
-			
-			switch (this.onShow)
-			{
-				case "info":
-				{			
-					// Hidden info
-					engine.animation.fadeAnimOut(engine.loc.infoScroll);
-					engine.animation.animBlock(false);
-					setTimeout(() => {
-						engine.loc.infoScroll.isVisible = false;
-					}, 400);
-					this.showInterfaces(true);
-					break;
-				}
-				case "map":
-				{
-				
-					// Hidden map
-					engine.animation.animBlock(false);
-					engine.animation.fadeAnimOut(engine.map.totalMap);
-					setTimeout(() => {	
-						engine.map.totalMap.isVisible = false;
-					},400);
-					this.showInterfaces(true);
-					break;
-				}
-			}
-			
-		});
-		engine.advancedTexture.addControl(this.rectBlock);	
+		this.initRectBlock();
+		this.initInfoPanel();
 	}
 	
 	initLogoNav()
@@ -193,7 +155,7 @@ export default class Interfaces
 		this.panel.isVertical = false;
 		//this.panel.width = "240px";
 		this.panel.height = "160px";
-		this.panel.horizontalAlignment = 1;
+		this.panel.horizontalAlignment = 1;//BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 		this.panel.verticalAlignment = 1;
 		this.panel.zIndex = 2;
 		//this.panel.isPointerBlocker = true;			
@@ -976,17 +938,6 @@ export default class Interfaces
 					engine.animation.fadeAnimOut(engine.map.totalMap);
 					setTimeout(() => {	
 						engine.map.totalMap.isVisible = false;
-					},400);
-					this.showInterfaces(true);
-					break;
-				}
-				case "help":
-				{
-					engine.animation.animBlock(false);
-					engine.animation.fadeAnimOut(this.btnHelp.container);
-					
-					setTimeout(() => {	
-						this.btnHelp.container.isVisible = false;
 					},400);
 					this.showInterfaces(true);
 					break;

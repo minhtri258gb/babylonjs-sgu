@@ -10,7 +10,7 @@ export default class Language
 		let url = new URL(window.location.href);
 		this.language = url.searchParams.get("lang");
 		if (this.language === null)
-			this.language = 'en'
+			this.language = 'vi'
 
 		// Change title
 		document.title = this.get('title');
@@ -41,6 +41,7 @@ export default class Language
 		{
 			case 'title': return 'Saigon University Sightseeing';
 			case 'confirm_direct_sguhome': return 'Do you want to redirect to the Saigon University homepage?';
+			// Setting
 			case 'effect': return 'Effects';
 			case 'lenflare': return 'Lens Flare';
 			case 'particle': return 'Particle';
@@ -57,6 +58,11 @@ export default class Language
 			case 'themes': return 'Themes';
 			case 'darkmode': return 'Dark Mode';
 			case 'lightmode': return 'Light Mode';
+			// Menu
+			case 'instruction': return 'Use mouse to control the panorama';
+			case 'start': return 'START SIGHTSEEING';
+			case 'credit': return 'Instructor: M.S. Pham Thi Vuong\n©2021 | Copyright belongs to Nguyen Minh Tri and Ha Thien Tuan';
+			// Direct
 			case 'localtitle': return 'List of areas in school:';
 			case 'localADV': return 'An Duong Vuong Gate';
 			case 'localNT': return 'Nguyen Trai Gate';
@@ -66,18 +72,39 @@ export default class Language
 			case 'localD': return 'School Area D';
 			case 'localE': return 'School Area E';
 			case 'localPL': return 'Parking Lot';
-			case 'instruction': return 'Use mouse to control the panorama';
-			case 'start': return 'START SIGHTSEEING';
-			case 'credit': return 'Instructor: M.S. Pham Thi Vuong\n©2021 | Copyright belongs to Nguyen Minh Tri and Ha Thien Tuan';
-			case 'CADV': return 'An Duong Vuong Gate';
-			case 'D01': return 'School Area D';
-			case 'C02': case 'C01': case 'HB': return 'School Area C';
-			case 'B02': case 'B01': case 'CT': case 'KLF': return 'School Area B';
-			case 'A02': case 'A01': case 'A03': case 'HTA': return 'School Area A';
-			case 'E01': case 'E02': return 'School Area E';
-			case 'STT': return 'Sports Field';
-			case 'GX1': case 'GX2': case 'GX3':  return 'Parking Lot';			
-			case 'CNT': return 'Nguyen Trai Gate';
+			// Location
+			case 'CADV': return "An Duong Vuong Gate";
+			case 'CADV2': return "Parking Lot Exit Gate";
+			case 'C02': case 'C01': case 'HB': return "School Field C";
+			case 'D01': return "School Field D";
+			case 'B01': case 'B02': case 'B03': return "School Field B";
+			case 'B04': case 'B05': return "KLF Back Area";
+			case 'A01': case 'A02': case 'A03': case 'A04': case 'A05': return "School Field A";
+			case 'KNT': return "Arts Faculty Area";
+			case 'GX1': case 'GX3': return "Parking Lot Exit";
+			case 'GX2': return "Basketball Field";
+			case 'GX4': return "Parking Lot Exit";
+			case 'E01': case 'E02': return "Block E";
+			case 'E03': return "School Field E";
+			case 'CNT': return "Nguyen Trai Gate";
+			// Infomation
+			case 'PBV': return "Security room of Saigon University";
+			case 'GXGV': return "Lecturers, officials and employees parking lots";
+			case 'ATM': return "ATM of AGRIBANK, where students can withdraw cash directly without going to the bank";
+			case 'THP': return "Tuition fees collection and scholarship receipt information place";
+			case 'KTHB': case 'KTHC': return "Self-study area, an area for students to study on by themselves, eat or take a lunch break";
+			case 'KLF': return "KLF, where students can use internet service for a certain fee";
+			case 'CT': return "School Canteen";
+			case 'KNU': return "Students drinking water area, where students can get free drinking water";
+			case 'PYT': return "Medical Room";
+			case 'CSNT': return "Back Gate";
+			case 'HGXE': case 'HGXD': return "Parking Garage";
+			case 'SBB': return "Table tennis field";
+			case 'SCL': return "Badminton field";
+			case 'SBR': return "Basketball field";
+			case 'SBD': return "Soccer field";
+			case 'GXI': return "Parking Lot Entrance";
+			case 'GXO': return "Parking Lot Exit";
 		}
 		return 'Unavailable';
 	}
@@ -100,17 +127,17 @@ export default class Language
 			case 'ortho': return 'Kiến Trúc';
 			case 'fisheye': return 'Mắt Cá';
 			case 'stereographic': return 'Lập Thể';
-			case 'tinyplanet': return 'Hành Tinh Tý Hon';
+			case 'tinyplanet': return 'Trái Đất Thu Nhỏ';
 			case 'tubeview': return 'Dạng Ống';
 			case 'themes': return 'Chủ Đề';
 			case 'darkmode': return 'Nền Tối';
 			case 'lightmode': return 'Nền Sáng';
-      // Menu
+      		// Menu
 			case 'instruction': return 'Sử dụng chuột để điều khiển ảnh toàn cảnh';
 			case 'start': return 'BẮT ĐẦU THAM QUAN';
 			case 'credit': return 'Giảng viên hướng dẫn: ThS. Phạm Thi Vương\n©2021 | Bản quyền thuộc về Nguyễn Minh Trí và Hà Thiện Tuấn';
 			// Direct
-			case 'localtitle': return 'CÁC KHU VỰC CỦA TRƯỜNG:';
+			case 'localtitle': return 'Các khu vực của trường:';
 			case 'localADV': return "Cổng An Dương Vương";
 			case 'localNT': return "Cổng Nguyễn Trãi";
 			case 'localA': return "Khu vực A";
@@ -135,23 +162,23 @@ export default class Language
 			case 'E03': return "Sân E";
 			case 'CNT': return "Cổng Nguyễn Trãi";
 			// Infomation
-			case 'PBV': return "Phòng bảo vệ";
+			case 'PBV': return "Phòng bảo vệ của trường Đại học Sài Gòn";
 			case 'GXGV': return "Nhà xe giảng viên, cán bộ nhà trường";
-			case 'ATM': return "Trụ ATM ngân hàng AGRIBANK";
-			case 'THP': return "Điểm thu học phí trực tiếp và nhận học bổng";
-			case 'KTHB': case 'KTHC': return "Khu tự học";
-			case 'KLF': return "KLF";
+			case 'ATM': return "Trụ ATM ngân hàng AGRIBANK, nơi sinh viên có thể rút tiền mặt trực tiếp mà không cần ra ngân hàng";
+			case 'THP': return "Điểm thu học phí trực tiếp và gửi thông tin nhận học bổng";
+			case 'KTHB': case 'KTHC': return "Khu tự học, một khu vực dành cho sinh viên có thể tự học, ăn uống hoặc nghỉ trưa";
+			case 'KLF': return "KLF, nơi sinh viên có thể sử dụng dịch vụ internet với phí nhất định";
 			case 'CT': return "Căn tin trường";
-			case 'KNU': return "Khu vực nước uống";
+			case 'KNU': return "Khu vực nước uống sinh viên, nơi sinh viên có thể lấy nước uống miễn phí";
 			case 'PYT': return "Phòng y tế";
-			case 'CSNT': return "Cổng Sau";
+			case 'CSNT': return "Cổng sau";
 			case 'HGXE': case 'HGXD': return "Hầm gửi xe";
-			case 'SBB': return "Sân Bóng Bàn";
-			case 'SCL': return "Sân Cầu Lông";
-			case 'SBR': return "Sân Bóng Rổ";
-			case 'SBD': return "Sân Bóng Đá";
-			case 'GXI': return "Điểm Vào Bãi Gửi Xe";
-			case 'GXO': return "Điểm Ra Xe";
+			case 'SBB': return "Sân bóng bàn";
+			case 'SCL': return "Sân cầu lông";
+			case 'SBR': return "Sân bóng rổ";
+			case 'SBD': return "Sân bóng đá";
+			case 'GXI': return "Điểm vào bãi gửi xe";
+			case 'GXO': return "Điểm ra xe";
 		}
 		return 'Không Có Sẵn';
 	}
