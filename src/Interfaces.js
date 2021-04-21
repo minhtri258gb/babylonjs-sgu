@@ -1151,7 +1151,7 @@ export default class Interfaces
 		{
 			// Change content
 			this.infoImage.source = "./asset/preview/"+name+".jpg";
-			this.infoText.text = engine.language.get("describe_"+name);
+			this.infoText.text = engine.language.get(name);
 
 			// Show
 			this.onShow = "info";

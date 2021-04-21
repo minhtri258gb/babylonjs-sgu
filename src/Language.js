@@ -67,7 +67,7 @@ export default class Language
 			case 'localE': return "School Area E"
 			case 'localPL': return "Parking Lot"
 		}
-		return '[en] unavailable';
+		return 'Unavailable';
 	}
 
 	vi(tag)
@@ -76,6 +76,7 @@ export default class Language
 		{
 			case 'title': return 'Tham quan Đại học Sài Gòn';
 			case 'confirm_direct_sguhome': return 'Bạn có muốn chuyển hướng đến trang chủ trường Đại học Sài Gòn?';
+			// Setting
 			case 'effect': return 'Hiệu Ứng';
 			case 'lenflare': return 'Lóa Sáng Mặt Trời';
 			case 'particle': return 'Đóm Sáng';
@@ -92,17 +93,50 @@ export default class Language
 			case 'themes': return 'Chủ Đề';
 			case 'darkmode': return 'Nền Tối';
 			case 'lightmode': return 'Nền Sáng';
-			case 'localtitle': return 'CÁC KHU VỰC CỦA TRƯỜNG:'
-			case 'localADV': return "Cổng An Dương Vương"
-			case 'localNT': return "Cổng Nguyễn Trãi"
-			case 'localA': return "Khu vực A"
-			case 'localB': return "Khu vực B"
-			case 'localC': return "Khu vực C"
-			case 'localD': return "Khu vực D"
-			case 'localE': return "Khu vực E"
-			case 'localPL': return "Bãi gửi xe"	
+			// Direct
+			case 'localtitle': return 'CÁC KHU VỰC CỦA TRƯỜNG:';
+			case 'localADV': return "Cổng An Dương Vương";
+			case 'localNT': return "Cổng Nguyễn Trãi";
+			case 'localA': return "Khu vực A";
+			case 'localB': return "Khu vực B";
+			case 'localC': return "Khu vực C";
+			case 'localD': return "Khu vực D";
+			case 'localE': return "Khu vực E";
+			case 'localPL': return "Bãi gửi xe";
+			// Location
+			case 'CADV': return "Cổng An Dương Vương";
+			case 'CADV2': return "Cổng Ra Xe An Dương Vương";
+			case 'C02': case 'C01': case 'HB': return "Sân C";
+			case 'D01': return "Sân D";
+			case 'B01': case 'B02': case 'B03': return "Sân B";
+			case 'B04': case 'B05': return "Lối đi sau KLF";
+			case 'A01': case 'A02': case 'A03': case 'A04': case 'A05': return "Sân A";
+			case 'KNT': return "Khu Nghệ Thuật";
+			case 'GX1': case 'GX3': return "Bãi gửi xe";
+			case 'GX2': return "Sân bóng rổ";
+			case 'GX4': return "Lối ra xe";
+			case 'E01': case 'E02': return "Dãy E";
+			case 'E03': return "Sân E";
+			case 'CNT': return "Cổng Nguyễn Trãi";
+			// Infomation
+			case 'PBV': return "Phòng bảo vệ";
+			case 'GXGV': return "Nhà xe giảng viên, cán bộ nhà trường";
+			case 'ATM': return "Trụ ATM ngân hàng AGRIBANK";
+			case 'THP': return "Điểm thu học phí trực tiếp và nhận học bổng";
+			case 'KTHB': case 'KTHC': return "Khu tự học";
+			case 'KLF': return "KLF";
+			case 'CT': return "Căn tin trường";
+			case 'KNU': return "Khu vực nước uống";
+			case 'PYT': return "Phòng y tế";
+			case 'CSNT': return "Cổng Sau";
+			case 'HGXE': case 'HGXD': return "Hầm gửi xe";
+			case 'SBB': return "Sân Bóng Bàn";
+			case 'SCL': return "Sân Cầu Lông";
+			case 'SBR': return "Sân Bóng Rổ";
+			case 'SBD': return "Sân Bóng Đá";
+			case 'GXI': return "Điểm Vào Bãi Gửi Xe";
+			case 'GXO': return "Điểm Ra Xe";
 		}
-		return '[vn] không có sẵn';
+		return 'Không Có Sẵn';
 	}
 }
- // engine.language.get('')
