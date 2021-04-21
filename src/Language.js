@@ -58,14 +58,26 @@ export default class Language
 			case 'darkmode': return 'Dark Mode';
 			case 'lightmode': return 'Light Mode';
 			case 'localtitle': return 'List of areas in school:';
-			case 'localADV': return "An Duong Vuong Gate"
-			case 'localNT': return "Nguyen Trai Gate"
-			case 'localA': return "School Area A"
-			case 'localB': return "School Area B"
-			case 'localC': return "School Area C"
-			case 'localD': return "School Area D"
-			case 'localE': return "School Area E"
-			case 'localPL': return "Parking Lot"
+			case 'localADV': return 'An Duong Vuong Gate';
+			case 'localNT': return 'Nguyen Trai Gate';
+			case 'localA': return 'School Area A';
+			case 'localB': return 'School Area B';
+			case 'localC': return 'School Area C';
+			case 'localD': return 'School Area D';
+			case 'localE': return 'School Area E';
+			case 'localPL': return 'Parking Lot';
+			case 'instruction': return 'Use mouse to control the panorama';
+			case 'start': return 'START SIGHTSEEING';
+			case 'credit': return 'Instructor: M.S. Pham Thi Vuong\n©2021 | Copyright belongs to Nguyen Minh Tri and Ha Thien Tuan';
+			case 'CADV': return 'An Duong Vuong Gate';
+			case 'D01': return 'School Area D';
+			case 'C02': case 'C01': case 'HB': return 'School Area C';
+			case 'B02': case 'B01': case 'CT': case 'KLF': return 'School Area B';
+			case 'A02': case 'A01': case 'A03': case 'HTA': return 'School Area A';
+			case 'E01': case 'E02': return 'School Area E';
+			case 'STT': return 'Sports Field';
+			case 'GX1': case 'GX2': case 'GX3':  return 'Parking Lot';			
+			case 'CNT': return 'Nguyen Trai Gate';
 		}
 		return 'Unavailable';
 	}
@@ -93,6 +105,10 @@ export default class Language
 			case 'themes': return 'Chủ Đề';
 			case 'darkmode': return 'Nền Tối';
 			case 'lightmode': return 'Nền Sáng';
+      // Menu
+			case 'instruction': return 'Sử dụng chuột để điều khiển ảnh toàn cảnh';
+			case 'start': return 'BẮT ĐẦU THAM QUAN';
+			case 'credit': return 'Giảng viên hướng dẫn: ThS. Phạm Thi Vương\n©2021 | Bản quyền thuộc về Nguyễn Minh Trí và Hà Thiện Tuấn';
 			// Direct
 			case 'localtitle': return 'CÁC KHU VỰC CỦA TRƯỜNG:';
 			case 'localADV': return "Cổng An Dương Vương";

@@ -3,7 +3,7 @@ import detectMobile from './DetectMobileAPI.js';
 import engine from './Engine.js'
 
 
-export default class Interfaces
+export default class Interfaces 
 {
 	// Forwards
 	constructor()
@@ -17,19 +17,46 @@ export default class Interfaces
 		this.initMenuNav();
 		this.initAreaNav();
 		this.initSettings();
-		this.initInfoPanel();
-		this.initRectBlock();
 
-		this.rectHelp = new BABYLON.GUI.Rectangle();
-		this.rectHelp.width = 0.8;
-		this.rectHelp.height = 0.8;
-		this.rectHelp.cornerRadius = 10;
-		this.rectHelp.color = "transparent";
-		this.rectHelp.background = "red";
-		this.rectHelp.zIndex = 3;
-		this.rectHelp.isVisible = false;
-
-		engine.advancedTexture.addControl(this.rectHelp);
+		//Rect block background
+		this.rectBlock = new BABYLON.GUI.Rectangle();
+		this.rectBlock.color = "transparent";
+		this.rectBlock.background = "black";
+		this.rectBlock.alpha = "0";
+		this.rectBlock.zIndex = 2;
+		this.rectBlock.isPointerBlocker = true;
+		this.rectBlock.isVisible = false;
+		this.rectBlock.onPointerClickObservable.add(() => {
+			
+			switch (this.onShow)
+			{
+				case "info":
+				{			
+					// Hidden info
+					engine.animation.fadeAnimOut(engine.loc.infoScroll);
+					engine.animation.animBlock(false);
+					setTimeout(() => {
+						engine.loc.infoScroll.isVisible = false;
+					}, 400);
+					this.showInterfaces(true);
+					break;
+				}
+				case "map":
+				{
+				
+					// Hidden map
+					engine.animation.animBlock(false);
+					engine.animation.fadeAnimOut(engine.map.totalMap);
+					setTimeout(() => {	
+						engine.map.totalMap.isVisible = false;
+					},400);
+					this.showInterfaces(true);
+					break;
+				}
+			}
+			
+		});
+		engine.advancedTexture.addControl(this.rectBlock);	
 	}
 	
 	initLogoNav()
@@ -44,7 +71,7 @@ export default class Interfaces
 		this.logoNav.container.left = "10px";
 		this.logoNav.container.top = "10px";
 		this.logoNav.container.color = "transparent";
-		this.logoNav.container.zIndex = 2;
+		this.logoNav.container.zIndex = 6;
 		engine.advancedTexture.addControl(this.logoNav.container);
 
 		//Nut logo ve trang SGU
@@ -53,7 +80,7 @@ export default class Interfaces
 		{
 			this.logoNav.btnLogo.width = "60px";
 			this.logoNav.btnLogo.height = "60px";
-			this.logoNav.btnLogo.top = "-20px";			
+			this.logoNav.btnLogo.top = "-20px";
 		}
 		else
 		{
@@ -202,7 +229,6 @@ export default class Interfaces
 				engine.animation.fadeAnimOut(this.btnMap.btn);
 				engine.animation.fadeAnimOut(this.btnSound.btn);
 				engine.animation.fadeAnimOut(this.btnRotation.btn);
-				engine.animation.fadeAnimOut(this.btnHelp.btn);
 				engine.animation.fadeAnimOut(this.FOV.container);
 				engine.animation.fadeAnimOut(this.logoNav.container);
 				engine.animation.fadeAnimOut(this.settings.container);			
@@ -214,7 +240,6 @@ export default class Interfaces
 				this.btnMap.btn.isVisible = false;
 				this.btnSound.btn.isVisible = false;
 				this.btnRotation.btn.isVisible = false;
-				this.btnHelp.btn.isVisible = false;
 				this.FOV.container.isVisible = false;
 				this.logoNav.container.isVisible = false;
 				this.settings.container.isVisible = false;
@@ -249,7 +274,6 @@ export default class Interfaces
 				this.btnMap.btn.isVisible = true;
 				this.btnSound.btn.isVisible = true;
 				this.btnRotation.btn.isVisible = true;
-				this.btnHelp.btn.isVisible = true;
 				this.FOV.container.isVisible = true;
 				this.logoNav.container.isVisible = true;
 				this.settings.container.isVisible = true;
@@ -260,7 +284,6 @@ export default class Interfaces
 				engine.animation.fadeAnimIn(this.btnMap.btn);
 				engine.animation.fadeAnimIn(this.btnSound.btn);
 				engine.animation.fadeAnimIn(this.btnRotation.btn);
-				engine.animation.fadeAnimIn(this.btnHelp.btn);
 				engine.animation.fadeAnimIn(this.FOV.container);
 				engine.animation.fadeAnimIn(this.logoNav.container);
 				engine.animation.fadeAnimIn(this.settings.container);
@@ -542,43 +565,6 @@ export default class Interfaces
 		this.panel.addControl(this.btnMap.btn);
 
 
-		//Nut help
-		let helpSize = (engine.canvas.width < engine.canvas.height) ? engine.canvas.width * 0.9 : engine.canvas.height * 0.9;
-		this.btnHelp = {};
-		this.btnHelp.container = new BABYLON.GUI.Rectangle();
-		this.btnHelp.container.widthInPixels = helpSize;
-		this.btnHelp.container.heightInPixels = helpSize;
-		this.btnHelp.container.cornerRadius = 10;
-		this.btnHelp.container.color = "transparent";
-		this.btnHelp.container.background = "red";
-		this.btnHelp.container.zIndex = 3;
-		this.btnHelp.container.isVisible = false;
-		engine.advancedTexture.addControl(this.btnHelp.container);
-
-		this.btnHelp.btn = new BABYLON.GUI.Button();
-		this.btnHelp.btn.width = "55px";
-		this.btnHelp.btn.height = "35px";
-		this.btnHelp.btn.paddingRight = "10px";
-		this.btnHelp.btn.paddingLeft = "10px";
-		this.btnHelp.btn.top = "30%";
-		this.btnHelp.btn.color = "transparent";
-		this.btnHelp.btn.background = "transparent";
-		this.btnHelp.btn.hoverCursor = "pointer";
-		this.btnHelp.btn.zIndex = 2;       
-		this.btnHelp.imgHelp = new BABYLON.GUI.Image("imgHelp","./asset/icon/"+(this.isDark?"dark":"light")+"/help.png");
-		this.btnHelp.btn.addControl(this.btnHelp.imgHelp);
-		this.btnHelp.btn.isPointerBlocker = true;
-		this.btnHelp.btn.onPointerClickObservable.add(() => {
-			this.onShow = "help";
-			// Show help
-			this.btnHelp.container.isVisible = true;
-			engine.animation.fadeAnimIn(this.btnHelp.container);
-			engine.animation.animBlock(true);
-			// Hidden interface
-			this.showInterfaces(false);
-		});
-		this.panel.addControl(this.btnHelp.btn);
-
 
 		this.panel.children.reverse();  //Reverse panel ĐỂ CUỐI PANEL!!!
 	}
@@ -610,7 +596,7 @@ export default class Interfaces
 		
 		
 		this.settings.selPanel.thickness = 0;   
-		this.settings.selPanel.height = "500px";
+		this.settings.selPanel.height = "470px";
 		
 		//this.settings.selPanel.barColor = "#4F7DF2";
 		this.settings.container.addControl(this.settings.selPanel);
@@ -650,7 +636,7 @@ export default class Interfaces
 
 		this.settings.projectionsGroup = new BABYLON.GUI.RadioGroup(engine.language.get('cameratype'));
 		this.settings.projectionsGroup.addRadio(engine.language.get('normal'),engine.setCameraType, true);
-		this.settings.projectionsGroup.addRadio(engine.language.get('ortho'), engine.setCameraType);
+		//this.settings.projectionsGroup.addRadio(engine.language.get('ortho'), engine.setCameraType);
 		this.settings.projectionsGroup.addRadio(engine.language.get('fisheye'), engine.setCameraType);
 		this.settings.projectionsGroup.addRadio(engine.language.get('tinyplanet'), engine.setCameraType);
 		this.settings.projectionsGroup.addRadio(engine.language.get('tubeview'), engine.setCameraType);
@@ -730,13 +716,15 @@ export default class Interfaces
 			if (this.areaNav.imgArrowOpen.isVisible === true)
 			{
 				this.areaNav.imgArrowClose.isVisible = true;
-				this.areaNav.imgArrowOpen.isVisible = false;  
+				this.areaNav.imgArrowOpen.isVisible = false;
+				this.areaNav.container.zIndex = 6;  
 				engine.animation.drawerAnimY(this.areaNav.container, 320, -1);	
 			}
 			else
 			{
 				this.areaNav.imgArrowClose.isVisible = false;
 				this.areaNav.imgArrowOpen.isVisible = true;
+				this.areaNav.container.zIndex = 4;  
 				engine.animation.drawerAnimY(this.areaNav.container, -1, 320);	                		
 			}
 		});
@@ -1043,7 +1031,6 @@ export default class Interfaces
 			this.btnMap.btn.isVisible = true;
 			this.btnSound.btn.isVisible = true;
 			this.btnRotation.btn.isVisible = true;
-			this.btnHelp.btn.isVisible = true;	
 			this.FOV.container.isVisible = true;	
 			this.logoNav.container.isVisible = true;	
 			this.settings.container.isVisible = true;	
@@ -1056,7 +1043,6 @@ export default class Interfaces
 			engine.animation.fadeAnimIn(this.btnSound.btn);
 			engine.animation.fadeAnimIn(this.btnMap.btn);
 			engine.animation.fadeAnimIn(this.btnRotation.btn);
-			engine.animation.fadeAnimIn(this.btnHelp.btn);
 			engine.animation.fadeAnimIn(this.FOV.container);
 			engine.animation.fadeAnimIn(this.logoNav.container);
 			engine.animation.fadeAnimIn(this.settings.container);
@@ -1083,7 +1069,6 @@ export default class Interfaces
 			engine.animation.fadeAnimOut(this.btnMap.btn);
 			engine.animation.fadeAnimOut(this.btnSound.btn);
 			engine.animation.fadeAnimOut(this.btnRotation.btn);
-			engine.animation.fadeAnimOut(this.btnHelp.btn);		
 			engine.animation.fadeAnimOut(this.FOV.container);
 			engine.animation.fadeAnimOut(this.logoNav.container);
 			engine.animation.fadeAnimOut(this.settings.container);
@@ -1096,7 +1081,6 @@ export default class Interfaces
 				this.btnMap.btn.isVisible = false;
 				this.btnSound.btn.isVisible = false;
 				this.btnRotation.btn.isVisible = false;
-				this.btnHelp.btn.isVisible = false;
 				this.FOV.container.isVisible = false; 
 				this.logoNav.container.isVisible = false; 
 				this.settings.container.isVisible = false; 
@@ -1171,4 +1155,3 @@ export default class Interfaces
 		}
 	}
 }
-	
