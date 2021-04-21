@@ -137,7 +137,6 @@ export default class DataSource
 		loc['A02'].position = {x: 0.6023391812865497, y: 0.572526086457975};
 		loc['A02'].rotation = BABYLON.Tools.ToRadians(158);
 
-		//PLACEHOLDER
 		loc['A03'] = {};
 		loc['A03'].link = [];
 		loc['A03'].link[0] = {name: 'A01', pos: [-498,30,13]};
@@ -151,7 +150,6 @@ export default class DataSource
  
 		// loc['HTA'].position = {x: 0.6642586859305125, y: 0.5633528265107213};
 
-		//PLACEHOLDER
 		loc['KNT'] = {};
 		loc['KNT'].link = [];
 		loc['KNT'].link[0] = {name: 'A01', pos: [499,10,-5]};
