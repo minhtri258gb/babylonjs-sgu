@@ -99,17 +99,12 @@ export default class Location
 		let rect = new BABYLON.GUI.Ellipse();
 		rect.width = "30px";
 		rect.height = "30px";
-		// rect.cornerRadius = 20;
-		rect.color = "white";
+		rect.color = "#DEE4E7";
 		rect.thickness = 3;
-		rect.background = "transparent"; // "white";//
-
+		rect.background = "#23272A";
 		rect.zIndex = 1;
 		rect.hoverCursor = "pointer";
 		rect.isPointerBlocker = true;
-		// rect.drawOutline = true;
-		// rect.outlineColor = "Black";
-		// rect.outlineWidth = 5;
 		engine.advancedTexture.addControl(rect);
 		rect.linkWithMesh(box);
 		rect.onPointerDownObservable.add(() => {
@@ -157,17 +152,12 @@ export default class Location
 		let rect = new BABYLON.GUI.Ellipse();
 		rect.width = "30px";
 		rect.height = "30px";
-		// rect.cornerRadius = 20;
-		rect.color = "white";
+		rect.color = "#DEE4E7";
 		rect.thickness = 3;
-		rect.background = "transparent"; // "white";//
-
+		rect.background = "#23272A";
 		rect.zIndex = 1;
 		rect.hoverCursor = "pointer";
 		rect.isPointerBlocker = true;
-		// rect.drawOutline = true;
-		// rect.outlineColor = "Black";
-		// rect.outlineWidth = 5;
 		engine.advancedTexture.addControl(rect);
 		rect.linkWithMesh(box);
 		rect.onPointerDownObservable.add(() => {
@@ -313,6 +303,8 @@ export default class Location
 			}
 			else if(event.button == 2)
 			{
+				if (!engine.debug)
+					returnl;
 				let vector = pickResult.pickedPoint;
 				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
 				// console.log("{x: "+vector.x.toFixed()+", y: "+vector.y.toFixed()+", z: "+vector.z.toFixed()+"}");

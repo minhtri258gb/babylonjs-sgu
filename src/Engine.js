@@ -25,6 +25,7 @@ const engine =
 	{
 		// set default
 		this.onInit = true;
+		this.debug = true;
 
 		// Scene setup
 		this.canvas = document.getElementById('renderCanvas');
@@ -42,7 +43,7 @@ const engine =
         this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
 		this.camera.attachControl(this.canvas, true);
 		this.camera.fov = BABYLON.Tools.ToRadians(60); // Tam nhin
-        this.camera.useAutoRotationBehavior = false; //tu dong xoay camera
+        this.camera.useAutoRotationBehavior = this.debug?false:true;
 
 		this.camera.angularSensibilityX = -500;
 		this.camera.angularSensibilityY = -500;
@@ -105,34 +106,36 @@ const engine =
 	// 	window.location.href = _url.toString();
 	// },
 
-	setCameraFOV(value)
+	setCameraFOV: function(value)
 	{
 		this.camera.fov = BABYLON.Tools.ToRadians(value);
 	},
 
-	setCameraType(type)
+	setCameraType: function(type)
 	{
+		if (engine.onInit)
+			return;
 		switch(type)
 		{
 			case 0: //cam thuong
 				engine.camera.position = new BABYLON.Vector3(0,0,-1);
-				engine.camera.fov = BABYLON.Tools.ToRadians(60)
+				engine.camera.fov = BABYLON.Tools.ToRadians(60);
+				engine.interfaces.FOV.slider.value = 0.5;
 				break;
-			case 1: //kien truc
-				break;
-			case 2: //mat ca
-				let pos = engine.camera.position.normalize();
+			case 1: //mat ca
 				engine.camera.position = new BABYLON.Vector3(0,0,-60);
-				engine.camera.fov = BABYLON.Tools.ToRadians(60)
-
+				engine.camera.fov = BABYLON.Tools.ToRadians(60);
+				engine.interfaces.FOV.slider.value = 0.5;
 				break;
-			case 3: //
+			case 2: //
 				engine.camera.position = new BABYLON.Vector3(0,500,0);
-				engine.camera.fov = BABYLON.Tools.ToRadians(120)
+				engine.camera.fov = BABYLON.Tools.ToRadians(120);
+				engine.interfaces.FOV.slider.value = 0;
 				break;
-			case 4:
+			case 3:
 				engine.camera.position = new BABYLON.Vector3(0,-500,0);
-				engine.camera.fov = BABYLON.Tools.ToRadians(120)
+				engine.camera.fov = BABYLON.Tools.ToRadians(120);
+				engine.interfaces.FOV.slider.value = 0;
 				break;
 		}
 	},

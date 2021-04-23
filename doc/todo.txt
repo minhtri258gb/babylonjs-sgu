@@ -24,6 +24,7 @@ location dispose element
 // Done
 
 // TODO
+remove ctrl + wheel
 BABYLON.Engine.isSupported()
 icon svg file
 upload image 360 by client

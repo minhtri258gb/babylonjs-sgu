@@ -81,6 +81,8 @@ export default class Map
 			}
 			else if (evt.buttonIndex == 2)
 			{
+				if (!engine.debug)
+					returnl;
 				// Find point in image
 				let x = ((evt.x - engine.canvas.width / 2) - (this.mat.x * this.mat.scale)) / (this.mat.imgSize * this.mat.scale) + 0.5;
 				let y = ((evt.y - engine.canvas.height / 2) - (this.mat.y * this.mat.scale)) / (this.mat.imgSize * this.mat.scale) + 0.5;
