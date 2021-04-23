@@ -14,6 +14,9 @@ export default class Language
 
 		// Change title
 		document.title = this.get('title');
+
+		// lorem ipsum
+		this.lorem = "\n\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam justo sem, mollis a iaculis sit amet, gravida luctus mi. Cras in arcu iaculis, vestibulum orci quis, vestibulum leo. In vitae ornare velit. Sed a lacus malesuada, aliquet lectus vitae, tincidunt leo. Nunc facilisis neque eleifend, volutpat ligula et, volutpat eros. Suspendisse fermentum eget augue a vulputate. Nam libero diam, placerat ac metus non, convallis vestibulum enim. Suspendisse potenti. Sed congue quam eu nunc iaculis condimentum.\n\tVivamus tempus viverra urna. Praesent vitae nulla sed elit tincidunt tincidunt. Nam vel nisi eu nisl facilisis mollis. Mauris quis enim quis turpis elementum condimentum. Nunc sit amet nisi dolor. Nam non magna diam. Phasellus convallis tellus elementum mauris molestie ultricies. Nulla sodales magna sit amet euismod blandit. Nunc nec commodo dolor. Curabitur quis luctus turpis. Etiam vulputate diam nec nisi rutrum, in aliquam ipsum viverra. Sed sed diam euismod, porttitor ante ac, accumsan mi. Nulla facilisi. Nam at lobortis purus. Nullam ullamcorper egestas lectus sed viverra.";
 	}
 
 	changeLanguage(lang)
@@ -88,23 +91,23 @@ export default class Language
 			case 'E03': return "School Field E";
 			case 'CNT': return "Nguyen Trai Gate";
 			// Infomation
-			case 'PBV': return "Security room of Saigon University";
-			case 'GXGV': return "Lecturers, officials and employees parking lots";
-			case 'ATM': return "ATM of AGRIBANK, where students can withdraw cash directly without going to the bank";
-			case 'THP': return "Tuition fees collection and scholarship receipt information place";
-			case 'KTHB': case 'KTHC': return "Self-study area, an area for students to study on by themselves, eat or take a lunch break";
-			case 'KLF': return "KLF, where students can use internet service for a certain fee";
-			case 'CT': return "School Canteen";
-			case 'KNU': return "Students drinking water area, where students can get free drinking water";
-			case 'PYT': return "Medical Room";
-			case 'CSNT': return "Back Gate";
-			case 'HGXE': case 'HGXD': return "Parking Garage";
-			case 'SBB': return "Table tennis field";
-			case 'SCL': return "Badminton field";
-			case 'SBR': return "Basketball field";
-			case 'SBD': return "Soccer field";
-			case 'GXI': return "Parking Lot Entrance";
-			case 'GXO': return "Parking Lot Exit";
+			case 'PBV': return "Security room of Saigon University."+this.lorem;
+			case 'GXGV': return "Lecturers, officials and employees parking lots."+this.lorem;
+			case 'ATM': return "ATM of AGRIBANK, where students can withdraw cash directly without going to the bank."+this.lorem;
+			case 'THP': return "Tuition fees collection and scholarship receipt information place."+this.lorem;
+			case 'KTHB': case 'KTHC': return "Self-study area, an area for students to study on by themselves, eat or take a lunch break."+this.lorem;
+			case 'KLF': return "KLF, where students can use internet service for a certain fee."+this.lorem;
+			case 'CT': return "School Canteen."+this.lorem;
+			case 'KNU': return "Students drinking water area, where students can get free drinking water."+this.lorem;
+			case 'PYT': return "Medical Room."+this.lorem;
+			case 'CSNT': return "Back Gate."+this.lorem;
+			case 'HGXE': case 'HGXD': return "Parking Garage."+this.lorem;
+			case 'SBB': return "Table tennis field."+this.lorem;
+			case 'SCL': return "Badminton field."+this.lorem;
+			case 'SBR': return "Basketball field."+this.lorem;
+			case 'SBD': return "Soccer field."+this.lorem;
+			case 'GXI': return "Parking Lot Entrance."+this.lorem;
+			case 'GXO': return "Parking Lot Exit."+this.lorem;
 		}
 		return 'Unavailable';
 	}
@@ -162,23 +165,23 @@ export default class Language
 			case 'E03': return "Sân E";
 			case 'CNT': return "Cổng Nguyễn Trãi";
 			// Infomation
-			case 'PBV': return "Phòng bảo vệ của trường Đại học Sài Gòn";
-			case 'GXGV': return "Nhà xe giảng viên, cán bộ nhà trường";
-			case 'ATM': return "Trụ ATM ngân hàng AGRIBANK, nơi sinh viên có thể rút tiền mặt trực tiếp mà không cần ra ngân hàng";
-			case 'THP': return "Điểm thu học phí trực tiếp và gửi thông tin nhận học bổng";
-			case 'KTHB': case 'KTHC': return "Khu tự học, một khu vực dành cho sinh viên có thể tự học, ăn uống hoặc nghỉ trưa";
-			case 'KLF': return "KLF, nơi sinh viên có thể sử dụng dịch vụ internet với phí nhất định";
-			case 'CT': return "Căn tin trường";
-			case 'KNU': return "Khu vực nước uống sinh viên, nơi sinh viên có thể lấy nước uống miễn phí";
-			case 'PYT': return "Phòng y tế";
-			case 'CSNT': return "Cổng sau";
-			case 'HGXE': case 'HGXD': return "Hầm gửi xe";
-			case 'SBB': return "Sân bóng bàn";
-			case 'SCL': return "Sân cầu lông";
-			case 'SBR': return "Sân bóng rổ";
-			case 'SBD': return "Sân bóng đá";
-			case 'GXI': return "Điểm vào bãi gửi xe";
-			case 'GXO': return "Điểm ra xe";
+			case 'PBV': return "Phòng bảo vệ của trường Đại học Sài Gòn."+this.lorem;
+			case 'GXGV': return "Nhà xe giảng viên, cán bộ nhà trường."+this.lorem;
+			case 'ATM': return "Trụ ATM ngân hàng AGRIBANK, nơi sinh viên có thể rút tiền mặt trực tiếp mà không cần ra ngân hàng."+this.lorem;
+			case 'THP': return "Điểm thu học phí trực tiếp và gửi thông tin nhận học bổng."+this.lorem;
+			case 'KTHB': case 'KTHC': return "Khu tự học, một khu vực dành cho sinh viên có thể tự học, ăn uống hoặc nghỉ trưa."+this.lorem;
+			case 'KLF': return "KLF, nơi sinh viên có thể sử dụng dịch vụ internet với phí nhất định."+this.lorem;
+			case 'CT': return "Căn tin trường."+this.lorem;
+			case 'KNU': return "Khu vực nước uống sinh viên, nơi sinh viên có thể lấy nước uống miễn phí."+this.lorem;
+			case 'PYT': return "Phòng y tế."+this.lorem;
+			case 'CSNT': return "Cổng sau."+this.lorem;
+			case 'HGXE': case 'HGXD': return "Hầm gửi xe."+this.lorem;
+			case 'SBB': return "Sân bóng bàn."+this.lorem;
+			case 'SCL': return "Sân cầu lông."+this.lorem;
+			case 'SBR': return "Sân bóng rổ."+this.lorem;
+			case 'SBD': return "Sân bóng đá."+this.lorem;
+			case 'GXI': return "Điểm vào bãi gửi xe."+this.lorem;
+			case 'GXO': return "Điểm ra xe."+this.lorem;
 		}
 		return 'Không Có Sẵn';
 	}
