@@ -53,7 +53,7 @@ export default class MainMenu
 		this.rectInstruction.top = "-150px";
 		this.rectInstruction.cornerRadius = 10;
 		this.rectInstruction.color = "transparent";
-		this.rectInstruction.alpha = 0.5;
+		this.rectInstruction.alpha = 0.7;
 		this.rectInstruction.background = "black";
 		this.rectInstruction.isPointerBlocker = false;
 		this.rectMain.addControl(this.rectInstruction);
@@ -88,7 +88,14 @@ export default class MainMenu
 		this.btnStart.background = "#23272a";
 		this.btnStart.color = "white";
 		this.btnStart.thickness = 1;
-		this.btnStart.onPointerClickObservable.add(() => {	
+		this.btnStart.onPointerClickObservable.add(() => {
+			// Add location get param
+			let url = new URL(window.location.href);
+			let param = url.searchParams;
+			param.set("location", "CADV");
+			url.search = param.toString();
+			history.pushState({}, null, url.toString());
+			// Hide Menu
 			BABYLON.Animation.CreateAndStartAnimation("MenuHidden", this.rectMain, "alpha", 60, 60, 1, 0, 0);	
 			setTimeout(() => {
 				engine.animation.animTextStart(false);

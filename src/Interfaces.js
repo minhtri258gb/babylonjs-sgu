@@ -16,6 +16,7 @@ export default class Interfaces
 		this.initFOV();
 		this.initMenuNav();
 		this.initAreaNav();
+		this.initSound();
 		this.initSettings();
 		this.initRectBlock();
 		this.initInfoPanel();
@@ -37,7 +38,7 @@ export default class Interfaces
 		engine.advancedTexture.addControl(this.logoNav.container);
 
 		//Nut logo ve trang SGU
-		this.logoNav.btnLogo = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/logo.png");
+		this.logoNav.btnLogo = new BABYLON.GUI.Button.CreateImageOnlyButton("btnLogo", "./asset/logo.png");
 		if (detectMobile())
 		{
 			this.logoNav.btnLogo.width = "60px";
@@ -60,7 +61,7 @@ export default class Interfaces
 
 
 		//Nut ngon ngu Viet Nam
-		this.logoNav.btnLangVi = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/vi-flag.png");
+		this.logoNav.btnLangVi = new BABYLON.GUI.Button.CreateImageOnlyButton("btnLangVi", "./asset/vi-flag.png");
 		this.logoNav.btnLangVi.width = "30px";
 		this.logoNav.btnLangVi.height = "20px";
 		this.logoNav.btnLangVi.color = "transparent";
@@ -74,7 +75,7 @@ export default class Interfaces
 		this.logoNav.container.addControl(this.logoNav.btnLangVi);
 
 		//Nut ngon ngu English
-		this.logoNav.btnLangEn = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/uk-flag.png");
+		this.logoNav.btnLangEn = new BABYLON.GUI.Button.CreateImageOnlyButton("btnLangEn", "./asset/uk-flag.png");
 		this.logoNav.btnLangEn.width = "30px";
 		this.logoNav.btnLangEn.height = "20px";
 		this.logoNav.btnLangEn.color = "transparent";
@@ -113,7 +114,7 @@ export default class Interfaces
 		this.FOV.slider.color = this.isDark?"#23272A":"#DEE4E7";
 		this.FOV.slider.thumbColor = this.isDark?"#DEE4E7":"#23272A";
 		this.FOV.slider.background = this.isDark?"#23272A":"#DEE4E7";	    
-		this.FOV.slider.height = "25px";
+		this.FOV.slider.height = "20px";
 		this.FOV.slider.width = "130px";
 		//this.FOV.slider.thumbWidth = "20px"
 		this.FOV.slider.rotation = -Math.PI/2;
@@ -124,8 +125,8 @@ export default class Interfaces
 
 
 		this.FOV.btnPlus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", "./asset/icon/"+(this.isDark?"dark":"light")+"/fov_plus.png");
-		this.FOV.btnPlus.width = "30px";
-		this.FOV.btnPlus.height = "30px";
+		this.FOV.btnPlus.width = "24px";
+		this.FOV.btnPlus.height = "24px";
 		this.FOV.btnPlus.color = "transparent";
 		this.FOV.btnPlus.hoverCursor = "pointer";
 		this.FOV.btnPlus.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;        
@@ -135,8 +136,8 @@ export default class Interfaces
 		this.FOV.container.addControl(this.FOV.btnPlus);
 		
 		this.FOV.btnMinus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnMinus", "./asset/icon/"+(this.isDark?"dark":"light")+"/fov_minus.png");
-		this.FOV.btnMinus.width = "30px";
-		this.FOV.btnMinus.height = "30px";
+		this.FOV.btnMinus.width = "24px";
+		this.FOV.btnMinus.height = "24px";
 		this.FOV.btnMinus.color = "transparent";
 		this.FOV.btnMinus.hoverCursor = "pointer";
 		this.FOV.btnMinus.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
@@ -150,11 +151,24 @@ export default class Interfaces
 
 	initMenuNav()
 	{
+		this.rectMenu = new BABYLON.GUI.Rectangle();
+		this.rectMenu.width = "285px";
+		this.rectMenu.height = "60px";
+		this.rectMenu.top = "10px";
+		this.rectMenu.left = "15px";
+		this.rectMenu.cornerRadius = 10;
+		this.rectMenu.background = this.isDark?"#23272A":"#DEE4E7";
+		this.rectMenu.color = "transparent";
+		this.rectMenu.alpha = 0.7;
+		this.rectMenu.verticalAlignment = 1;
+		this.rectMenu.horizontalAlignment = 1;
+		engine.advancedTexture.addControl(this.rectMenu);
+
 		//StackPanel cho Menu (phai/duoi)
 		this.panel = new BABYLON.GUI.StackPanel();
 		this.panel.isVertical = false;
 		//this.panel.width = "240px";
-		this.panel.height = "160px";
+		this.panel.height = "120px";
 		this.panel.horizontalAlignment = 1;//BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 		this.panel.verticalAlignment = 1;
 		this.panel.zIndex = 2;
@@ -165,8 +179,8 @@ export default class Interfaces
 		//Nut an/hien UI
 		this.btnUI = {};
 		this.btnUI.btn = new BABYLON.GUI.Button();
-		this.btnUI.btn.width = "55px";
-		this.btnUI.btn.height = "35px";
+		this.btnUI.btn.width = "44px";
+		this.btnUI.btn.height = "24px";
 		this.btnUI.btn.paddingRight = "10px";
 		this.btnUI.btn.paddingLeft = "10px";
 		this.btnUI.btn.top = "30%";
@@ -174,9 +188,9 @@ export default class Interfaces
 		this.btnUI.btn.background = "transparent";
 		this.btnUI.btn.hoverCursor = "pointer";
 		this.btnUI.btn.zIndex = 2;    
-		this.btnUI.imgUIOn = new BABYLON.GUI.Image("imgUIOn","./asset/icon/"+(this.isDark?"dark":"light")+"/eye_on.png");
+		this.btnUI.imgUIOn = new BABYLON.GUI.Image("imgUIOn","./asset/icon/"+(this.isDark?"light":"dark")+"/eye_on.png");
 		this.btnUI.btn.addControl(this.btnUI.imgUIOn);
-		this.btnUI.imgUIOff = new BABYLON.GUI.Image("imgUIOff","./asset/icon/"+(this.isDark?"dark":"light")+"/eye_off.png");
+		this.btnUI.imgUIOff = new BABYLON.GUI.Image("imgUIOff","./asset/icon/"+(this.isDark?"light":"dark")+"/eye_off.png");
 		this.btnUI.imgUIOff.isVisible = false;
 		this.btnUI.btn.addControl(this.btnUI.imgUIOff);
 		this.btnUI.btn.onPointerClickObservable.add(() => {
@@ -195,6 +209,7 @@ export default class Interfaces
 				engine.animation.fadeAnimOut(this.logoNav.container);
 				engine.animation.fadeAnimOut(this.settings.container);			
 				engine.animation.fadeAnimOut(this.areaNav.container);
+				engine.animation.fadeAnimOut(this.rectSound);
 				
 				setTimeout(() => {
 				this.btnFullScreen.btn.isVisible = false;
@@ -206,11 +221,12 @@ export default class Interfaces
 				this.logoNav.container.isVisible = false;
 				this.settings.container.isVisible = false;
 				this.areaNav.container.isVisible = false;
+				this.rectSound.isVisible = false;
+				this.rectMenu.width = "60px";   
 				}, 400);
-				//----add link
-
+				//----
+				
 				engine.map.showMiniMap(false);
-
 				for (let i=0; i<engine.loc.link.length; i++)
 				{
 					engine.animation.fadeAnimOut(engine.loc.link[i].button);
@@ -225,7 +241,8 @@ export default class Interfaces
 					setTimeout(() => {
 					engine.loc.info[i].button.isVisible = false;
 					}, 400);  
-				}   		
+				}
+						
 			}
 			else
 			{
@@ -240,6 +257,7 @@ export default class Interfaces
 				this.logoNav.container.isVisible = true;
 				this.settings.container.isVisible = true;
 				this.areaNav.container.isVisible = true;
+				this.rectSound.isVisible = true;
 
 				engine.animation.fadeAnimIn(this.btnFullScreen.btn);
 				engine.animation.fadeAnimIn(this.btnSetting.btn);
@@ -250,11 +268,11 @@ export default class Interfaces
 				engine.animation.fadeAnimIn(this.logoNav.container);
 				engine.animation.fadeAnimIn(this.settings.container);
 				engine.animation.fadeAnimIn(this.areaNav.container);
-				
+				engine.animation.fadeAnimIn(this.rectSound);
+				this.rectMenu.width = "285px"; 
+				//----
 
-				//----add link
 				engine.map.showMiniMap(true);
-
 				for (let i=0; i<engine.loc.link.length; i++)
 				{                    
 					engine.loc.link[i].button.isVisible = true; 
@@ -265,7 +283,8 @@ export default class Interfaces
 				{                    
 					engine.loc.info[i].button.isVisible = true; 
 					engine.animation.fadeAnimIn(engine.loc.info[i].button);
-				}       		
+				}
+				         		
 			}
 		});
 		this.panel.addControl(this.btnUI.btn);
@@ -274,8 +293,8 @@ export default class Interfaces
 		//Nut fullscreen
 		this.btnFullScreen = {};
 		this.btnFullScreen.btn = new BABYLON.GUI.Button();
-		this.btnFullScreen.btn.width = "55px";
-		this.btnFullScreen.btn.height = "35px";
+		this.btnFullScreen.btn.width = "44px";
+		this.btnFullScreen.btn.height = "24px";
 		this.btnFullScreen.btn.paddingRight = "10px";
 		this.btnFullScreen.btn.paddingLeft = "10px";
 		this.btnFullScreen.btn.top = "30%"
@@ -283,9 +302,9 @@ export default class Interfaces
 		this.btnFullScreen.btn.color = "transparent"
 		this.btnFullScreen.btn.hoverCursor = "pointer";
 		this.btnFullScreen.btn.zIndex = 2;       
-		this.btnFullScreen.imgFullScreenOn = new BABYLON.GUI.Image("imgFullScreenOn","./asset/icon/"+(this.isDark?"dark":"light")+"/fullscreen_on.png");
+		this.btnFullScreen.imgFullScreenOn = new BABYLON.GUI.Image("imgFullScreenOn","./asset/icon/"+(this.isDark?"light":"dark")+"/fullscreen_on.png");
 		this.btnFullScreen.btn.addControl(this.btnFullScreen.imgFullScreenOn);
-		this.btnFullScreen.imgFullScreenOff = new BABYLON.GUI.Image("imgFullScreenOff","./asset/icon/"+(this.isDark?"dark":"light")+"/fullscreen_off.png");
+		this.btnFullScreen.imgFullScreenOff = new BABYLON.GUI.Image("imgFullScreenOff","./asset/icon/"+(this.isDark?"light":"dark")+"/fullscreen_off.png");
 		this.btnFullScreen.imgFullScreenOff.isVisible = false;
 		this.btnFullScreen.btn.addControl(this.btnFullScreen.imgFullScreenOff);
 		this.btnFullScreen.btn.onPointerClickObservable.add(() => {
@@ -311,8 +330,8 @@ export default class Interfaces
 		//Nut setting
 		this.btnSetting = {};
 		this.btnSetting.btn = new BABYLON.GUI.Button();
-		this.btnSetting.btn.width = "55px";
-		this.btnSetting.btn.height = "35px";
+		this.btnSetting.btn.width = "44px";
+		this.btnSetting.btn.height = "24px";
 		this.btnSetting.btn.paddingRight = "10px";
 		this.btnSetting.btn.paddingLeft = "10px";
 		this.btnSetting.btn.top = "30%";
@@ -320,93 +339,18 @@ export default class Interfaces
 		this.btnSetting.btn.background = "transparent";
 		this.btnSetting.btn.hoverCursor = "pointer";
 		this.btnSetting.btn.zIndex = 2;        
-		this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/"+(this.isDark?"dark":"light")+"/setting.png");
+		this.btnSetting.imgSetting = new BABYLON.GUI.Image("imgSetting","./asset/icon/"+(this.isDark?"light":"dark")+"/setting.png");
 		this.btnSetting.btn.addControl(this.btnSetting.imgSetting);
 		this.btnSetting.btn.onPointerClickObservable.add(() => {
 			this.showSettingPanel(!this.settings.isShow);
 		});
 		this.panel.addControl(this.btnSetting.btn);
-	   
-		//Thanh sound
+
+		//Nut sound
 		this.btnSound = {};
-		this.btnSound.slider = new BABYLON.GUI.Slider();
-		this.btnSound.slider.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-		this.btnSound.slider.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-		this.btnSound.slider.minimum = 0;
-		this.btnSound.slider.maximum = 1;
-		this.btnSound.slider.value = 0;
-		this.btnSound.slider.color = "black";
-		this.btnSound.slider.isThumbClamped = true;
-		this.btnSound.slider.isThumbCircle = true;
-		this.btnSound.slider.hoverCursor = "grab";
-		this.btnSound.slider.isPointerBlocker = true;
-		this.btnSound.slider.thumbColor = this.isDark?"#DEE4E7":"#23272A";	
-		this.btnSound.slider.background = this.isDark?"#777777":"#ccc1bf";	
-		this.btnSound.slider.color = this.isDark?"#23272A":"#DEE4E7";
-		this.btnSound.slider.height = "25px";
-		this.btnSound.slider.width = "120px";
-		this.btnSound.slider.top = "-100px"
-		this.btnSound.slider.left = "-133px"
-		this.btnSound.slider.rotation = -Math.PI/2;
-		this.btnSound.slider.isVisible = false;
-		this.btnSound.slider.zIndex = 2;
-		this.btnSound.slider.onPointerMoveObservable.add(() => {
-			this.btnSound.slider.isVisible = true;
-		});
-		this.btnSound.slider.onPointerOutObservable.add(() => {
-			this.btnSound.slider.isVisible = false;
-		});
-		this.btnSound.slider.onValueChangedObservable.add((evt) => {
-			engine.music.setVolume(evt);
-
-			if (evt > 0.66)
-			{
-				if (!this.btnSound.imgSoundOn3.isVisible)
-				{
-					this.btnSound.imgSoundOn3.isVisible = true;
-					this.btnSound.imgSoundOn2.isVisible = false;
-					this.btnSound.imgSoundOn1.isVisible = false;
-					this.btnSound.imgSoundOff.isVisible = false;
-				}
-			}
-			else if (evt > 0.33)
-			{
-				if (!this.btnSound.imgSoundOn2.isVisible)
-				{
-					this.btnSound.imgSoundOn3.isVisiblep = false;
-					this.btnSound.imgSoundOn2.isVisible = true;
-					this.btnSound.imgSoundOn1.isVisible = false;
-					this.btnSound.imgSoundOff.isVisible = false;
-				}
-			}
-			else if (evt > 0)
-			{
-				if (!this.btnSound.imgSoundOn1.isVisible)
-				{
-					this.btnSound.imgSoundOn3.isVisible = false;
-					this.btnSound.imgSoundOn2.isVisible = false;
-					this.btnSound.imgSoundOn1.isVisible = true;
-					this.btnSound.imgSoundOff.isVisible = false;
-				}
-			}
-			else
-			{
-				if (!this.btnSound.imgSoundOff.isVisible)
-				{
-					this.btnSound.imgSoundOn3.isVisible = false;
-					this.btnSound.imgSoundOn2.isVisible = false;
-					this.btnSound.imgSoundOn1.isVisible = false;
-					this.btnSound.imgSoundOff.isVisible = true;
-				}
-			}
-		});
-		engine.advancedTexture.addControl(this.btnSound.slider);
-
-
-		//Nut sound   
 		this.btnSound.btn = new BABYLON.GUI.Button();
-		this.btnSound.btn.width = "55px";
-		this.btnSound.btn.height = "35px";
+		this.btnSound.btn.width = "44px";
+		this.btnSound.btn.height = "24px";
 		this.btnSound.btn.paddingRight = "10px";
 		this.btnSound.btn.paddingLeft = "10px";
 		this.btnSound.btn.top = "30%";
@@ -414,64 +358,27 @@ export default class Interfaces
 		this.btnSound.btn.background = "transparent";
 		this.btnSound.btn.hoverCursor = "pointer";
 		this.btnSound.btn.zIndex = 2;       
-		this.btnSound.imgSoundOn1 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"dark":"light")+"/sound_on1.png");
+		this.btnSound.imgSoundOn1 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_on1.png");
 		this.btnSound.imgSoundOn1.isVisible = false;
 		this.btnSound.btn.addControl(this.btnSound.imgSoundOn1);
-		this.btnSound.imgSoundOn2 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"dark":"light")+"/sound_on2.png");
+		this.btnSound.imgSoundOn2 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_on2.png");
 		this.btnSound.imgSoundOn2.isVisible = false;
 		this.btnSound.btn.addControl(this.btnSound.imgSoundOn2);
-		this.btnSound.imgSoundOn3 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"dark":"light")+"/sound_on3.png");
+		this.btnSound.imgSoundOn3 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_on3.png");
 		this.btnSound.imgSoundOn3.isVisible = false;
 		this.btnSound.btn.addControl(this.btnSound.imgSoundOn3);
-		this.btnSound.imgSoundOff = new BABYLON.GUI.Image("imgSoundOff","./asset/icon/"+(this.isDark?"dark":"light")+"/sound_off.png");
+		this.btnSound.imgSoundOff = new BABYLON.GUI.Image("imgSoundOff","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_off.png");
 		this.btnSound.btn.addControl(this.btnSound.imgSoundOff);
 		this.btnSound.btn.onPointerClickObservable.add(() => {
-			//TODO
-			if (this.btnSound.imgSoundOff.isVisible === false) // turn off
-			{
-				
-				this.btnSound.imgSoundOff.isVisible = true;
-				this.btnSound.imgSoundOn3.isVisible = false;
-				this.btnSound.imgSoundOn2.isVisible = false;
-				this.btnSound.imgSoundOn1.isVisible = false;
-				this.btnSound.slider.value = 0;
-				engine.music.turn(false);
-			}
-			else  // turn on
-			{
-				this.btnSound.imgSoundOff.isVisible = false;
-				this.btnSound.slider.value = engine.music.volume;
-
-				if (this.btnSound.slider.value > 0.66)		
-					this.btnSound.imgSoundOn3.isVisible = true;
-				else if (this.btnSound.slider.value > 0.33)
-					this.btnSound.imgSoundOn2.isVisible = true;
-				else if (this.btnSound.slider.value > 0)
-					this.btnSound.imgSoundOn1.isVisible = true;
-
-				engine.music.turn(true);
-			}
-		});
-		this.btnSound.btn.onPointerMoveObservable.add(() => {
-			this.btnSound.slider.isVisible = true;       	
-		});
-
-
-		this.btnSound.btn.onPointerOutObservable.add(() => {
-			setTimeout(() => {
-				//if()
-				this.btnSound.slider.isVisible = false;
-			},3000);            
+			this.showSoundPanel(!this.rectSound.isShow);
 		});
 		this.panel.addControl(this.btnSound.btn);
-
-
 
 		//Nut bat/tat tu xoay
 		this.btnRotation = {};
 		this.btnRotation.btn = new BABYLON.GUI.Button();
-		this.btnRotation.btn.width = "55px";
-		this.btnRotation.btn.height = "35px";
+		this.btnRotation.btn.width = "44px";
+		this.btnRotation.btn.height = "24px";
 		this.btnRotation.btn.paddingRight = "10px";
 		this.btnRotation.btn.paddingLeft = "10px";
 		this.btnRotation.btn.top = "30%";
@@ -479,9 +386,9 @@ export default class Interfaces
 		this.btnRotation.btn.background = "transparent";
 		this.btnRotation.btn.hoverCursor = "pointer";
 		this.btnRotation.btn.zIndex = 2; 
-		this.btnRotation.imgRotationOn = new BABYLON.GUI.Image("imgRotationOn","./asset/icon/"+(this.isDark?"dark":"light")+"/rotation_on.png");
+		this.btnRotation.imgRotationOn = new BABYLON.GUI.Image("imgRotationOn","./asset/icon/"+(this.isDark?"light":"dark")+"/rotation_on.png");
 		this.btnRotation.btn.addControl(this.btnRotation.imgRotationOn);
-		this.btnRotation.imgRotationOff = new BABYLON.GUI.Image("imgRotationOff","./asset/icon/"+(this.isDark?"dark":"light")+"/rotation_off.png");
+		this.btnRotation.imgRotationOff = new BABYLON.GUI.Image("imgRotationOff","./asset/icon/"+(this.isDark?"light":"dark")+"/rotation_off.png");
 		this.btnRotation.imgRotationOff.isVisible = false;
 		this.btnRotation.btn.addControl(this.btnRotation.imgRotationOff);
 		this.btnRotation.btn.onPointerClickObservable.add(() => {
@@ -501,12 +408,11 @@ export default class Interfaces
 		});
 		this.panel.addControl(this.btnRotation.btn);
 
-
 		//Nut mo map
 		this.btnMap = {};
 		this.btnMap.btn = new BABYLON.GUI.Button();
-		this.btnMap.btn.width = "55px";
-		this.btnMap.btn.height = "35px";
+		this.btnMap.btn.width = "44px";
+		this.btnMap.btn.height = "24px";
 		this.btnMap.btn.paddingRight = "10px";
 		this.btnMap.btn.paddingLeft = "10px";
 		this.btnMap.btn.top = "30%";
@@ -514,7 +420,7 @@ export default class Interfaces
 		this.btnMap.btn.background = "transparent";
 		this.btnMap.btn.hoverCursor = "pointer";
 		this.btnMap.btn.zIndex = 2;       
-		this.btnMap.imgMap = new BABYLON.GUI.Image("imgMap","./asset/icon/"+(this.isDark?"dark":"light")+"/map.png");
+		this.btnMap.imgMap = new BABYLON.GUI.Image("imgMap","./asset/icon/"+(this.isDark?"light":"dark")+"/map.png");
 		this.btnMap.btn.addControl(this.btnMap.imgMap);
 		this.btnMap.btn.isPointerBlocker = true;
 		this.btnMap.btn.onPointerClickObservable.add(() => {
@@ -526,9 +432,166 @@ export default class Interfaces
 		});
 		this.panel.addControl(this.btnMap.btn);
 
-
-
 		this.panel.children.reverse();  //Reverse panel ĐỂ CUỐI PANEL!!!
+	}
+
+	initSound()
+	{
+		//Thanh sound
+		this.rectSound = new BABYLON.GUI.Rectangle();
+		this.rectSound.isShow = false;  
+		this.rectSound.width = "285px";
+		this.rectSound.height = "60px";
+		this.rectSound.top = "-70px";
+		this.rectSound.left = "400px";
+		this.rectSound.cornerRadius = 10;
+		this.rectSound.background = this.isDark?"#23272A":"#DEE4E7";
+		this.rectSound.color = "transparent";
+		this.rectSound.alpha = 1;
+		this.rectSound.verticalAlignment = 1;
+		this.rectSound.horizontalAlignment = 1;
+		this.rectSound.isPointerBlocker = true;
+		this.rectSound.zIndex = 2;
+		engine.advancedTexture.addControl(this.rectSound);
+		
+		this.sliderSound = new BABYLON.GUI.Slider();
+		this.sliderSound.minimum = 0;
+		this.sliderSound.maximum = 1;
+		this.sliderSound.value = 0;
+		this.sliderSound.color = "black";
+		this.sliderSound.isThumbClamped = true;
+		this.sliderSound.isThumbCircle = true;
+		this.sliderSound.hoverCursor = "grab";
+		this.sliderSound.thumbColor = this.isDark?"#DEE4E7":"#23272A";	
+		this.sliderSound.background = this.isDark?"#777777":"#ccc1bf";	
+		this.sliderSound.color = this.isDark?"#FFFFFF":"#000000";
+		this.sliderSound.height = "20px";
+		this.sliderSound.width = "205px";
+		this.sliderSound.left = "10px"
+		//this.sliderSound.thumbWidth = "1px";
+		this.sliderSound.isVisible = true;
+		this.sliderSound.zIndex = 2;
+		this.sliderSound.onPointerMoveObservable.add(() => {
+			this.sliderSound.thumbColor = "blue";
+		});
+		this.sliderSound.onPointerOutObservable.add(() => {
+			this.sliderSound.thumbColor = this.isDark?"#DEE4E7":"#23272A";	
+		});
+		this.sliderSound.onValueChangedObservable.add((evt) => {
+			engine.music.setVolume(evt);
+
+			if (evt > 0.66)
+			{
+				if (!this.btnSound.imgSoundOn3.isVisible)
+				{
+					this.btnSound.imgSoundOn3.isVisible = true;
+					this.btnSound.imgSoundOn2.isVisible = false;
+					this.btnSound.imgSoundOn1.isVisible = false;
+					this.btnSound.imgSoundOff.isVisible = false;
+
+					this.btnSoundControl.imgSoundOn3.isVisible = true;
+					this.btnSoundControl.imgSoundOn2.isVisible = false;
+					this.btnSoundControl.imgSoundOn1.isVisible = false;
+					this.btnSoundControl.imgSoundOff.isVisible = false;
+				}
+			}
+			else if (evt > 0.33)
+			{
+				if (!this.btnSound.imgSoundOn2.isVisible)
+				{
+					this.btnSound.imgSoundOn3.isVisible = false;
+					this.btnSound.imgSoundOn2.isVisible = true;
+					this.btnSound.imgSoundOn1.isVisible = false;
+					this.btnSound.imgSoundOff.isVisible = false;
+
+					this.btnSoundControl.imgSoundOn3.isVisible = false;
+					this.btnSoundControl.imgSoundOn2.isVisible = true;
+					this.btnSoundControl.imgSoundOn1.isVisible = false;
+					this.btnSoundControl.imgSoundOff.isVisible = false;
+				}
+			}
+			else if (evt > 0)
+			{
+				if (!this.btnSound.imgSoundOn1.isVisible)
+				{
+					this.btnSound.imgSoundOn3.isVisible = false;
+					this.btnSound.imgSoundOn2.isVisible = false;
+					this.btnSound.imgSoundOn1.isVisible = true;
+					this.btnSound.imgSoundOff.isVisible = false;
+
+					this.btnSoundControl.imgSoundOn3.isVisible = false;
+					this.btnSoundControl.imgSoundOn2.isVisible = false;
+					this.btnSoundControl.imgSoundOn1.isVisible = true;
+					this.btnSoundControl.imgSoundOff.isVisible = false;
+				}
+			}
+			else
+			{
+				if (!this.btnSound.imgSoundOff.isVisible)
+				{
+					this.btnSound.imgSoundOn3.isVisible = false;
+					this.btnSound.imgSoundOn2.isVisible = false;
+					this.btnSound.imgSoundOn1.isVisible = false;
+					this.btnSound.imgSoundOff.isVisible = true;
+
+					this.btnSoundControl.imgSoundOn3.isVisible = false;
+					this.btnSoundControl.imgSoundOn2.isVisible = false;
+					this.btnSoundControl.imgSoundOn1.isVisible = false;
+					this.btnSoundControl.imgSoundOff.isVisible = true;
+				}
+			}
+		});
+		this.rectSound.addControl(this.sliderSound);
+
+		this.btnSoundControl = new BABYLON.GUI.Button();
+		this.btnSoundControl.width = "44px";
+		this.btnSoundControl.height = "24px";
+		this.btnSoundControl.paddingRight = "10px";
+		this.btnSoundControl.paddingLeft = "10px";
+		this.btnSoundControl.left = "-40%";
+		this.btnSoundControl.color = "transparent";
+		this.btnSoundControl.background = "transparent";
+		this.btnSoundControl.hoverCursor = "pointer";
+		this.btnSoundControl.zIndex = 2;       
+		this.btnSoundControl.imgSoundOn1 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_on1.png");
+		this.btnSoundControl.imgSoundOn1.isVisible = false;
+		this.btnSoundControl.addControl(this.btnSoundControl.imgSoundOn1);
+		this.btnSoundControl.imgSoundOn2 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_on2.png");
+		this.btnSoundControl.imgSoundOn2.isVisible = false;
+		this.btnSoundControl.addControl(this.btnSoundControl.imgSoundOn2);
+		this.btnSoundControl.imgSoundOn3 = new BABYLON.GUI.Image("imgSoundOn","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_on3.png");
+		this.btnSoundControl.imgSoundOn3.isVisible = false;
+		this.btnSoundControl.addControl(this.btnSoundControl.imgSoundOn3);
+		this.btnSoundControl.imgSoundOff = new BABYLON.GUI.Image("imgSoundOff","./asset/icon/"+(this.isDark?"light":"dark")+"/sound_off.png");
+		this.btnSoundControl.addControl(this.btnSoundControl.imgSoundOff);
+		this.btnSoundControl.onPointerClickObservable.add(() => {
+			//TODO
+			if (this.btnSoundControl.imgSoundOff.isVisible === false) // turn off
+			{
+				
+				this.btnSoundControl.imgSoundOff.isVisible = true;
+				this.btnSoundControl.imgSoundOn3.isVisible = false;
+				this.btnSoundControl.imgSoundOn2.isVisible = false;
+				this.btnSoundControl.imgSoundOn1.isVisible = false;
+				this.sliderSound.value = 0;
+				engine.music.turn(false);
+			}
+			else  // turn on
+			{
+				this.btnSoundControl.imgSoundOff.isVisible = false;
+				this.sliderSound.value = engine.music.volume;
+
+				if (this.sliderSound.value > 0.66)		
+					this.btnSoundControl.imgSoundOn3.isVisible = true;
+				else if (this.sliderSound.value > 0.33)
+					this.btnSoundControl.imgSoundOn2.isVisible = true;
+				else if (this.sliderSound.value > 0)
+					this.btnSoundControl.imgSoundOn1.isVisible = true;
+
+				engine.music.turn(true);
+			}
+		});
+		this.rectSound.addControl(this.btnSoundControl);
 	}
 
 	initSettings()
@@ -664,12 +727,13 @@ export default class Interfaces
 		this.areaNav.btn.color = this.isDark?"#23272a":"#DEE4E7";
 		this.areaNav.btn.verticalAlignment = -1;
 		this.areaNav.btn.hoverCursor = "pointer";
-		//this.areaNav.btn.cornerRadius = 2;
+		this.areaNav.btn.background = this.isDark?"#23272a":"#DEE4E7";;
+		this.areaNav.btn.alpha = 0.8;
 		this.areaNav.btn.thickness = 2;
-		this.areaNav.imgArrowOpen = new BABYLON.GUI.Image("imgArrowOpen","./asset/icon/"+(this.isDark?"dark":"light")+"/double_arrow_up.png");
+		this.areaNav.imgArrowOpen = new BABYLON.GUI.Image("imgArrowOpen","./asset/icon/"+(this.isDark?"light":"dark")+"/double_arrow_up.png");
 		this.areaNav.imgArrowOpen.width = "40px";
 		this.areaNav.btn.addControl(this.areaNav.imgArrowOpen);
-		this.areaNav.imgArrowClose = new BABYLON.GUI.Image("imgArrowClose","./asset/icon/"+(this.isDark?"dark":"light")+"/double_arrow_down.png");
+		this.areaNav.imgArrowClose = new BABYLON.GUI.Image("imgArrowClose","./asset/icon/"+(this.isDark?"light":"dark")+"/double_arrow_down.png");
 		this.areaNav.imgArrowClose.width = "40px";
 		this.areaNav.imgArrowClose.isVisible = false;
 		this.areaNav.btn.addControl(this.areaNav.imgArrowClose);
@@ -985,8 +1049,10 @@ export default class Interfaces
 			this.FOV.container.isVisible = true;	
 			this.logoNav.container.isVisible = true;	
 			this.settings.container.isVisible = true;	
-			this.areaNav.container.isVisible = true;	
-			
+			this.areaNav.container.isVisible = true;
+			this.rectMenu.isVisible = true;
+			this.rectSound.isVisible = true;
+
 
 			engine.animation.fadeAnimIn(this.btnUI.btn);
 			engine.animation.fadeAnimIn(this.btnFullScreen.btn);
@@ -998,6 +1064,8 @@ export default class Interfaces
 			engine.animation.fadeAnimIn(this.logoNav.container);
 			engine.animation.fadeAnimIn(this.settings.container);
 			engine.animation.fadeAnimIn(this.areaNav.container);
+			engine.animation.fadeAnimIn(this.rectMenu);
+			engine.animation.fadeAnimIn(this.rectSound);
 			engine.map.showMiniMap(true);
 			
 			
@@ -1024,6 +1092,8 @@ export default class Interfaces
 			engine.animation.fadeAnimOut(this.logoNav.container);
 			engine.animation.fadeAnimOut(this.settings.container);
 			engine.animation.fadeAnimOut(this.areaNav.container);
+			engine.animation.fadeAnimOut(this.rectMenu);
+			engine.animation.fadeAnimOut(this.rectSound);
 			
 			setTimeout(() => {			
 				this.btnUI.btn.isVisible = false;
@@ -1036,6 +1106,8 @@ export default class Interfaces
 				this.logoNav.container.isVisible = false; 
 				this.settings.container.isVisible = false; 
 				this.areaNav.container.isVisible = false; 
+				this.rectMenu.isVisible = false; 
+				this.rectSound.isVisible = false; 
 			},400);
 			engine.map.showMiniMap(false);
 			
@@ -1104,5 +1176,16 @@ export default class Interfaces
 			}, 400);
 			this.showInterfaces(true);
 		}
+	}
+
+	showSoundPanel(toggle)
+	{
+		if (toggle)
+		{
+			engine.animation.drawerAnimX(this.rectSound, 285, 15);
+		}
+		else
+			engine.animation.drawerAnimX(this.rectSound, 15, 285);
+		this.rectSound.isShow = toggle;
 	}
 }
