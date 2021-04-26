@@ -77,18 +77,18 @@ export default class Language
 			case 'localPL': return 'Parking Lot';
 			// Location
 			case 'CADV': return "An Duong Vuong Gate";
-			case 'CADV2': return "Parking Lot Exit Gate";
-			case 'C02': case 'C01': case 'HB': return "School Field C";
-			case 'D01': return "School Field D";
-			case 'B01': case 'B02': case 'B03': return "School Field B";
-			case 'B04': case 'B05': return "KLF Back Area";
-			case 'A01': case 'A02': case 'A03': case 'A04': case 'A05': return "School Field A";
-			case 'KNT': return "Arts Faculty Area";
-			case 'GX1': case 'GX3': return "Parking Lot Exit";
-			case 'GX2': return "Basketball Field";
-			case 'GX4': return "Parking Lot Exit";
+			case 'CADV2': return "Parking lot exit gate";
+			case 'C02': case 'C01': case 'HB': return "School field C";
+			case 'D01': return "School field D";
+			case 'B01': case 'B02': case 'B03': return "School field B";
+			case 'B04': case 'B05': return "KLF back area";
+			case 'A01': case 'A02': case 'A03': case 'A04': case 'A05': case 'A06': return "School field A";
+			case 'KNT': return "Arts Faculty area";
+			case 'GX1': case 'GX3': return "Parking lot";
+			case 'GX2': return "Basketball field";
+			case 'GX4': return "Parking lot exit";
 			case 'E01': case 'E02': return "Block E";
-			case 'E03': return "School Field E";
+			case 'E03': return "School field E";
 			case 'CNT': return "Nguyen Trai Gate";
 			// Infomation
 			case 'PBV': return "Security room of Saigon University."+this.lorem;
@@ -96,11 +96,12 @@ export default class Language
 			case 'ATM': return "ATM of AGRIBANK, where students can withdraw cash directly without going to the bank."+this.lorem;
 			case 'THP': return "Tuition fees collection and scholarship receipt information place."+this.lorem;
 			case 'KTHB': case 'KTHC': return "Self-study area, an area for students to study on by themselves, eat or take a lunch break."+this.lorem;
-			case 'KLF': return "KLF, where students can use internet service for a certain fee."+this.lorem;
+			case 'KLF': return "KLF, where students can use internet service for a certain fee, find documents with a giant bookcase."+this.lorem;
+			case 'TV': return "The library is a place where students can borrow and return books, find and read documents and textbooks of many different disciplines"+this.lorem;
 			case 'CT': return "School Canteen."+this.lorem;
 			case 'KNU': return "Students drinking water area, where students can get free drinking water."+this.lorem;
 			case 'PYT': return "Medical Room."+this.lorem;
-			case 'CSNT': return "Back Gate."+this.lorem;
+			case 'CSNT': return "Back Gate. Usually the gate used for starting field trips or school sporting events."+this.lorem;
 			case 'HGXE': case 'HGXD': return "Parking Garage."+this.lorem;
 			case 'SBB': return "Table tennis field."+this.lorem;
 			case 'SCL': return "Badminton field."+this.lorem;
@@ -151,12 +152,12 @@ export default class Language
 			case 'localPL': return "Bãi gửi xe";
 			// Location
 			case 'CADV': return "Cổng An Dương Vương";
-			case 'CADV2': return "Cổng Ra Xe An Dương Vương";
+			case 'CADV2': return "Cổng ra xe An Dương Vương";
 			case 'C02': case 'C01': case 'HB': return "Sân C";
 			case 'D01': return "Sân D";
 			case 'B01': case 'B02': case 'B03': return "Sân B";
 			case 'B04': case 'B05': return "Lối đi sau KLF";
-			case 'A01': case 'A02': case 'A03': case 'A04': case 'A05': return "Sân A";
+			case 'A01': case 'A02': case 'A03': case 'A04': case 'A05': case 'A06': return "Sân A";
 			case 'KNT': return "Khu Nghệ Thuật";
 			case 'GX1': case 'GX3': return "Bãi gửi xe";
 			case 'GX2': return "Sân bóng rổ";
@@ -170,11 +171,12 @@ export default class Language
 			case 'ATM': return "Trụ ATM ngân hàng AGRIBANK, nơi sinh viên có thể rút tiền mặt trực tiếp mà không cần ra ngân hàng."+this.lorem;
 			case 'THP': return "Điểm thu học phí trực tiếp và gửi thông tin nhận học bổng."+this.lorem;
 			case 'KTHB': case 'KTHC': return "Khu tự học, một khu vực dành cho sinh viên có thể tự học, ăn uống hoặc nghỉ trưa."+this.lorem;
-			case 'KLF': return "KLF, nơi sinh viên có thể sử dụng dịch vụ internet với phí nhất định."+this.lorem;
+			case 'KLF': return "KLF, nơi sinh viên có thể sử dụng dịch vụ internet với phí nhất định, tìm tài liệu với một tủ sách khổng lồ."+this.lorem;
+			case 'TV': return "Thư viện là nơi sinh viên có thể mượn trả sách, tìm đọc tài liệu, giáo trình của nhiều ngành khác nhau."+this.lorem;
 			case 'CT': return "Căn tin trường."+this.lorem;
 			case 'KNU': return "Khu vực nước uống sinh viên, nơi sinh viên có thể lấy nước uống miễn phí."+this.lorem;
 			case 'PYT': return "Phòng y tế."+this.lorem;
-			case 'CSNT': return "Cổng sau."+this.lorem;
+			case 'CSNT': return "Cổng sau. Thường là cổng dùng để xuất phát của các chuyến xe đi thực tế hoặc các sự kiện hội thao của trường."+this.lorem;
 			case 'HGXE': case 'HGXD': return "Hầm gửi xe."+this.lorem;
 			case 'SBB': return "Sân bóng bàn."+this.lorem;
 			case 'SCL': return "Sân cầu lông."+this.lorem;
