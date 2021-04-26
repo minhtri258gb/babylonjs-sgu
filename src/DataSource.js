@@ -28,7 +28,7 @@ export default class DataSource
 				{name: 'GX4', pos: [28,6,499]}
 			],
 			info: [],
-			position: {x: 0.3747384649267702, y: 0.36703006276841754},
+			position: {x: 0.37908138401559455, y: 0.3739035087719298},
 			rotation: BABYLON.Tools.ToRadians(92)
 		};
 
@@ -90,7 +90,7 @@ export default class DataSource
 				{name: 'A02', pos: [6,-3,500]},
 				{name: 'B02', pos: [-3,18,-499]},
 				{name: 'B03', pos: [440,7,-236]},
-				{name: 'B05', pos: [-497,5,-46]}
+				{name: 'B05', pos: [-498,10,36]}
 			],
 			info: [
 				{name: 'KTHB', pos: [-499,9,-4]},
@@ -123,11 +123,11 @@ export default class DataSource
 			link: [
 				{name: 'B01', pos: [-298,-13,400]},
 				{name: 'B02', pos: [-318,-1,-385]},
-				{name: 'KLF', pos: [-499,-6,5]},
 				{name: 'GX2', pos: [499,-12,-10]}
 			],
 			info: [
-				{name: 'CT', pos: [444,-3,229]}
+				{name: 'CT', pos: [444,-3,229]},
+				{name: 'KLF', pos: [-499,-6,5]}
 			],
 			position: {x: 0.515193211787639, y: 0.515193211787639},
 			rotation: BABYLON.Tools.ToRadians(272),
@@ -149,14 +149,15 @@ export default class DataSource
 
 		this.loc['B05'] = {
 			link: [
-				{name: 'B01', pos: [285,21,409]},
-				{name: 'B04', pos: [0,-10,-500]}
+				{name: 'B01', pos: [495,29,58]},
+				{name: 'B04', pos: [2,14,-499]},
+				{name: 'A06', pos: [-457,-24,199]}
 			],
 			info: [
-				{name: 'KTHB', pos: [228,-3,445]}
+				{name: 'KTHB', pos: [474,34,-154]}
 			],
 			position: {x: 0.6668854071260298, y: 0.4671916010498688},
-			rotation: BABYLON.Tools.ToRadians(175)
+			rotation: BABYLON.Tools.ToRadians(355)
 		};
 
 		this.loc['A01'] = {
@@ -204,26 +205,40 @@ export default class DataSource
 
 		this.loc['A04'] = {
 			link: [
-				{name: 'A03', pos: [-43,-3,498]},
-				{name: 'A02', pos: [-499,8,11]},
-				{name: 'GX1', pos: [495,-1,69]}
+				{name: 'A03', pos: [4,17,499]},
+				{name: 'A02', pos: [-498,18,30]},
+				{name: 'GX1', pos: [497,11,48]}
 			],
 			info: [
 			],
 			position: {x: 0.5386204300021298, y: 0.6038827099091715},
-			rotation: BABYLON.Tools.ToRadians(0)
+			rotation: BABYLON.Tools.ToRadians(90)
 		};
 
 		this.loc['A05'] = {
 			link: [
 				{name: 'A01', pos: [496,22,56]},
 				{name: 'A02', pos: [405,18,-292]},
-				{name: 'KNT', pos: [-499,17,-15]}
+				{name: 'A06', pos: [-499,17,-15]}
 			],
 			info: [
 			],
 			position: {x: 0.6738845144356955, y: 0.5634295713035871},
 			rotation: BABYLON.Tools.ToRadians(90)
+		};
+
+		this.loc['A06'] = {
+			link: [
+				{name: 'A05', pos: [431,17,-251]},
+				{name: 'KNT', pos: [-498,25,18]},
+				{name: 'B05', pos: [-52,45,-495]}
+			],
+			info: [
+				{name: 'TV', pos: [-276,75,409]}
+			],
+			position: {x: 0.7333447999082674, y: 0.5369797041623667},
+			rotation: BABYLON.Tools.ToRadians(270),
+			sun: {x: 404, y: 243, z: -165}
 		};
 
 		this.loc['KNT'] = {
@@ -241,7 +256,7 @@ export default class DataSource
 				{name: 'A04', pos: [-481,-2,137]},
 				{name: 'E03', pos: [-220,24,448]},
 				{name: 'E02', pos: [180,38,465]},
-				{name: 'GX2', pos: [0,-1,-500]}
+				{name: 'GX2', pos: [-240,6,-438]}
 			],
 			info: [
 				{name: 'HGXE', pos: [234,-5,441]},
@@ -255,7 +270,7 @@ export default class DataSource
 
 		this.loc['GX2'] = {
 			link: [
-				{name: 'GX1', pos: [13,29,498]},
+				{name: 'GX1', pos: [89,34,490]},
 				{name: 'B03', pos: [-499,0,-5]},
 				{name: 'GX3', pos: [18,7,-499]}
 			],
@@ -331,16 +346,20 @@ export default class DataSource
 
 		this.loc['CNT'] = {
 			link: [
-				{name: 'E01', pos: [-39,43,-496]},
-				{name: 'E03', pos: [-458,18,-198]}
+				{name: 'E01', pos: [-123,35,-482]},
+				{name: 'E03', pos: [-473,9,-159]}
 			],
 			info: [
-				{name: 'GXI', pos: [429,-16,-255]}
+				{name: 'GXI', pos: [365,-13,-341]}
 			],
 			position: {x: 0.4968466918931315, y: 0.7342047930283224},
-			rotation: BABYLON.Tools.ToRadians(0),
+			rotation: BABYLON.Tools.ToRadians(90),
 			sun: {x: 404, y: 243, z: -165}
 		};
+
+		
+
+	
 	}
 
 	initMusic()
