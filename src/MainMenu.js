@@ -64,6 +64,7 @@ export default class MainMenu
 
 		this.imgInstruction = new BABYLON.GUI.Image("imgInstruction","https://firebasestorage.googleapis.com/v0/b/babylonjs-sgu.appspot.com/o/help.png?alt=media");
 		this.rectInstruction.addControl(this.imgInstruction);
+		console.log("sdfds");
 
 		//Text instruction
 		this.textInstruction = new BABYLON.GUI.TextBlock();
