@@ -309,12 +309,12 @@ export default class Interfaces
 		this.btnFullScreen.btn.addControl(this.btnFullScreen.imgFullScreenOff);
 		this.btnFullScreen.btn.onPointerClickObservable.add(() => {
 			//TODO
-			if (this.btnFullScreen.imgFullScreenOn.isVisible === true)
+			if (!engine.engine.isFullscreen)
 			{
 				this.btnFullScreen.imgFullScreenOff.isVisible = true;
 				this.btnFullScreen.imgFullScreenOn.isVisible = false;  
 				
-				engine.engine.enterFullscreen();	
+				engine.engine.enterFullscreen();
 			}
 			else
 			{

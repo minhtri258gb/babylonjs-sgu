@@ -165,10 +165,9 @@ export default class DataSource
 				{name: 'A02', pos: [-62,28,-494]},
 				{name: 'A03', pos: [493,23,-76]},
 				{name: 'A05', pos: [-498,12,-40]},
-				{name: 'A04', pos: [426,32,-259]}
+				{name: 'A04', pos: [399,27,-298]}
 			],
 			info: [
-				{name: 'PYT', pos: [391,15,310]},
 				{name: 'CSNT', pos: [-29,21,498]}
 			],
 			position: {x: 0.6206857011810573, y: 0.60921912624699},
@@ -196,7 +195,6 @@ export default class DataSource
 				{name: 'A04', pos: [112,46,-485]}
 			],
 			info: [
-				{name: 'PYT', pos: [-222,24,447]}
 			],
 			position: {x: 0.5567947129285419, y: 0.636376178315499},
 			rotation: BABYLON.Tools.ToRadians(0),

@@ -38,6 +38,37 @@ const engine =
 		this.scene.clearColor = new BABYLON.Color3.Black();
 
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+		
+		this.canvas.addEventListener('wheel', event => { // Block ctrl + wheel
+			if (event.ctrlKey)
+				event.preventDefault();
+		}, true);
+		
+		document.addEventListener("keydown", event => { // Block ctrl + cross and subtract
+			if (event.ctrlKey && event.keyCode == 187 || event.keyCode == 189) // case ctrl + -
+				event.preventDefault();
+			// else if (event.keyCode == 122)
+			// {	
+			// 	event.preventDefault();
+			// }
+		  });
+
+		  document.addEventListener("fullscreenchange", ()=> {
+			  console.log("RUN")
+			if (!engine.engine.isFullscreen)
+			{
+				this.btnFullScreen.imgFullScreenOff.isVisible = true;
+				this.btnFullScreen.imgFullScreenOn.isVisible = false;  
+				
+			}
+			else
+			{
+				this.btnFullScreen.imgFullScreenOff.isVisible = false;
+				this.btnFullScreen.imgFullScreenOn.isVisible = true;
+
+
+			}
+		  });
 
 		// Camera setup
         this.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2, Math.PI/2, 1, BABYLON.Vector3.Zero(), this.scene);
@@ -93,7 +124,6 @@ const engine =
 
 		// Resize window event
 		window.addEventListener("resize", () => {
-			// alert("ASAS")
 			this.map.resize();
 			this.setCanvasSizeMobile();
 			this.engine.resize();
@@ -154,7 +184,7 @@ const engine =
 		{
 			this.canvas.style.height = '100%';
 		}
-	}
+	},
 }
 
 export default engine;
