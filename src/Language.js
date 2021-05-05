@@ -1,6 +1,4 @@
 
-// import engine from './Engine.js'
-
 export default class Language
 {
 	// Forwards
