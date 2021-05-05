@@ -1,6 +1,4 @@
 
-import engine from '../Engine.js'
-
 export default class CheckboxDef
 {
 	constructor(name, toggle, parent, row, column)

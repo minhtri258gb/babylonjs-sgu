@@ -37,4 +37,5 @@ fix F11 fullscreen
 change all GUI content into a fullscreen rect //cant be done cuz of isVisible element hide interfaces unstable
 
 // Final
+set auto rotate = true
 Remove func right click to get information

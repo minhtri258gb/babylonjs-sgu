@@ -1,5 +1,3 @@
-/// <reference path="../lib/babylon.js" />
-/// <reference path="../lib/babylon.gui.js" />
 
 import DataSource from "./DataSource.js";
 import Map from "./Map.js";

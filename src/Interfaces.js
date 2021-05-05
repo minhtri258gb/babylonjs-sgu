@@ -2,7 +2,6 @@
 import detectMobile from './DetectMobileAPI.js';
 import engine from './Engine.js'
 
-
 export default class Interfaces 
 {
 	// Forwards

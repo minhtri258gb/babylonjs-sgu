@@ -141,7 +141,7 @@ export default class DataSource
 			],
 			info: [
 				{name: 'KTHC', pos: [417,18,-274]},
-				{name: 'KNU', pos: [-236,10,440]}
+				{name: 'KNU', pos: [-236,10,440]}	
 			],
 			position: {x: 0.6410574310987626, y: 0.41553078501345647},
 			rotation: BABYLON.Tools.ToRadians(120)
