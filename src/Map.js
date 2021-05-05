@@ -273,6 +273,10 @@ export default class Map
 		rect.leftInPixels = (_position.x - 0.5) * (this.mat.imgSize * this.mat.scale) + this.totalImg.leftInPixels;
 		rect.topInPixels = (_position.y - 0.5) * (this.mat.imgSize * this.mat.scale) + this.totalImg.topInPixels;
 		rect.onPointerClickObservable.add((evt) => { // Mouse click
+			// Show interfaces
+			engine.interfaces.showInterfaces(true);
+			// Hidden map
+			this.showTotalMap(false);
 			engine.loc.goto(_name);
 		});
 		
