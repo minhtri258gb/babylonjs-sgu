@@ -37,17 +37,17 @@ const engine =
 		this.data = {};
 		this.assetsManager = new BABYLON.AssetsManager(this.scene);
 		this.task = {};
-		this.task.loadDB = this.assetsManager.addTextFileTask("LoadDBTask", "../public/locationDB.json");
+		this.task.loadDB = this.assetsManager.addTextFileTask("LoadDBTask", "file/locationDB.json");
 		this.task.loadDB.onSuccess = (task) => {
 			this.data.loc = JSON.parse(task.text);
 		}
 		let lang = this.getParam('lang');
 		if (lang === null) lang = config.default_lang;
-		this.task.loadLang = this.assetsManager.addTextFileTask("LoadLangTask", "../public/langDB_"+lang+".json");
+		this.task.loadLang = this.assetsManager.addTextFileTask("LoadLangTask", "file/langDB_"+lang+".json");
 		this.task.loadLang.onSuccess = (task) => {
 			this.data.lang = JSON.parse(task.text);
 		}
-		this.task.loadMusic = this.assetsManager.addTextFileTask("LoadMusicTask", "../public/musicDB.json");
+		this.task.loadMusic = this.assetsManager.addTextFileTask("LoadMusicTask", "file/musicDB.json");
 		this.task.loadMusic.onSuccess = (task) => {
 			this.data.music = JSON.parse(task.text);
 		}

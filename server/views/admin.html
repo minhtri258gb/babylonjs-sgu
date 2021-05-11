@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="file/lib/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<script>
+		function add() {
+
+			let jsonObj = {
+				link: [
+					{name: "C02", pos: [-17, 31, 498]},
+					{name: "CADV2", pos: [494,30,62]}
+				],
+				info: [],
+				position: {x: 0.47276688453159044, y: 0.3340213278293774},
+				rotation: 92,
+				sun: {x: 383, y: 296, z: -122}
+			}
+
+			const XHR = new XMLHttpRequest();
+			XHR.addEventListener( 'load', function(event) {
+				alert( 'Thanh cong' );
+			});
+			XHR.addEventListener( 'error', function(event) {
+				alert( 'That bai' );
+			});
+			XHR.open('POST', 'http://babylonjs-sgu.herokuapp.com/api/location/NEWPOS');
+			XHR.setRequestHeader('Content-Type', 'application/json');
+			XHR.send(JSON.stringify(jsonObj));
+		}
+
+		function getAll() {
+			const XHR = new XMLHttpRequest();
+			XHR.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					let myArr = JSON.parse(this.responseText);
+					console.log(myArr);
+			}};
+			XHR.addEventListener( 'error', function(event) {
+				alert('That bai');
+			});
+			XHR.open('GET', 'http://babylonjs-sgu.herokuapp.com/api/locations' );
+			XHR.send();
+		}
+
+		function get() {
+
+			let id = "SOMETHIng";
+
+			const XHR = new XMLHttpRequest();
+			XHR.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					let myArr = JSON.parse(this.responseText);
+					console.log(myArr);
+			}};
+			XHR.addEventListener( 'load', function(event) {
+				alert('Thanh cong');
+			});
+			XHR.addEventListener( 'error', function(event) {
+				alert('That bai');
+			});
+			XHR.open('GET', 'http://babylonjs-sgu.herokuapp.com/api/location/'+id );
+			// XHR.setRequestHeader( 'Content-Type', 'application/json' );
+			XHR.send();
+		}
+
+		function set() {
+			let jsonObj = {
+				link: [
+					{name: "C02", pos: [-17, 31, 498]},
+					{name: "CADV2", pos: [494,30,62]}
+				],
+				info: [],
+				position: {x: 0.47276688453159044, y: 0.3340213278293774},
+				rotation: 92,
+				sun: {x: 383, y: 296, z: -122}
+			}
+			const XHR = new XMLHttpRequest();
+			XHR.addEventListener( 'load', function(event) {
+				alert( 'Thanh cong' );
+			} );
+			XHR.addEventListener( 'error', function(event) {
+				alert( 'That bai' );
+			} );
+			XHR.open('PUT', 'http://babylonjs-sgu.herokuapp.com/api/location/NEWPOS' );
+			XHR.setRequestHeader( 'Content-Type', 'application/json' );
+			XHR.send(JSON.stringify(jsonObj));
+		}
+
+		function del() {
+			let id = "SOMETHIng";
+			const XHR = new XMLHttpRequest();
+			XHR.addEventListener( 'load', function(event) {
+				alert( 'Thanh cong' );
+			} );
+			XHR.addEventListener( 'error', function(event) {
+				alert( 'That bai' );
+			});
+			XHR.open('DELETE', 'http://babylonjs-sgu.herokuapp.com/api/location/' + id);
+			XHR.send();
+		}
+
+		function importLocation() {
+			$.getJSON("./file/locationDB_import.json", function(json) {
+				const XHR = new XMLHttpRequest();
+				XHR.addEventListener('load', function(event) {
+					alert( 'Thanh cong' );
+				});
+				XHR.addEventListener('error', function(event) {
+					alert( 'That bai' );
+				});
+				XHR.open('POST', 'http://babylonjs-sgu.herokuapp.com/api/location');
+				XHR.setRequestHeader('Content-Type', 'application/json');
+				XHR.send(JSON.stringify(json));
+			});
+		}
+
+		function importLanguage() {
+			$.getJSON("./file/languageDB_import.json", function(json) {
+				const XHR = new XMLHttpRequest();
+				XHR.addEventListener('load', function(event) {
+					alert( 'Thanh cong' );
+				});
+				XHR.addEventListener('error', function(event) {
+					alert( 'That bai' );
+				});
+				XHR.open('POST', 'http://babylonjs-sgu.herokuapp.com/api/language');
+				XHR.setRequestHeader('Content-Type', 'application/json');
+				XHR.send(JSON.stringify(json));
+			});
+		}
+
+		function importOther() {
+			$.getJSON("./file/otherDB_import.json", function(json) {
+				const XHR = new XMLHttpRequest();
+				XHR.addEventListener( 'load', function(event) {
+					alert('Thanh cong');
+				});
+				XHR.addEventListener( 'error', function(event) {
+					alert('That bai');
+				});
+				XHR.open('POST', 'http://babylonjs-sgu.herokuapp.com/api/other');
+				XHR.setRequestHeader('Content-Type', 'application/json');
+				XHR.send(JSON.stringify(json));
+			});
+		}
+
+	</script>
+
+<div>
+	<p>Location admin example</p>
+	<button onclick="add()">add</button>
+	<button onclick="getAll()">getAll</button>
+	<button onclick="get()">get</button>
+	<button onclick="set()">set</button>
+	<button onclick="del()">del</button>
+</div>
+
+<div>
+	<p>import DB</p>
+	<button onclick="importLocation()">import Location</button>
+	<button onclick="importLanguage()">import Language</button>
+	<button onclick="importOther()">import Other</button>
+</div>
+
+</body>
+</html>
