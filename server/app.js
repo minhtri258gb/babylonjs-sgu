@@ -41,4 +41,6 @@ app.get('/admin', function (req, res) {
 	res.sendFile(path.join(__dirname, './views/admin.html'));
 });
 
+app.use('/favicon.ico', express.static('public/favicon.ico'));
+
 app.listen(config.port, () => console.log('Server running ...'));
