@@ -8,13 +8,12 @@ export default class MainMenu
 	constructor()
 	{
 		// Default
-		let url = new URL(window.location.href);
-		this.language = url.searchParams.get("location");
-		if (this.language !== null)
+		let location = engine.getParam("location");
+		if (location !== null)
 			return;
 
 		this.menuImg = new BABYLON.GUI.Image("mapImg",
-				"./asset/background/"+Math.floor(Math.random()*4)+".jpg");
+				engine.getLink("background/"+Math.floor(Math.random()*4)+".jpg"));
 		
 		// this.menuImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.menuImg.scaleX = 1.15;
@@ -62,12 +61,12 @@ export default class MainMenu
 			this.rectInstruction.isVisible = false;
 		}
 
-		this.imgInstruction = new BABYLON.GUI.Image("imgInstruction","./asset/help.png");
+		this.imgInstruction = new BABYLON.GUI.Image("imgInstruction",engine.getLink("help.png"));
 		this.rectInstruction.addControl(this.imgInstruction);
 
 		//Text instruction
 		this.textInstruction = new BABYLON.GUI.TextBlock();
-		this.textInstruction.text = engine.language.get("instruction");
+		this.textInstruction.text = engine.data.lang["instruction"];
 		this.textInstruction.color = "white";
 		this.textInstruction.top = "-180px";
 		// this.textInstruction
@@ -90,11 +89,7 @@ export default class MainMenu
 		this.btnStart.thickness = 1;
 		this.btnStart.onPointerClickObservable.add(() => {
 			// Add location get param
-			let url = new URL(window.location.href);
-			let param = url.searchParams;
-			param.set("location", "CADV");
-			url.search = param.toString();
-			history.pushState({}, null, url.toString());
+			engine.changeURLwithoutReload("location", "CADV");
 			// Hide Menu
 			BABYLON.Animation.CreateAndStartAnimation("MenuHidden", this.rectMain, "alpha", 60, 60, 1, 0, 0);	
 			setTimeout(() => {
@@ -106,7 +101,7 @@ export default class MainMenu
 
 		// Text start
 		this.textStart = new BABYLON.GUI.TextBlock();
-		this.textStart.text = engine.language.get("start");
+		this.textStart.text = engine.data.lang["start"];
 		this.textStart.fontSizeInPixels = 24;
 		engine.animation.animTextStart(true);
 		this.btnStart.addControl(this.textStart);
@@ -178,7 +173,7 @@ export default class MainMenu
 
 		// Text credit
 		this.textCredit2 = new BABYLON.GUI.TextBlock();
-		this.textCredit2.text = engine.language.get("credit");				
+		this.textCredit2.text = engine.data.lang["credit"];				
 		this.textCredit2.color = "#23272a";
 		this.textCredit2.fontStyle = "italic";
 		this.rectCredit2.addControl(this.textCredit2);
