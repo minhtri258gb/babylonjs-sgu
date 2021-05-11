@@ -7,7 +7,7 @@ npm install
 # deploy heroku
 heroku login
 git init
-heroku git:remote -a nodeserver-massan258
+heroku git:remote -a babylonjs-sgu
 git add .
 git commit -am "make it better"
 git push heroku main
