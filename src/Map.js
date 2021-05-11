@@ -54,7 +54,7 @@ export default class Map
 
 	initTotalMap()
 	{
-		this.totalImg = new BABYLON.GUI.Image("mapImg","./asset/total_map.png");
+		this.totalImg = new BABYLON.GUI.Image("mapImg", engine.getLink("total_map.png"));
 		this.totalImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.totalImg.scaleX = 2.0;
 		this.totalImg.scaleY = 2.0;
@@ -186,7 +186,7 @@ export default class Map
 		this.btnCloseTotalMap.horizontalAlignment = 1;
 		this.btnCloseTotalMap.top = "10px";
 		this.btnCloseTotalMap.left = "-10px";		
-		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn","./asset/icon/close.png");
+		this.imgTotalMapCloseBtn = new BABYLON.GUI.Image("imgTotalMapCloseBtn",engine.getLink("icon/close.png"));
         this.btnCloseTotalMap.onPointerClickObservable.add(() => {
 			engine.interfaces.showInterfaces(true); // Show interfaces
 			this.showTotalMap(false); // Hidden map
@@ -204,13 +204,13 @@ export default class Map
 
 	initMiniMap()
 	{
-		this.miniImg = new BABYLON.GUI.Image("mapImg","./asset/map.png");
+		this.miniImg = new BABYLON.GUI.Image("mapImg", engine.getLink("map.png"));
 		this.miniImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.miniImg.scaleX = 5.0;
 		this.miniImg.scaleY = 5.0;
 		this.miniImg.zIndex = 1;
 		
-		this.crossImg = new BABYLON.GUI.Image("mapImg","./asset/eye.png");
+		this.crossImg = new BABYLON.GUI.Image("mapImg", engine.getLink("eye.png"));
 		this.crossImg.zIndex = 2;
 		
 		// Mini map
@@ -224,7 +224,7 @@ export default class Map
 		{
 			this.miniMap.width = "200px";
 			this.miniMap.height = "200px";
-		}		
+		}
 		this.miniMap.hoverCursor = "pointer";
 		this.miniMap.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
 		this.miniMap.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;

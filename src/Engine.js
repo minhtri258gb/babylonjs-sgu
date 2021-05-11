@@ -1,12 +1,11 @@
 
-import DataSource from "./DataSource.js";
+import config from "./Config.js";
 import Map from "./Map.js";
 import Interfaces from "./Interfaces.js";
 import Animation from "./Animation.js";
 import Location from './Location.js'
 import Effect from "./Effect.js";
 import Music from "./Music.js";
-import Language from "./Language.js";
 import MainMenu from "./MainMenu.js";
 import detectMobile from "./DetectMobileAPI.js"
 
@@ -15,8 +14,7 @@ const engine =
 	// Forwards
 	main: function()
 	{
-		this.initEngine();
-		this.run();
+		engine.initEngine();
 	},
 
 	initEngine: function()
@@ -35,6 +33,26 @@ const engine =
 		this.scene = new BABYLON.Scene(this.engine);
 		this.scene.clearColor = new BABYLON.Color3.Black();
 
+		// Task load DB
+		this.data = {};
+		this.assetsManager = new BABYLON.AssetsManager(this.scene);
+		this.task = {};
+		this.task.loadDB = this.assetsManager.addTextFileTask("LoadDBTask", "../public/locationDB.json");
+		this.task.loadDB.onSuccess = (task) => {
+			this.data.loc = JSON.parse(task.text);
+		}
+		let lang = this.getParam('lang');
+		if (lang === null) lang = config.default_lang;
+		this.task.loadLang = this.assetsManager.addTextFileTask("LoadLangTask", "../public/langDB_"+lang+".json");
+		this.task.loadLang.onSuccess = (task) => {
+			this.data.lang = JSON.parse(task.text);
+		}
+		this.task.loadMusic = this.assetsManager.addTextFileTask("LoadMusicTask", "../public/musicDB.json");
+		this.task.loadMusic.onSuccess = (task) => {
+			this.data.music = JSON.parse(task.text);
+		}
+
+		// GUI
 		this.advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 		
 		this.canvas.addEventListener('wheel', event => { // Block ctrl + wheel
@@ -51,20 +69,16 @@ const engine =
 			// }
 		  });
 
-		  document.addEventListener("fullscreenchange", ()=> {
-			  console.log("RUN")
-			if (!engine.engine.isFullscreen)
+		document.addEventListener("fullscreenchange", () => {
+			if (!this.engine.isFullscreen)
 			{
 				this.btnFullScreen.imgFullScreenOff.isVisible = true;
 				this.btnFullScreen.imgFullScreenOn.isVisible = false;  
-				
 			}
 			else
 			{
 				this.btnFullScreen.imgFullScreenOff.isVisible = false;
 				this.btnFullScreen.imgFullScreenOn.isVisible = true;
-
-
 			}
 		  });
 
@@ -91,20 +105,25 @@ const engine =
 		// this.camera.inputs.attached.pointers.pinchPrecision = 0; // 
 		// this.camera.pinchToPanMaxDistance = 0;
 
-		// Component
-		Location.registerMousePicking();
-		this.data = new DataSource();
-		this.language = new Language();
-		this.animation = new Animation();
-		this.effect = new Effect();
-        this.interfaces = new Interfaces();
-		this.map = new Map();
-		this.music = new Music();
-		this.loc = new Location();
-		this.menu = new MainMenu();
+		// load
+		this.assetsManager.load();
+		this.assetsManager.onFinish = (tasks) => {
+
+			// Component
+			Location.registerMousePicking();
+			this.animation = new Animation();
+			this.effect = new Effect();
+			this.interfaces = new Interfaces();
+			this.map = new Map();
+			this.music = new Music();
+			this.loc = new Location();
+			this.menu = new MainMenu();
     
-		// set flag
-		this.onInit = false;
+			// set flag
+			this.onInit = false;
+
+			this.run();
+		};
 	},
 
 	run: function()
@@ -129,10 +148,34 @@ const engine =
 	},
 
 	// Natives
-	// reload: function(_url)
-	// {
-	// 	window.location.href = _url.toString();
-	// },
+	getLink: function(path)
+	{
+		let newpath = path.replace(/\//g, "%2F");
+		newpath = newpath.replace(/\s/g, "%20");
+		let res = "https://firebasestorage.googleapis.com/v0/b/"+config.firebase_storage+"/o/"+newpath+"?alt=media";
+		return res;
+	},
+
+	getParam: function(key) {
+		let url = new URL(window.location.href);
+		return url.searchParams.get(key);
+	},
+
+	changeURLwithReload: function(key, value) {
+		let url = new URL(window.location.href);
+		let param = url.searchParams;
+		param.set(key, value);
+		url.search = param.toString();
+		window.location.href = url.toString();
+	},
+
+	changeURLwithoutReload: function(key, value) {
+		let url = new URL(window.location.href);
+		let param = url.searchParams;
+		param.set(key, value);
+		url.search = param.toString();
+		history.pushState({}, null, url.toString());
+	},
 
 	setCameraFOV: function(value)
 	{

@@ -25,12 +25,12 @@ export default class Effect
 			// this.lensFlareSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD; // BLENDMODE_ONEONE, BLENDMODE_STANDARD, or BLENDMODE_ADD
 
 			this.lenFlares = [];
-			this.lenFlares[0] = new BABYLON.LensFlare(0.2, 0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens5.png", this.lensFlareSystem);
-			this.lenFlares[1] = new BABYLON.LensFlare(0.5, 0.2, new BABYLON.Color3(0.5, 0.5, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
-			this.lenFlares[2] = new BABYLON.LensFlare(0.2, 1.0, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
-			this.lenFlares[3] = new BABYLON.LensFlare(0.4, 0.4, new BABYLON.Color3(1, 0.5, 1), "asset/lenFlare/Flare.png", this.lensFlareSystem);
-			this.lenFlares[4] = new BABYLON.LensFlare(0.1, 0.6, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens5.png", this.lensFlareSystem);
-			this.lenFlares[5] = new BABYLON.LensFlare(0.3, 0.8, new BABYLON.Color3(1, 1, 1), "asset/lenFlare/lens4.png", this.lensFlareSystem);
+			this.lenFlares[0] = new BABYLON.LensFlare(0.2, 0, new BABYLON.Color3(1, 1, 1), engine.getLink("lenFlare/lens5.png"), this.lensFlareSystem);
+			this.lenFlares[1] = new BABYLON.LensFlare(0.5, 0.2, new BABYLON.Color3(0.5, 0.5, 1), engine.getLink("lenFlare/lens4.png"), this.lensFlareSystem);
+			this.lenFlares[2] = new BABYLON.LensFlare(0.2, 1.0, new BABYLON.Color3(1, 1, 1), engine.getLink("lenFlare/lens4.png"), this.lensFlareSystem);
+			this.lenFlares[3] = new BABYLON.LensFlare(0.4, 0.4, new BABYLON.Color3(1, 0.5, 1), engine.getLink("lenFlare/Flare.png"), this.lensFlareSystem);
+			this.lenFlares[4] = new BABYLON.LensFlare(0.1, 0.6, new BABYLON.Color3(1, 1, 1), engine.getLink("lenFlare/lens5.png"), this.lensFlareSystem);
+			this.lenFlares[5] = new BABYLON.LensFlare(0.3, 0.8, new BABYLON.Color3(1, 1, 1), engine.getLink("lenFlare/lens4.png"), this.lensFlareSystem);
 		}
 		else
 		{
@@ -69,7 +69,7 @@ export default class Effect
 			if (this.particleSystem === undefined)
 			{
 				this.particleSystem = new BABYLON.ParticleSystem("particles", 2000);
-				this.particleSystem.particleTexture = new BABYLON.Texture("asset/lenFlare/Flare.png");
+				this.particleSystem.particleTexture = new BABYLON.Texture(engine.getLink("lenFlare/Flare.png"));
 				this.particleSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
 				
 				this.particleSystem.emitter = new BABYLON.Vector3(0, 0.5, 0);

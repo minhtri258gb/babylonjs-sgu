@@ -10,8 +10,7 @@ export default class Location
 		this.onLoad = false;
 
 		// Get location
-		let url = new URL(window.location.href);
-		this.name = url.searchParams.get("location");
+		this.name = engine.getParam("location");
 		if (this.name === null)
 			this.name = 'CADV'
 
@@ -21,7 +20,7 @@ export default class Location
 		// Create PhotoDome
 		this.dome = new BABYLON.PhotoDome(
 			"skyDome",
-			"./asset/dome/"+this.name+".jpg",
+			engine.getLink("dome/"+this.name+".jpg"),
 			{
 				faceForward: false,
 				resolution: 32,
@@ -29,7 +28,7 @@ export default class Location
 			},
 			engine.scene
 		);
-		this.dome.rotation.y = this.data.rotation;
+		this.dome.rotation.y = BABYLON.Tools.ToRadians(this.data.rotation);
 		
 		// Set link
 		this.link = [];
@@ -70,7 +69,7 @@ export default class Location
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
 		
-		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview","./asset/preview/"+_name+".jpg");
+		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview",engine.getLink("preview/"+_name+".jpg"));
         rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
@@ -84,7 +83,7 @@ export default class Location
         line.connectedControl = rectPre;
         line.isVisible = false;
 
-        let textPre = new BABYLON.GUI.TextBlock(_name+"textPre",engine.language.get(_name));
+        let textPre = new BABYLON.GUI.TextBlock(_name+"textPre",engine.data.lang[_name]);
         //textPre.linkWithMesh(box);
         textPre.color = "white";
         textPre.fontFamily = "Time News Roman"
@@ -128,7 +127,7 @@ export default class Location
         });
 
 		// Walk icon
-		let imgwalk = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/walk.png");
+		let imgwalk = new BABYLON.GUI.Image(+"walkIcon",engine.getLink("icon/walk.png"));
         rect.addControl(imgwalk);
 
 		
@@ -165,7 +164,7 @@ export default class Location
 		});
 
 		// Walk icon
-		let imginfo = new BABYLON.GUI.Image(+"walkIcon","./asset/icon/info.png");
+		let imginfo = new BABYLON.GUI.Image(+"walkIcon",engine.getLink("icon/info.png"));
         rect.addControl(imginfo);
 
 		this.info.push({
@@ -188,11 +187,7 @@ export default class Location
 		this.onLoad = true;
 
 		// update url
-		let url = new URL(window.location.href);
-		let param = url.searchParams;
-		param.set("location", _name);
-		url.search = param.toString();
-		history.pushState({}, null, url.toString());
+		engine.changeURLwithoutReload("location", _name);
 
 		// Get data
 		this.name_next = _name;
@@ -224,12 +219,12 @@ export default class Location
 
 		// Load new dome
 		this.dome_next = new BABYLON.PhotoDome("skyDome_next",
-			"./asset/dome/"+this.name_next+".jpg",
+			engine.getLink("dome/"+this.name_next+".jpg"),
 			{faceForward: false, resolution: 32, size: 1000},
 			engine.scene
 		);
 		this.dome_next.setEnabled(false);
-		this.dome_next.rotation.y = this.data.rotation;
+		this.dome_next.rotation.y = BABYLON.Tools.ToRadians(this.data.rotation);
 		this.dome_next.onReady = () => {
 			this.flag_load_done = true;
 		};
