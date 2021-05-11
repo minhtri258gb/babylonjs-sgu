@@ -9,7 +9,7 @@ heroku login
 git init
 heroku git:remote -a babylonjs-sgu
 git add .
-git commit -am "make it better"
+git commit -am "add node server"
 git push heroku main
 
 

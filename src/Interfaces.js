@@ -13,7 +13,6 @@ export default class Interfaces
 
 		// Change title and logo icon website
 		document.title = engine.data.lang['title'];
-		document.getElementById("logo").attributes[2].value = engine.getLink("logo.ico");
 
 		this.initLogoNav();
 		this.initFOV();
