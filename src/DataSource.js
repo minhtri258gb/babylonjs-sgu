@@ -89,7 +89,7 @@ export default class DataSource
 			link: [
 				{name: 'A02', pos: [6,-3,500]},
 				{name: 'B02', pos: [-3,18,-499]},
-				{name: 'B03', pos: [440,7,-236]},
+				{name: 'B03', pos: [438,19,-238]},
 				{name: 'B05', pos: [-498,10,36]}
 			],
 			info: [
@@ -106,7 +106,7 @@ export default class DataSource
 			link: [
 				{name: 'C01', pos: [-8,-4,-499]},
 				{name: 'B01', pos: [-4,12,499]},
-				{name: 'B03', pos: [412,11,282]},
+				{name: 'B03', pos: [434,14,-245]},
 				{name: 'B04', pos: [-496,9,55]}
 			],
 			info: [
@@ -190,9 +190,9 @@ export default class DataSource
 
 		this.loc['A03'] = {
 			link: [
-				{name: 'A01', pos: [-498,30,13]},
-				{name: 'A02', pos: [-424,36,-262]},
-				{name: 'A04', pos: [112,46,-485]}
+				{name: 'A01', pos: [-499,-6,14]},
+				{name: 'A02', pos: [-424,1,-262]},
+				{name: 'A04', pos: [90,6,-485]}
 			],
 			info: [
 			],
