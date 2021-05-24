@@ -21,7 +21,7 @@ const engine =
 	{
 		// set default
 		this.onInit = true;
-		this.debug = true;
+		this.debug = false;
 
 		// Scene setup
 		this.canvas = document.getElementById('renderCanvas');
@@ -47,9 +47,9 @@ const engine =
 		this.task.loadLang.onSuccess = (task) => {
 			this.data.lang = JSON.parse(task.text);
 		}
-		this.task.loadMusic = this.assetsManager.addTextFileTask("LoadMusicTask", "file/musicDB.json");
-		this.task.loadMusic.onSuccess = (task) => {
-			this.data.music = JSON.parse(task.text);
+		this.task.loadOther = this.assetsManager.addTextFileTask("LoadOtherTask", "file/otherDB.json");
+		this.task.loadOther.onSuccess = (task) => {
+			this.data.other = JSON.parse(task.text);
 		}
 
 		// GUI

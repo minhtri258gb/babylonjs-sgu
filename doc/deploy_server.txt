@@ -9,8 +9,8 @@ heroku login
 git init
 heroku git:remote -a babylonjs-sgu
 git add .
-git commit -am "fix favicon.ico"
-git push heroku main
+git commit -am "update210514"
+git push heroku master
 
 
 # git cmd

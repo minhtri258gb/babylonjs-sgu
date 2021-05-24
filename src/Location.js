@@ -299,7 +299,7 @@ export default class Location
 			else if(event.button == 2)
 			{
 				if (!engine.debug)
-					returnl;
+					return;
 				let vector = pickResult.pickedPoint;
 				console.log(vector.x.toFixed() + ',' + vector.y.toFixed() + ',' + vector.z.toFixed());
 				// console.log("{x: "+vector.x.toFixed()+", y: "+vector.y.toFixed()+", z: "+vector.z.toFixed()+"}");

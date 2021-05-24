@@ -162,6 +162,7 @@ export default class Interfaces
 		this.rectMenu.background = this.isDark?"#23272A":"#DEE4E7";
 		this.rectMenu.color = "transparent";
 		this.rectMenu.alpha = 0.7;
+		this.rectMenu.zIndex = 2;
 		this.rectMenu.verticalAlignment = 1;
 		this.rectMenu.horizontalAlignment = 1;
 		engine.advancedTexture.addControl(this.rectMenu);

@@ -109,7 +109,7 @@ const writeLocationDB = async () => {
 			locationList[doc.id] = loc;
 		});
 		const fs = require('fs');
-		fs.writeFileSync('./public/locationDB_export.json', JSON.stringify(locationList));
+		fs.writeFileSync('./public/locationDB.json', JSON.stringify(locationList));
 	}
 }
 

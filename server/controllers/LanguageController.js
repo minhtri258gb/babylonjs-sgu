@@ -24,7 +24,7 @@ const writeLanguageDB = async () => {
 		data.forEach(doc => {
 			let value = doc.data();
 			langData[doc.id] = value;
-			fs.writeFileSync("./public/langDB_"+doc.id+"_export.json", JSON.stringify(langData[doc.id]));
+			fs.writeFileSync("./public/langDB_"+doc.id+".json", JSON.stringify(langData[doc.id]));
 		});
 	}
 }

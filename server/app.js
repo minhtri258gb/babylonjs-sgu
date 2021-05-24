@@ -28,18 +28,18 @@ app.use('/api/language', languageRouter.router);
 app.use('/api/other', otherRouter.router);
 
 app.get('/', function (req, res) {
-	// writeLocationDB(); // TODO Open when real run >> update DB json when request
-	// writeLanguageDB();
-	// writeOtherDB();
+	writeLocationDB();
+	writeLanguageDB();
+	writeOtherDB();
 
 	const path = require('path');
 	res.sendFile(path.join(__dirname, './views/home.html'));
 });
 
-app.get('/admin', function (req, res) {
-	const path = require('path');
-	res.sendFile(path.join(__dirname, './views/admin.html'));
-});
+// app.get('/admin', function (req, res) {
+// 	const path = require('path');
+// 	res.sendFile(path.join(__dirname, './views/admin.html'));
+// });
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 

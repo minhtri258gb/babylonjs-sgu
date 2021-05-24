@@ -33,8 +33,8 @@ export default class Music
 
 	changeMusic()
 	{
-		let musicName = engine.data.music[Math.floor(Math.random() * engine.data.music.length)];
-		let pathMusic = engine.getLink("music/"+musicName+".mp3");
+		let musicName = engine.data.other.music[Math.floor(Math.random() * engine.data.other.music.length)];
+		let pathMusic = "file/music/"+musicName+".mp3";
 		this.music = new BABYLON.Sound("music1", pathMusic, engine.scene, null, {loop: true, autoplay: true});
 	}
 }

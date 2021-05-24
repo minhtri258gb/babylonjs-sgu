@@ -11,9 +11,10 @@ export default class MainMenu
 		let location = engine.getParam("location");
 		if (location !== null)
 			return;
-
-		this.menuImg = new BABYLON.GUI.Image("mapImg",
-				engine.getLink("background/"+Math.floor(Math.random()*4)+".jpg"));
+		
+		let backgroundName = engine.data.other.background[Math.floor(Math.random() * engine.data.other.background.length)];
+		let pathBackground = engine.getLink("background/"+backgroundName+".jpg");
+		this.menuImg = new BABYLON.GUI.Image("mapImg", pathBackground);
 		
 		// this.menuImg.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
 		this.menuImg.scaleX = 1.15;

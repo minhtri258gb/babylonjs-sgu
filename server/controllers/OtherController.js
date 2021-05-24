@@ -20,7 +20,7 @@ const writeOtherDB = async () => {
 	const otherData = [];
 	if (!data.empty) {
 		data.forEach(doc => {
-			fs.writeFileSync("./public/otherDB_export.json", JSON.stringify(doc.data()));
+			fs.writeFileSync("./public/otherDB.json", JSON.stringify(doc.data()));
 		});
 	}
 }
