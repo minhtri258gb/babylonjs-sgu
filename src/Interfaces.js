@@ -929,8 +929,8 @@ export default class Interfaces
 	initInfoPanel()
 	{
 		
-		//Scrollview info
-		this.infoScroll = new BABYLON.GUI.ScrollViewer();
+		//Rect info
+		this.infoScroll = new BABYLON.GUI.Rectangle();
 		this.infoScroll.width = "700px";
 		this.infoScroll.height = "600px";
 		this.infoScroll.background = "white";
@@ -940,18 +940,13 @@ export default class Interfaces
 		this.infoScroll.isPointerBlocker = true;
 		engine.advancedTexture.addControl(this.infoScroll);
 
-		//Khung ben trong scroll
-		this.infoContainer = new BABYLON.GUI.Rectangle();
-		this.infoContainer.height = "800px";
-		this.infoScroll.addControl(this.infoContainer);
-		
 		//Khung chua anh
 		this.infoImgContainer = new BABYLON.GUI.Rectangle();
 		this.infoImgContainer.width = "640px";
 		this.infoImgContainer.height = "360px";
 		this.infoImgContainer.top = "20px";
 		this.infoImgContainer.verticalAlignment = 0;
-		this.infoContainer.addControl(this.infoImgContainer);
+		this.infoScroll.addControl(this.infoImgContainer);
 		
 		//Anh cua info
 		this.infoImage = new BABYLON.GUI.Image("imgInfo", engine.getLink("logo.png"));
@@ -960,19 +955,20 @@ export default class Interfaces
 		this.infoImgContainer.addControl(this.infoImage);
 
 		//Khung chua text
-		this.infoTextContainer = new BABYLON.GUI.Rectangle();
+		this.infoTextContainer = new BABYLON.GUI.ScrollViewer();
 		this.infoTextContainer.width = "640px";
-		this.infoTextContainer.height = "380px";
+		this.infoTextContainer.height = "180px";
 		this.infoTextContainer.top = "20px";
 		this.infoTextContainer.verticalAlignment = 0;
 		this.infoTextContainer.topInPixels = 400;
-		this.infoContainer.addControl(this.infoTextContainer);
+		this.infoScroll.addControl(this.infoTextContainer);
 
 		//Text cua info
 		this.infoText = new BABYLON.GUI.TextBlock();
+		this.infoText.textWrapping = BABYLON.GUI.TextWrapping.WordWrap;
+		this.infoText.resizeToFit = true;
 		this.infoText.text = "";
-		this.infoText.textWrapping = true;
-		this.infoText.textHorizontalAlignment = 0;	
+		this.infoText.textHorizontalAlignment = 0;
 		this.infoText.textVerticalAlignment = 0;
 		this.infoTextContainer.addControl(this.infoText);
 	}
