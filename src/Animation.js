@@ -14,15 +14,15 @@ export default class Animation
 		this.ease.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
 	}
 	
-	fadeAnimIn(control)
+	fadeAnimIn(control, end=1)
 	{
 		//BABYLON.Animation.CreateAndStartAnimation("Name", BABYLON.node, targetProperty, framePerSecond, totalFrame, from, to, loop: 0-1, this.ease);
-		BABYLON.Animation.CreateAndStartAnimation(control+"fadeIn", control, "alpha", 50, 20, 0, 1, 0, this.ease);
+		BABYLON.Animation.CreateAndStartAnimation(control+"fadeIn", control, "alpha", 50, 20, 0, end, 0, this.ease);
 	}
 
-	fadeAnimOut(control)
+	fadeAnimOut(control, start=1)
 	{
-		BABYLON.Animation.CreateAndStartAnimation(control+"fadeOut", control, "alpha", 50, 20, 1, 0, 0, this.ease);
+		BABYLON.Animation.CreateAndStartAnimation(control+"fadeOut", control, "alpha", 50, 20, start, 0, 0, this.ease);
 	}
 
 	drawerAnimX(control, from, to)

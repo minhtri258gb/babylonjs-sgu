@@ -1059,7 +1059,7 @@ export default class Interfaces
 			engine.animation.fadeAnimIn(this.logoNav.container);
 			engine.animation.fadeAnimIn(this.settings.container);
 			engine.animation.fadeAnimIn(this.areaNav.container);
-			engine.animation.fadeAnimIn(this.rectMenu);
+			engine.animation.fadeAnimIn(this.rectMenu, 0.7);
 			engine.animation.fadeAnimIn(this.rectSound);
 			engine.map.showMiniMap(true);
 			
@@ -1087,7 +1087,7 @@ export default class Interfaces
 			engine.animation.fadeAnimOut(this.logoNav.container);
 			engine.animation.fadeAnimOut(this.settings.container);
 			engine.animation.fadeAnimOut(this.areaNav.container);
-			engine.animation.fadeAnimOut(this.rectMenu);
+			engine.animation.fadeAnimOut(this.rectMenu, 0.7);
 			engine.animation.fadeAnimOut(this.rectSound);
 			
 			setTimeout(() => {			
