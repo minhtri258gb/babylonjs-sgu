@@ -107,7 +107,7 @@ export default class Effect
 		}
 	}
 
-	turnMosionBlur(toogle)
+	turnMotionBlur(toogle)
 	{
 		if (toogle)
 		{
@@ -123,7 +123,7 @@ export default class Effect
 	turnBloom(toogle)
 	{
 		if (this.defaultPipeline === undefined)
-			this.defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, engine.scene, [engine.camera]);
+			this.defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", false, engine.scene, [engine.camera]);
 
 		this.defaultPipeline.bloomEnabled = toogle;
 		this.defaultPipeline.bloomWeight = 0.5;
@@ -132,7 +132,7 @@ export default class Effect
 	turnAntiAlias(toogle)
 	{
 		if (this.defaultPipeline === undefined)
-			this.defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", true, engine.scene, [engine.camera]);
+			this.defaultPipeline = new BABYLON.DefaultRenderingPipeline("default", false, engine.scene, [engine.camera]);
 
 		this.defaultPipeline.fxaaEnabled = toogle;
 	}

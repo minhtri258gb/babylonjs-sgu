@@ -12,7 +12,7 @@ export default class Interfaces
 		this.lorem = "\n\tLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam justo sem, mollis a iaculis sit amet, gravida luctus mi. Cras in arcu iaculis, vestibulum orci quis, vestibulum leo. In vitae ornare velit. Sed a lacus malesuada, aliquet lectus vitae, tincidunt leo. Nunc facilisis neque eleifend, volutpat ligula et, volutpat eros. Suspendisse fermentum eget augue a vulputate. Nam libero diam, placerat ac metus non, convallis vestibulum enim. Suspendisse potenti. Sed congue quam eu nunc iaculis condimentum.\n\tVivamus tempus viverra urna. Praesent vitae nulla sed elit tincidunt tincidunt. Nam vel nisi eu nisl facilisis mollis. Mauris quis enim quis turpis elementum condimentum. Nunc sit amet nisi dolor. Nam non magna diam. Phasellus convallis tellus elementum mauris molestie ultricies. Nulla sodales magna sit amet euismod blandit. Nunc nec commodo dolor. Curabitur quis luctus turpis. Etiam vulputate diam nec nisi rutrum, in aliquam ipsum viverra. Sed sed diam euismod, porttitor ante ac, accumsan mi. Nulla facilisi. Nam at lobortis purus. Nullam ullamcorper egestas lectus sed viverra.";
 
 		// Change title and logo icon website
-		document.title = engine.data.lang['title'];
+		// document.title = engine.data.lang['title'];
 
 		this.initLogoNav();
 		this.initFOV();
@@ -93,6 +93,20 @@ export default class Interfaces
 
 	initFOV()
 	{
+		this.rectFOV = new BABYLON.GUI.Rectangle();
+		this.rectFOV.width = "40px";
+		this.rectFOV.height = "220px";
+		this.rectFOV.top = "0px";
+		this.rectFOV.left = "15px";
+		this.rectFOV.cornerRadius = 10;
+		this.rectFOV.background = this.isDark?"#23272A":"#DEE4E7";
+		this.rectFOV.color = "transparent";
+		this.rectFOV.alpha = 0.7;
+		this.rectFOV.zIndex = 2;
+		this.rectFOV.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+		this.rectFOV.horizontalAlignment = 0;
+		engine.advancedTexture.addControl(this.rectFOV);
+
 		this.FOV = {};
 		this.FOV.container = new BABYLON.GUI.Rectangle();
 		this.FOV.container.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
@@ -113,9 +127,9 @@ export default class Interfaces
 		this.FOV.slider.isThumbClamped = true;
 		this.FOV.slider.isThumbCircle = true;        
 		this.FOV.slider.hoverCursor = "grab";
-		this.FOV.slider.color = this.isDark?"#23272A":"#DEE4E7";
-		this.FOV.slider.thumbColor = this.isDark?"#DEE4E7":"#23272A";
-		this.FOV.slider.background = this.isDark?"#23272A":"#DEE4E7";	    
+		this.FOV.slider.color = this.isDark?"#DEE4E7":"#23272A";
+		this.FOV.slider.thumbColor = this.isDark?"#23272A":"#DEE4E7";
+		this.FOV.slider.background = this.isDark?"#DEE4E7":"#23272A";	    
 		this.FOV.slider.height = "20px";
 		this.FOV.slider.width = "130px";
 		//this.FOV.slider.thumbWidth = "20px"
@@ -126,7 +140,7 @@ export default class Interfaces
 		this.FOV.container.addControl(this.FOV.slider);
 
 
-		this.FOV.btnPlus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", engine.getLink("icon/"+(this.isDark?"dark":"light")+"/fov_plus.png"));
+		this.FOV.btnPlus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnPlus", engine.getLink("icon/"+(this.isDark?"light":"dark")+"/fov_plus.png"));
 		this.FOV.btnPlus.width = "24px";
 		this.FOV.btnPlus.height = "24px";
 		this.FOV.btnPlus.color = "transparent";
@@ -137,7 +151,7 @@ export default class Interfaces
 		});
 		this.FOV.container.addControl(this.FOV.btnPlus);
 		
-		this.FOV.btnMinus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnMinus", engine.getLink("icon/"+(this.isDark?"dark":"light")+"/fov_minus.png"));
+		this.FOV.btnMinus = new BABYLON.GUI.Button.CreateImageOnlyButton("btnMinus", engine.getLink("icon/"+(this.isDark?"light":"dark")+"/fov_minus.png"));
 		this.FOV.btnMinus.width = "24px";
 		this.FOV.btnMinus.height = "24px";
 		this.FOV.btnMinus.color = "transparent";
@@ -155,7 +169,7 @@ export default class Interfaces
 	{
 		this.rectMenu = new BABYLON.GUI.Rectangle();
 		this.rectMenu.width = "285px";
-		this.rectMenu.height = "60px";
+		this.rectMenu.height = "52.5px";
 		this.rectMenu.top = "10px";
 		this.rectMenu.left = "15px";
 		this.rectMenu.cornerRadius = 10;
@@ -171,7 +185,7 @@ export default class Interfaces
 		this.panel = new BABYLON.GUI.StackPanel();
 		this.panel.isVertical = false;
 		//this.panel.width = "240px";
-		this.panel.height = "120px";
+		this.panel.height = "105px";
 		this.panel.horizontalAlignment = 1;//BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
 		this.panel.verticalAlignment = 1;
 		this.panel.zIndex = 2;
@@ -213,6 +227,7 @@ export default class Interfaces
 				engine.animation.fadeAnimOut(this.settings.container);			
 				engine.animation.fadeAnimOut(this.areaNav.container);
 				engine.animation.fadeAnimOut(this.rectSound);
+				engine.animation.fadeAnimOut(this.rectFOV, 0.7);
 				
 				setTimeout(() => {
 				this.btnFullScreen.btn.isVisible = false;
@@ -225,6 +240,7 @@ export default class Interfaces
 				this.settings.container.isVisible = false;
 				this.areaNav.container.isVisible = false;
 				this.rectSound.isVisible = false;
+				this.rectFOV.isVisible = false;
 				this.rectMenu.width = "60px";   
 				}, 400);
 				//----
@@ -261,6 +277,7 @@ export default class Interfaces
 				this.settings.container.isVisible = true;
 				this.areaNav.container.isVisible = true;
 				this.rectSound.isVisible = true;
+				this.rectFOV.isVisible = true;
 
 				engine.animation.fadeAnimIn(this.btnFullScreen.btn);
 				engine.animation.fadeAnimIn(this.btnSetting.btn);
@@ -272,6 +289,7 @@ export default class Interfaces
 				engine.animation.fadeAnimIn(this.settings.container);
 				engine.animation.fadeAnimIn(this.areaNav.container);
 				engine.animation.fadeAnimIn(this.rectSound);
+				engine.animation.fadeAnimIn(this.rectFOV, 0.7);
 				this.rectMenu.width = "285px"; 
 				//----
 
@@ -461,13 +479,12 @@ export default class Interfaces
 		this.sliderSound.minimum = 0;
 		this.sliderSound.maximum = 1;
 		this.sliderSound.value = 0;
-		this.sliderSound.color = "black";
 		this.sliderSound.isThumbClamped = true;
 		this.sliderSound.isThumbCircle = true;
 		this.sliderSound.hoverCursor = "grab";
-		this.sliderSound.thumbColor = this.isDark?"#DEE4E7":"#23272A";	
+		this.sliderSound.thumbColor = this.isDark?"#FFFFFF":"#000000";	
 		this.sliderSound.background = this.isDark?"#777777":"#ccc1bf";	
-		this.sliderSound.color = this.isDark?"#FFFFFF":"#000000";
+		this.sliderSound.color = this.isDark?"#DEE4E7":"#23272A";
 		this.sliderSound.height = "20px";
 		this.sliderSound.width = "205px";
 		this.sliderSound.left = "10px"
@@ -478,7 +495,7 @@ export default class Interfaces
 			this.sliderSound.thumbColor = "blue";
 		});
 		this.sliderSound.onPointerOutObservable.add(() => {
-			this.sliderSound.thumbColor = this.isDark?"#DEE4E7":"#23272A";	
+			this.sliderSound.thumbColor = this.isDark?"#FFFFFF":"#000000";	
 		});
 		this.sliderSound.onValueChangedObservable.add((evt) => {
 			engine.music.setVolume(evt);
@@ -621,8 +638,6 @@ export default class Interfaces
 		this.settings.selPanel.color = "white";
 		this.settings.selPanel.background = this.isDark?"#23272A":"#DEE4E7";
 		this.settings.selPanel.headerColor = this.isDark?"#ffffff":"#000000";
-		
-		
 		this.settings.selPanel.thickness = 0;   
 		this.settings.selPanel.height = "470px";
 		
@@ -642,7 +657,7 @@ export default class Interfaces
 			engine.effect.turnBloom(isCheck);
 		});
 		this.settings.effectsGroup.addCheckbox(engine.data.lang['motionblur'], (isCheck) => {
-			engine.effect.turnMosionBlur(isCheck);
+			engine.effect.turnMotionBlur(isCheck);
 		});
 		this.settings.effectsGroup.addCheckbox(engine.data.lang['antialias'], (isCheck) => {
 			engine.effect.turnAntiAlias(isCheck);
@@ -713,7 +728,7 @@ export default class Interfaces
 		this.areaNav = {};
 		this.areaNav.container = new BABYLON.GUI.Rectangle();
 		this.areaNav.container.isPointerBlocker = true;
-		this.areaNav.container.width = "300px";
+		this.areaNav.container.width = "285px";
 		this.areaNav.container.height = "350px";
 		this.areaNav.container.top = "320px";
 		this.areaNav.container.cornerRadius = 5;
@@ -725,7 +740,9 @@ export default class Interfaces
 
 		//Nut bat/tat khu vuc
 		this.areaNav.btn = new BABYLON.GUI.Button();
-		//this.areaNav.btn.width = "40px"
+		//this.areaNav.btn.cornerRadius = "10";
+		//this.areaNav.btn.horizontalAlignment = 0;
+		//this.areaNav.btn.width = "50px"
 		this.areaNav.btn.height = "30px";
 		this.areaNav.btn.color = this.isDark?"#23272a":"#DEE4E7";
 		this.areaNav.btn.verticalAlignment = -1;
@@ -939,7 +956,7 @@ export default class Interfaces
 		this.infoScroll.isVisible = false;
 		this.infoScroll.isPointerBlocker = true;
 		engine.advancedTexture.addControl(this.infoScroll);
-
+		
 		//Khung chua anh
 		this.infoImgContainer = new BABYLON.GUI.Rectangle();
 		this.infoImgContainer.width = "640px";
@@ -1046,6 +1063,7 @@ export default class Interfaces
 			this.settings.container.isVisible = true;	
 			this.areaNav.container.isVisible = true;
 			this.rectMenu.isVisible = true;
+			this.rectFOV.isVisible = true;
 			this.rectSound.isVisible = true;
 
 
@@ -1060,6 +1078,7 @@ export default class Interfaces
 			engine.animation.fadeAnimIn(this.settings.container);
 			engine.animation.fadeAnimIn(this.areaNav.container);
 			engine.animation.fadeAnimIn(this.rectMenu, 0.7);
+			engine.animation.fadeAnimIn(this.rectFOV, 0.7);
 			engine.animation.fadeAnimIn(this.rectSound);
 			engine.map.showMiniMap(true);
 			
@@ -1088,6 +1107,7 @@ export default class Interfaces
 			engine.animation.fadeAnimOut(this.settings.container);
 			engine.animation.fadeAnimOut(this.areaNav.container);
 			engine.animation.fadeAnimOut(this.rectMenu, 0.7);
+			engine.animation.fadeAnimOut(this.rectFOV, 0.7);
 			engine.animation.fadeAnimOut(this.rectSound);
 			
 			setTimeout(() => {			
@@ -1102,6 +1122,7 @@ export default class Interfaces
 				this.settings.container.isVisible = false; 
 				this.areaNav.container.isVisible = false; 
 				this.rectMenu.isVisible = false; 
+				this.rectFOV.isVisible = false; 
 				this.rectSound.isVisible = false; 
 			},400);
 			engine.map.showMiniMap(false);
@@ -1116,7 +1137,7 @@ export default class Interfaces
 			for (let i=0; i<engine.loc.info.length; i++)
 			{
 				engine.animation.fadeAnimOut(engine.loc.info[i].button);
-				setTimeout(() => {	// ko toi uu
+				setTimeout(() => {
 					engine.loc.info[i].button.isVisible = false;  
 				},400);
 			}
