@@ -61,20 +61,22 @@ export default class Location
         rectPre.width = "300px";
         rectPre.height = "200px";
         rectPre.cornerRadius = 40;
-        rectPre.color = "white";
+        rectPre.color = "#DEE4E7";
         rectPre.thickness = 3;
-        rectPre.background = "green";
+        rectPre.background = "#23272a";
         engine.advancedTexture.addControl(rectPre);
         rectPre.linkWithMesh(box);
         rectPre.linkOffsetY = -150;
         rectPre.isVisible = false;
+		//rectPre.adaptWidthToChildren = true;
+    	//rectPre.adaptHeightToChildren = true;
 		
 		let imgPreview = new BABYLON.GUI.Image(_name+"_imgPreview",engine.getLink("preview/"+_name+".jpg"));
         rectPre.addControl(imgPreview);
 
 		let line = new BABYLON.GUI.Line();
         line.lineWidth = 3;
-        line.color = "white";
+        line.color = "#DEE4E7";
         line.y2 = 98;
         // line.dash = [5, 10];
         line.linkOffsetY = -15;
@@ -86,9 +88,9 @@ export default class Location
         let textPre = new BABYLON.GUI.TextBlock(_name+"textPre",engine.data.lang[_name]);
         //textPre.linkWithMesh(box);
         textPre.color = "white";
-        textPre.fontFamily = "Time News Roman";
+        //textPre.fontFamily = "Time News Roman"
         textPre.drawOutline = true;
-        textPre.outlineColor = "Black";
+        textPre.outlineColor = "#23272a";
         textPre.outlineWidth = 3;
         textPre.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
         textPre.height = 0.25;
