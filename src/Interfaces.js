@@ -626,7 +626,7 @@ export default class Interfaces
 		this.settings.container.width = "300px";
 		this.settings.container.height = "400px";
 		this.settings.container.leftInPixels = 400;
-		this.settings.container.background = this.isDark?"#23272A":"#DEE4E7";     
+		this.settings.container.background = this.isDark?"#23272A":"#DEE4E7";
 		this.settings.container.thickness = 0;
 		this.settings.container.zIndex = 4;
 		this.settings.container.cornerRadius = 5;

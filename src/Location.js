@@ -86,12 +86,13 @@ export default class Location
         let textPre = new BABYLON.GUI.TextBlock(_name+"textPre",engine.data.lang[_name]);
         //textPre.linkWithMesh(box);
         textPre.color = "white";
-        textPre.fontFamily = "Time News Roman"
+        textPre.fontFamily = "Time News Roman";
         textPre.drawOutline = true;
         textPre.outlineColor = "Black";
         textPre.outlineWidth = 3;
         textPre.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-        textPre.height = 0.15
+        textPre.height = 0.25;
+		textPre.textWrapping = true;
         rectPre.addControl(textPre);
 
 		// Icon walk
